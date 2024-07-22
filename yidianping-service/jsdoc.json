@@ -1,0 +1,64 @@
+{
+    "plugins": [
+        "jsdoc-http-plugin"
+    ],
+    "recurseDepth": 10,
+    "source": {
+        "include": [
+            "src/controller",
+            "README.md",
+            "package.json"
+        ],
+        "exclude": ["node_modules"],
+        "includePattern": ".+\\.js(doc|x)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "sourceType": "module",
+    "opts": {
+        "template": "./node_modules/clean-jsdoc-theme",
+        "theme_opts": {
+            "default_theme": "light",
+            "base_url": "http://127.0.0.1:33001/",
+            "homepageTitle": "接口文档",
+            "title": "接口文档",
+            "footer": "CopyRight &copy; 2024 GDMU-NA, All Rights Reserved.",
+            "menu": [
+                {
+                    "title": "文档主页",
+                    "link": "./index.html"
+                },
+                {
+                "title": "项目地址",
+                "link": "https://github.com/gdmuna/YiDianPing",
+                "target": "_blank"
+                }
+            ],
+            "meta": [
+                {
+                    "name": "author",
+                    "content": "Seele.Clover"
+                },
+                {
+                    "name": "description",
+                    "content": "Yi点评后端服务的接口文档"
+                }
+            ]
+        },
+        "encoding": "utf8",
+        "destination": "./docs/",
+        "recurse": true,
+        "verbose": true
+    },
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": ["jsdoc", "closure"]
+    },
+    "templates": {
+        "cleverLinks": true,
+        "monospaceLinks": true
+    },
+    "markdown": {
+        "hardwrap": false,
+        "idInHeadings": true
+    }
+}

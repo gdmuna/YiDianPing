@@ -1,0 +1,7 @@
+# user 用户模块
+@moduleUrl = /user
+
+### 获取用户信息
+GET {{ baseUrl }}{{ moduleUrl }}/userInfo
+Content-Type: application/json
+Authorization: Bearer {{ token }}

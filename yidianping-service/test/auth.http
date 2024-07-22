@@ -1,0 +1,16 @@
+# auth 认证模块
+@moduleUrl = /auth
+
+### 用户登录
+POST {{ baseUrl }}{{ moduleUrl }}/login
+Content-Type: application/json
+
+{
+    "account": "",
+    "password": ""
+}
+
+### 凭证校验
+POST {{ baseUrl }}{{ moduleUrl }}/tokenVerify
+Content-Type: application/json
+Authorization: Bearer {{ token }}

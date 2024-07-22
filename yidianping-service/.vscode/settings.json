@@ -1,0 +1,12 @@
+{
+    "rest-client.environmentVariables": {
+        "development": {
+            "baseUrl": "http://127.0.0.1:33001/api",
+            "token": ""
+        },
+        "production": {
+            "baseUrl": "https://example.com/api",
+            "token": ""
+        }
+    }
+}
