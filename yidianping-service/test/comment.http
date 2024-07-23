@@ -1,0 +1,48 @@
+## commentSubject 评论板块
+@moduleUrl = /comment
+
+### 获取评论板块列表
+GET {{ baseUrl }}{{ moduleUrl }}/getComment
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+###新增评论接口
+POST {{ baseUrl }}{{ moduleUrl }}/createComment
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "comtSubjectId":1,
+    "commentId":2,
+    "text":"测试评论",
+    "userId":"0190c9e4-684a-7070-a326-d0b5c07d65b0"
+}
+
+###删除评论接口
+DELETE {{ baseUrl }}{{ moduleUrl }}/deleteComment
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "comtSubjectId":1,
+    "commentId":2
+}
+
+###获赞接口
+PUT {{ baseUrl }}{{ moduleUrl }}/thumbsUp
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "commentId":1,
+    "comtSubjectId":1
+}
+###取消点赞接口
+PUT {{ baseUrl }}{{ moduleUrl }}/cancelThumbsUp
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "commentId":1,
+    "comtSubjectId":1
+}

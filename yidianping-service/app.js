@@ -26,6 +26,8 @@ const server_conf = require('config').get('serverConfig');
 const baseUrl = server_conf.baseUrl || '/api';
 app.use(`${baseUrl}/auth`, require('./src/controller/authController'));
 app.use(`${baseUrl}/user`, require('./src/controller/userController'));
+app.use(`${baseUrl}/commentSubject`, require('./src/controller/commentSubjectController'));
+app.use(`${baseUrl}/comment`, require('./src/controller/commentController'));
 
 // 启动服务器
 const server = app.listen(server_conf.port || 33001, server_conf.host || '127.0.0.1', () => {
