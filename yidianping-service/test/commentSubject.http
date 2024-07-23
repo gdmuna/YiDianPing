@@ -1,0 +1,37 @@
+## commentSubject 评论体板块
+@moduleUrl = /commentSubject
+
+### 获取评论体板块列表
+GET {{ baseUrl }}{{ moduleUrl }}/getAllCommentSubject
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+###创建评论体接口
+POST {{ baseUrl }}{{ moduleUrl }}/createCommentSubject
+Content-Type: application/json
+
+{
+    "comtSubjectId":"",
+    "cbImg":"",
+    "cbText":"",
+    "cbTitle":"",
+    "userId":""
+}
+###修改评论体接口
+PUT {{ baseUrl }}{{ moduleUrl }}/modifyCommentSubject
+Content-Type: application/json
+
+{
+    "comtSubjectId":,
+    "cbImg":"",
+    "cbText":"",
+    "cbTitle":"",
+    "userId":""
+}
+###删除评论体接口
+DELETE {{ baseUrl }}{{ moduleUrl }}/deleteCommentSubject
+Content-Type: application/json
+
+{
+    "comtSubjectId":4
+}
