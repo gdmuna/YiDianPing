@@ -25,8 +25,8 @@ router.get('/getAllCommentSubject', async (req, res, next) => {
  * @response {Object} result 创建结果
  */
 router.post('/createCommentSubject', async (req, res, next) => {
-    const { comtSubjectId, cbImg, cbText, cbTitle, userId } = req.body;
-    const result = await commentSubjectService.createCommentSubject(comtSubjectId, cbImg, cbText, cbTitle, userId);
+    const { cbImg, cbText, cbTitle, userId } = req.body;
+    const result = await commentSubjectService.createCommentSubject(cbImg, cbText, cbTitle, userId);
     res.ResultVO(0, '成功', result);
 });
 

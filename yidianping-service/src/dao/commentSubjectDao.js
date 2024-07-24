@@ -1,5 +1,5 @@
 const db = require('../utils/dbConnPool/mariadb');
-
+const { v7: uuidv7 } = require('uuid');
 // 获取评论体信息
 exports.getAllCommentSubject = async () => {
     const sql = `
@@ -12,12 +12,29 @@ exports.getAllCommentSubject = async () => {
 };
 
 // 创建评论体
-exports.createCommentSubject = async (comtSubjectId, cbImg, cbText, cbTitle, userId) => {
+exports.createCommentSubject = async (cbImg, cbText, cbTitle, userId) => {
     const sql = `
-        INSERT yi_comment_subject (comt_subject_id, cb_img, cb_text, cb_title, user_id)
-        VALUES (?, ?, ?, ?, ?)
+        INSERT
+        yi_comment_subject
+        (
+        comt_subject_id,
+        cb_img,
+        cb_text,
+        cb_title,
+        user_id,
+        created_at
+        )
+        VALUES 
+        (
+        ?,
+        ?, 
+        ?, 
+        ?, 
+        ?,
+        NOW()
+        )
     `;
-    const sqlParams = [comtSubjectId, cbImg, cbText, cbTitle, userId];
+    const sqlParams = [uuidv7(), cbImg, cbText, cbTitle, userId];
     try {
         return await db.query(sql, sqlParams);
     } catch (error) {

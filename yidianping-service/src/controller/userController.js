@@ -52,6 +52,6 @@ router.post('/banUser', async (req, res, next) => {
  */
 router.post('/unbanUser', async (req, res, next) => {
     const { userId } = req.body;
-    const result = await userService.banUser(userId);
+    const result = await userService.unbanUser(userId);
     res.ResultVO(0, '成功', result);
 });
