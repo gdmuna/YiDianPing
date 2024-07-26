@@ -54,6 +54,16 @@ const routes = [
             freeAuth: true,
             showNavigation: true
         }
+    },
+    {
+        path: '/createComment',
+        name: 'createComment',
+        component: () => import('@/pages/user/createComment.vue'),
+        meta: {
+            title: '创建新评论',
+            freeAuth: true,
+            showNavigation: true
+        }
     }
 ];
 
