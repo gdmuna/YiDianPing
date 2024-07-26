@@ -26,6 +26,16 @@ const routes = [
         }
     },
     {
+        path: '/register',
+        name: 'register',
+        component: () => import('@/pages/auth/register.vue'),
+        meta: {
+            title: '用户注册',
+            freeAuth: true,
+            hideAppBar: true
+        }
+    },
+    {
         path: '/home',
         name: 'home',
         component: () => import('@/pages/home/home.vue'),
