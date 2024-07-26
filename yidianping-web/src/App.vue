@@ -6,10 +6,15 @@
         <router-view></router-view>
     </div>
     <!-- 底部导航栏 -->
-    <var-bottom-navigation v-if="$route.meta.showNavigation" v-model:active="activeNavigation" variant fixed safe-area @change="navigateTo()">
-        <var-bottom-navigation-item icon="home" />
-        <var-bottom-navigation-item icon="plus-circle" />
-        <var-bottom-navigation-item icon="account-circle" />
+    <var-bottom-navigation v-if="$route.meta.showNavigation" v-model:active="activeNavigation" fixed safe-area class="items-center" style="height: 4.3rem; border-top: 2px solid rgb(242, 245, 248); --bottom-navigation-item-icon-size: 1.6rem" inactive-color="#424242" active-color="#356fcf" @change="navigateTo()">
+        <!-- "首页"按钮 -->
+        <var-bottom-navigation-item label="首页" icon="home" />
+        <!-- "创建新评论"按钮 -->
+        <var-button type="primary" class="h-11 w-11" color="#356fcf" @click="goCreateComment">
+            <font-awesome-icon :icon="['fas', 'plus']" size="2xl" style="color: #ffffff" />
+        </var-button>
+        <!-- "我的"按钮 -->
+        <var-bottom-navigation-item label="我的" icon="account-circle" />
     </var-bottom-navigation>
 </template>
 
@@ -44,11 +49,12 @@ export default {
                     this.$router.push('/home');
                     break;
                 case 1:
-                    break;
-                case 2:
                     this.$router.push('/user');
                     break;
             }
+        },
+        goCreateComment() {
+            this.$router.push('/createComment');
         }
     }
 };
