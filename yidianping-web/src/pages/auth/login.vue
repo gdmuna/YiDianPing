@@ -18,7 +18,7 @@
                     </template>
                 </var-input>
                 <!-- 输入验证码 -->
-                <var-input v-model="user.password" class="my-4 w-5/6 bg-white relative inline-flex" text-color="#476fcf" variant="outlined" placeholder="请输入验证码" blur-color="#476fcf" focus-color="#476fcf" :type="showPassword ? 'text' : 'password'">
+                <var-input v-model="user.password" class="my-4 w-5/6 bg-white relative inline-flex" text-color="#476fcf" variant="outlined" placeholder="请输入验证码" blur-color="#476fcf" focus-color="#476fcf">
                     <template #prepend-icon>
                         <font-awesome-icon :icon="['fas', 'lock']" size="lg" style="color: #2041a9" class="mr-2.5 ml-0.5" />
                     </template>
