@@ -4,7 +4,7 @@ const routes = [
     {
         path: '/',
         name: '',
-        redirect: '/demo'
+        redirect: 'home'
     },
     {
         path: '/demo',
@@ -21,7 +21,6 @@ const routes = [
         component: () => import('@/pages/auth/login.vue'),
         meta: {
             title: '用户登录',
-            freeAuth: true,
             hideAppBar: true
         }
     },
@@ -41,6 +40,56 @@ const routes = [
         component: () => import('@/pages/user/user.vue'),
         meta: {
             title: '个人中心',
+            freeAuth: true,
+            showNavigation: true
+        }
+    },
+    {
+        path: '/manager',
+        name: 'manager',
+        component: () => import('@/pages/manager/manager.vue'),
+        meta: {
+            title: '管理员',
+            freeAuth: true,
+            showNavigation: true
+        }
+    },
+    {
+        path: '/commentSubjectgl',
+        name: 'commentSubjectgl',
+        component: () => import('@/pages/manager/commentSubjectgl.vue'),
+        meta: {
+            title: '评论体',
+            freeAuth: true,
+            showNavigation: true
+        }
+    },
+    {
+        path: '/usergl',
+        name: 'usergl',
+        component: () => import('@/pages/manager/usergl.vue'),
+        meta: {
+            title: '用户',
+            freeAuth: true,
+            showNavigation: true
+        }
+    },
+    {
+        path: '/commentgl',
+        name: 'commentgl',
+        component: () => import('@/pages/manager/commentgl.vue'),
+        meta: {
+            title: '评论',
+            freeAuth: true,
+            showNavigation: true
+        }
+    },
+    {
+        path: '/questiongl',
+        name: 'questiongl',
+        component: () => import('@/pages/manager/questiongl.vue'),
+        meta: {
+            title: '评论体',
             freeAuth: true,
             showNavigation: true
         }
