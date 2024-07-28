@@ -43,9 +43,9 @@ exports.conditionReplace = (condition, param) => {
     }
 };
 
-exports.keyReplace = (key, param, endFlag = false) => {
-    if (param != null && param != undefined && param != '') {
-        return `${key} = ?${endFlag ? '' : ','}`;
+exports.keyReplace = (keyName, dbParamName, endFlag = false) => {
+    if (dbParamName != null && dbParamName != undefined && dbParamName != '') {
+        return `${keyName} = ?${endFlag ? '' : ','}`;
     } else {
         return '';
     }
