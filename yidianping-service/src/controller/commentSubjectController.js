@@ -54,8 +54,20 @@ router.put('/modifyCommentSubject', async (req, res, next) => {
  * @body {string} comtSubjectId 评论体ID
  * @response {Object} result 删除结果
  */
-router.delete('/deleteCommentSubject', async (req, res, next) => {
+router.post('/deleteCommentSubject', async (req, res, next) => {
     const { comtSubjectId } = req.body;
     const result = await commentSubjectService.deleteCommentSubject(comtSubjectId);
+    res.ResultVO(0, '成功', result);
+});
+/**
+ * 管理员页恢复评论体信息
+ * @name recoverCommentSubject 恢复评论体信息
+ * @description POST /recoverCommentSubject
+ * @body {string} comtSubjectId 评论体ID
+ * @response {Object} result 删除结果
+ */
+router.post('/recoverCommentSubject', async (req, res, next) => {
+    const { comtSubjectId } = req.body;
+    const result = await commentSubjectService.recoverCommentSubject(comtSubjectId);
     res.ResultVO(0, '成功', result);
 });

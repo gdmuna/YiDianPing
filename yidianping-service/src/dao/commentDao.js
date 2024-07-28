@@ -4,9 +4,15 @@ const db = require('../utils/dbConnPool/mariadb');
 exports.getComment = async () => {
     const sql = `
         SELECT 
-            *
+            c.*, 
+            u.nickname, 
+            s.cb_title
         FROM 
-            yi_comment
+            yi_comment c
+        LEFT JOIN 
+            yi_user u ON c.user_id = u.user_id
+        LEFT JOIN 
+            yi_comment_subject s ON c.comt_subject_id = s.comt_subject_id
     `;
     return await db.query(sql);
 };
@@ -42,8 +48,9 @@ exports.createComment = async (comtSubjectId, commentId, text, userId) => {
 // 删除评论
 exports.deleteComment = async (comtSubjectId, commentId) => {
     const sql = `
-        DELETE FROM 
-            yi_comment
+        UPDATE yi_comment
+        SET 
+            is_enabled =1
         WHERE
             comt_subject_id = ?
             AND comment_id = ?
@@ -53,6 +60,23 @@ exports.deleteComment = async (comtSubjectId, commentId) => {
         return await db.query(sql, sqlParams);
     } catch (error) {
         console.error('删除评论失败:', error);
+    }
+};
+//恢复评论
+exports.recoverComment = async (comtSubjectId, commentId) => {
+    const sql = `
+        UPDATE yi_comment
+        SET 
+            is_enabled =0
+        WHERE
+            comt_subject_id = ?
+            AND comment_id = ?
+    `;
+    const sqlParams = [comtSubjectId, commentId];
+    try {
+        return await db.query(sql, sqlParams);
+    } catch (error) {
+        console.error('恢复评论失败:', error);
     }
 };
 

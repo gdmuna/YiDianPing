@@ -17,6 +17,11 @@ exports.deleteComment = async (comtSubjectId, commentId) => {
     const Comment = await commentDao.deleteComment(comtSubjectId, commentId);
     return Comment;
 };
+//恢复评论
+exports.recoverComment = async (comtSubjectId, commentId) => {
+    const Comment = await commentDao.recoverComment(comtSubjectId, commentId);
+    return Comment;
+};
 
 // 更新评论获赞数
 exports.updateThumbsUp = async (commentId, comtSubjectId) => {

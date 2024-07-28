@@ -12,9 +12,8 @@ Content-Type: application/json
 
 {
     "userId":"",
-    "nickname":"",
-    "avatar":"",
-    "password":""
+    "nickname":""
+   
 }
 
 ###封禁用户接口
@@ -24,6 +23,7 @@ Content-Type: application/json
 {
     "userId":""
 }
+
 ###解禁用户接口
 POST {{ baseUrl }}{{ moduleUrl }}/unbanUser
 Content-Type: application/json
