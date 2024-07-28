@@ -1,6 +1,40 @@
+<!-- eslint-disable vue/valid-v-slot -->
 <template>
-    <!-- 标题栏 -->
-    <var-app-bar v-if="!$route.meta.hideAppBar" title-position="center" :title="$route.meta.title" fixed safe-area-top />
+    <!-- 顶部导航栏 -->
+    <var-app-bar v-if="!$route.meta.hideAppBar" title-position="center" :title="$route.meta.title" fixed safe-area-top class="h-20" style="background-color: #f6f8fb; color: #0f46a0; box-shadow: none; --app-bar-left-gap: 1rem; --app-bar-right-gap: 1rem">
+        <!-- 左侧 -->
+        <!-- "发现页+分类页"————刷新页面按钮 -->
+        <template v-if="$route.meta.isRefresh" #left>
+            <var-button round text color="transparent" text-color="#0F46A0" class="self-end" @click="refresh">
+                <font-awesome-icon :icon="['fas', 'arrow-rotate-right']" size="xl" style="color: #2041a9" />
+            </var-button>
+        </template>
+        <!-- "创建新评论+创建新评论对象"————返回上一页面按钮 -->
+        <template v-if="$route.meta.isGoBack" #left>
+            <var-button round text color="transparent" text-color="#0F46A0" class="self-end" @click="goBack">
+                <font-awesome-icon :icon="['fas', 'arrow-left']" size="xl" style="color: #2041a9" />
+            </var-button>
+        </template>
+        <!-- 右侧 -->
+        <!-- "发现页+分类页"————搜索按钮 -->
+        <template v-if="$route.meta.isSearch" #right>
+            <var-button round text color="transparent" text-color="#0F46A0" class="self-end" @click="goSearsh">
+                <font-awesome-icon :icon="['fas', 'magnifying-glass']" size="xl" style="color: #2041a9" />
+            </var-button>
+        </template>
+        <!-- "创建新评论+创建新评论对象"————弹窗提示按钮 -->
+        <template v-if="$route.meta.isTip" #right>
+            <var-button round text color="transparent" text-color="#0F46A0" class="self-end" @click="showTips">
+                <font-awesome-icon :icon="['fas', 'question']" size="xl" style="color: #2041a9" />
+            </var-button>
+        </template>
+        <!-- "我的"页面————设置按钮 -->
+        <template v-if="$route.meta.isSettings" #right>
+            <var-button type="primary" class="h-9 w-9 rounded-2xl self-end" color="#ffffff" style="box-shadow: inset 0 0 4px rgb(159, 178, 234)" @click="goSettings">
+                <font-awesome-icon :icon="['fas', 'gear']" size="xl" style="color: #2041a9" />
+            </var-button>
+        </template>
+    </var-app-bar>
     <!-- 主要内容区域 -->
     <div :class="$route.meta.hideAppBar ? 'main-area_no-app-bar' : !$route.meta.showNavigation ? 'main-area_no-nav' : 'main-area'">
         <router-view></router-view>
@@ -27,7 +61,8 @@ export default {
     },
     data() {
         return {
-            activeNavigation: null
+            activeNavigation: null,
+            activeTab: '发现'
         };
     },
     created() {
