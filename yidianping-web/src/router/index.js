@@ -70,6 +70,17 @@ const routes = [
             isGoBack: true,
             isTip: true
         }
+    },
+    {
+        path: '/settings',
+        name: 'settings',
+        component: () => import('@/pages/user/settings.vue'),
+        meta: {
+            title: '设置',
+            freeAuth: true,
+            showNavigation: false,
+            isGoBack: true
+        }
     }
 ];
 
