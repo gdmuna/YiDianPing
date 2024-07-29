@@ -56,8 +56,37 @@ const routes = [
             // title: '个人中心',
             freeAuth: true,
             showNavigation: true,
-            isSettings: true
-        }
+            hideAppBar: true
+        },
+        children: [
+            {
+                path: 'myComment',
+                name: 'myComment',
+                component: () => import('@/pages/user/myComment.vue'),
+                meta: {
+                    // title: '我评论的',
+                    freeAuth: true
+                }
+            },
+            {
+                path: 'star',
+                name: 'star',
+                component: () => import('@/pages/user/star.vue'),
+                meta: {
+                    // title: '收藏',
+                    freeAuth: true
+                }
+            },
+            {
+                path: 'like',
+                name: 'like',
+                component: () => import('@/pages/user/like.vue'),
+                meta: {
+                    // title: '点赞',
+                    freeAuth: true
+                }
+            }
+        ]
     },
     {
         path: '/createComment',
