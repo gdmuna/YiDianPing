@@ -1,11 +1,23 @@
-import request from '@/utils/request';
+import request from '../utils/request';
 
 const moduleUrl = '/user';
 
 const user = {
-    // 查询某个用户的详细信息
-    getUserInfo(data) {
-        return request.get(`${moduleUrl}/userInfo`, data);
+    // 查询所有用户的详细信息
+    getUserInfo() {
+        return request.get(`${moduleUrl}/users`);
+    },
+    //修改用户信息
+    updateUser(data) {
+        return request.put(`${moduleUrl}/updateUser`, data);
+    },
+    //封禁用户
+    banUser(data) {
+        return request.post(`${moduleUrl}/banUser`, data);
+    },
+    //解禁用户
+    unbanUser(data) {
+        return request.post(`${moduleUrl}/unbanUser`, data);
     }
 };
 

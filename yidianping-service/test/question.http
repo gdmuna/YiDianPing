@@ -1,0 +1,27 @@
+## question 提问板块
+@moduleUrl = /question
+
+### 获取提问列表
+GET {{ baseUrl }}{{ moduleUrl }}/getQuestion
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+### 删除提问
+POST {{ baseUrl }}{{ moduleUrl }}/deleteQuestion
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "comtSubjectId":"",
+    "questionId":1
+}
+
+### 恢复提问
+POST {{ baseUrl }}{{ moduleUrl }}/recoverQuestion
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "comtSubjectId":"",
+    "questionId":1
+}

@@ -46,7 +46,7 @@
     </var-bottom-navigation>
 </template>
 
-<script lang="js">
+<script>
 export default {
     name: 'App',
     components: {},
