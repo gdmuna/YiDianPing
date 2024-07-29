@@ -45,6 +45,13 @@
     display: none;
 }
 
+/* 全局隐藏滚动条但允许内容滚动 */
+* {
+    overflow: -moz-scrollbars-none; /* Firefox */
+    -ms-overflow-style: none; /* Internet Explorer */
+    scrollbar-width: none; /* Firefox */
+}
+
 body {
     width: 100vw;
     height: 100vh;
