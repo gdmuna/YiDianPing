@@ -40,9 +40,12 @@ const routes = [
         name: 'home',
         component: () => import('@/pages/home/home.vue'),
         meta: {
-            title: '主页',
+            // title: '主页',
             freeAuth: true,
-            showNavigation: true
+            showNavigation: true,
+            isRefresh: true,
+            isSearch: true,
+            isTabs: true
         }
     },
     {
@@ -50,9 +53,10 @@ const routes = [
         name: 'user',
         component: () => import('@/pages/user/user.vue'),
         meta: {
-            title: '个人中心',
+            // title: '个人中心',
             freeAuth: true,
-            showNavigation: true
+            showNavigation: true,
+            isSettings: true
         }
     },
     {
@@ -60,9 +64,11 @@ const routes = [
         name: 'createComment',
         component: () => import('@/pages/user/createComment.vue'),
         meta: {
-            title: '创建新评论',
+            // title: '创建新评论',
             freeAuth: true,
-            showNavigation: true
+            showNavigation: false,
+            isGoBack: true,
+            isTip: true
         }
     }
 ];
