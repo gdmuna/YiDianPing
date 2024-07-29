@@ -25,13 +25,26 @@ const routes = [
         }
     },
     {
+        path: '/register',
+        name: 'register',
+        component: () => import('@/pages/auth/register.vue'),
+        meta: {
+            title: '用户注册',
+            freeAuth: true,
+            hideAppBar: true
+        }
+    },
+    {
         path: '/home',
         name: 'home',
         component: () => import('@/pages/home/home.vue'),
         meta: {
-            title: '主页',
+            // title: '主页',
             freeAuth: true,
-            showNavigation: true
+            showNavigation: true,
+            isRefresh: true,
+            isSearch: true,
+            isTabs: true
         }
     },
     {
@@ -39,9 +52,62 @@ const routes = [
         name: 'user',
         component: () => import('@/pages/user/user.vue'),
         meta: {
-            title: '个人中心',
+            // title: '个人中心',
             freeAuth: true,
-            showNavigation: true
+            showNavigation: true,
+            hideAppBar: true
+        },
+        children: [
+            {
+                path: 'myComment',
+                name: 'myComment',
+                component: () => import('@/pages/user/myComment.vue'),
+                meta: {
+                    // title: '我评论的',
+                    freeAuth: true
+                }
+            },
+            {
+                path: 'star',
+                name: 'star',
+                component: () => import('@/pages/user/star.vue'),
+                meta: {
+                    // title: '收藏',
+                    freeAuth: true
+                }
+            },
+            {
+                path: 'like',
+                name: 'like',
+                component: () => import('@/pages/user/like.vue'),
+                meta: {
+                    // title: '点赞',
+                    freeAuth: true
+                }
+            }
+        ]
+    },
+    {
+        path: '/createComment',
+        name: 'createComment',
+        component: () => import('@/pages/user/createComment.vue'),
+        meta: {
+            // title: '创建新评论',
+            freeAuth: true,
+            showNavigation: false,
+            isGoBack: true,
+            isTip: true
+        }
+    },
+    {
+        path: '/settings',
+        name: 'settings',
+        component: () => import('@/pages/user/settings.vue'),
+        meta: {
+            title: '设置',
+            freeAuth: true,
+            showNavigation: false,
+            isGoBack: true
         }
     },
     {
