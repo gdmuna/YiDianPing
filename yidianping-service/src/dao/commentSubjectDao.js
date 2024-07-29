@@ -46,7 +46,8 @@ exports.createCommentSubject = async (cbImg, cbText, cbTitle, userId) => {
 // 修改评论体信息
 exports.modifyCommentSubject = async (comtSubjectId, cbImg, cbText, cbTitle, userId) => {
     const sql = `
-        UPDATE yi_comment_subject
+        UPDATE 
+            yi_comment_subject
         SET 
             cb_img = ?,
             cb_text = ?,
@@ -66,7 +67,9 @@ exports.modifyCommentSubject = async (comtSubjectId, cbImg, cbText, cbTitle, use
 // 删除评论体信息
 exports.deleteCommentSubject = async (comtSubjectId) => {
     const sql = `
-        DELETE FROM yi_comment_subject
+        UPDATE yi_comment_subject
+        SET 
+            is_enabled =1
         WHERE
             comt_subject_id = ?
     `;
@@ -75,5 +78,21 @@ exports.deleteCommentSubject = async (comtSubjectId) => {
         return await db.query(sql, sqlParams);
     } catch (error) {
         console.error('Error in deleteCommentSubject:', error);
+    }
+};
+// 恢复评论体信息
+exports.recoverCommentSubject = async (comtSubjectId) => {
+    const sql = `
+        UPDATE yi_comment_subject
+        SET 
+            is_enabled =0
+        WHERE
+            comt_subject_id = ?
+    `;
+    const sqlParams = [comtSubjectId];
+    try {
+        return await db.query(sql, sqlParams);
+    } catch (error) {
+        console.error('Error in recoverCommentSubject:', error);
     }
 };

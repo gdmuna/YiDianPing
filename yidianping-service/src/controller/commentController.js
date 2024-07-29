@@ -31,14 +31,28 @@ router.post('/createComment', async (req, res, next) => {
 /**
  * 删除评论
  * @name deleteComment 删除评论
- * @description DELETE /deleteComment
+ * @description POST /deleteComment
  * @body {string} comtSubjectId 评论主题ID
  * @body {string} commentId 评论ID
  * @body {string} userId 用户ID
  * @response {Object} result 删除结果
  */
-router.delete('/deleteComment', async (req, res, next) => {
-    const result = await commentService.deleteComment(req.body.comtSubjectId, req.body.commentId, req.body.userId);
+router.post('/deleteComment', async (req, res, next) => {
+    const result = await commentService.deleteComment(req.body.comtSubjectId, req.body.commentId);
+    res.ResultVO(0, '成功', result);
+});
+/**
+ * 恢复评论内容
+ * @name updateComment 恢复评论
+ * @description POST /recoverComment
+ * @body {string} comtSubjectId 评论主题ID
+ * @body {string} commentId 评论ID
+ * @body {string} text 评论内容
+ * @body {string} userId 用户ID
+ * @response {Object} result 恢复结果
+ */
+router.post('/recoverComment', async (req, res, next) => {
+    const result = await commentService.recoverComment(req.body.comtSubjectId, req.body.commentId);
     res.ResultVO(0, '成功', result);
 });
 

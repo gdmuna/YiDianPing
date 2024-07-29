@@ -1,19 +1,8 @@
 <template>
-    <!-- 标题栏 -->
-    <var-app-bar v-if="!$route.meta.hideAppBar" title-position="center" :title="$route.meta.title" fixed safe-area-top />
-    <!-- 主要内容区域 -->
-    <div :class="$route.meta.hideAppBar ? 'main-area_no-app-bar' : !$route.meta.showNavigation ? 'main-area_no-nav' : 'main-area'">
-        <router-view></router-view>
-    </div>
-    <!-- 底部导航栏 -->
-    <var-bottom-navigation v-if="$route.meta.showNavigation" v-model:active="activeNavigation" variant fixed safe-area @change="navigateTo()">
-        <var-bottom-navigation-item icon="home" />
-        <var-bottom-navigation-item icon="plus-circle" />
-        <var-bottom-navigation-item icon="account-circle" />
-    </var-bottom-navigation>
+    <router-view></router-view>
 </template>
 
-<script lang="js">
+<script>
 export default {
     name: 'App',
     components: {},

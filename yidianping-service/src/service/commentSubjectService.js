@@ -22,3 +22,8 @@ exports.deleteCommentSubject = async (comtSubjectId) => {
     const commentSubject = await commentSubjectDao.deleteCommentSubject(comtSubjectId);
     return commentSubject;
 };
+//恢复评论体信息
+exports.recoverCommentSubject = async (comtSubjectId) => {
+    const commentSubject = await commentSubjectDao.recoverCommentSubject(comtSubjectId);
+    return commentSubject;
+};

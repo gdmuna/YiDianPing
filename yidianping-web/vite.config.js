@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue';
 import components from 'unplugin-vue-components/vite';
 import autoImport from 'unplugin-auto-import/vite';
 import { VarletImportResolver } from '@varlet/import-resolver';
+import { ArcoResolver } from 'unplugin-vue-components/resolvers';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
@@ -39,10 +40,10 @@ export default defineConfig(({ command, mode }) => {
         plugins: [
             vue(),
             components({
-                resolvers: [VarletImportResolver()]
+                resolvers: [VarletImportResolver(), ArcoResolver({ sideEffect: true })]
             }),
             autoImport({
-                resolvers: [VarletImportResolver({ autoImport: true })]
+                resolvers: [VarletImportResolver({ autoImport: true }), ArcoResolver()]
             })
         ],
         // 打包时自动去除 console 和 debugger

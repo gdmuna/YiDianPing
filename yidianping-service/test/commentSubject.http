@@ -21,16 +21,25 @@ PUT {{ baseUrl }}{{ moduleUrl }}/modifyCommentSubject
 Content-Type: application/json
 
 {
-    "comtSubjectId":,
+    "comtSubjectId":"",
+    "userId":"",
     "cbImg":"",
     "cbText":"",
-    "cbTitle":"",
-    "userId":""
+    "cbTitle":""
+    
 }
+
 ###删除评论体接口
-DELETE {{ baseUrl }}{{ moduleUrl }}/deleteCommentSubject
+POST {{ baseUrl }}{{ moduleUrl }}/deleteCommentSubject
 Content-Type: application/json
 
 {
-    "comtSubjectId":4
+    "comtSubjectId":"0190e366-04fa-7ef5-a0f8-bbd67ec1e3fa"
+}
+###恢复评论体接口
+POST {{ baseUrl }}{{ moduleUrl }}/recoverCommentSubject
+Content-Type: application/json
+
+{
+    "comtSubjectId":"0190e366-04fa-7ef5-a0f8-bbd67ec1e3fa"
 }

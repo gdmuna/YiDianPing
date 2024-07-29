@@ -5,10 +5,17 @@ exports.getAllUsers = async () => {
     const users = await userDao.getAllUsers();
     return users;
 };
-//修改用户信息
-exports.updateUser = async (userId, nickname, avatar, password) => {
-    const updateuser = await userDao.updateUser(userId, nickname, avatar, password);
-    return updateuser;
+// 修改用户信息
+exports.updateUser = async (userId, nickname, avatar, password, stuId, email, phone) => {
+    // const updatedFields = {};
+    // if (nickname) updatedFields.nickname = nickname;
+    // if (avatar) updatedFields.avatar = avatar;
+    // if (password) updatedFields.password = password;
+    // if (stuId) updatedFields.stu_id = stuId;
+    // if (email) updatedFields.email = email;
+    // if (phone) updatedFields.phone = phone;
+    const result = await userDao.updateUser(userId, nickname, avatar, password, stuId, email, phone);
+    return result;
 };
 //封禁用户
 exports.banUser = async (userId) => {
