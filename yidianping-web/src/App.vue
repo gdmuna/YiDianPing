@@ -90,6 +90,9 @@ export default {
         },
         goCreateComment() {
             this.$router.push('/createComment');
+        },
+        goSettings() {
+            this.$router.push('/settings');
         }
     }
 };
