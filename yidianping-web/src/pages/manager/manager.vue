@@ -1,6 +1,6 @@
 <template>
     <a-layout class="layout-demo">
-        <a-layout-sider hide-trigger="ture" collapsible :collapsed="collapsed">
+        <a-layout-sider hide-trigger="true" collapsible :collapsed="collapsed">
             <div class="logo-container">
                 <img src="https://cube.elemecdn.com/0/88/03b0d39583f48206768a7534e55bcpng.png" width="40px" height="40px" alt="logo" />
                 <div class="managername">
@@ -52,7 +52,7 @@
 import { defineComponent, ref } from 'vue';
 import { useRouter } from 'vue-router';
 import { Message } from '@arco-design/web-vue';
-import { IconCaretRight, IconCaretLeft, IconHome, IconCalendar } from '@arco-design/web-vue/es/icon';
+import { IconCaretRight, IconCaretLeft, IconCalendar } from '@arco-design/web-vue/es/icon';
 
 export default defineComponent({
     name: 'ManagerHtml',
@@ -73,16 +73,16 @@ export default defineComponent({
             Message.info({ content: `You select ${key}`, showIcon: true });
         };
         const gousergl = () => {
-            router.push('/usergl');
+            router.push('/manager/usergl');
         };
         const gocomtbody = () => {
-            router.push('/commentSubjectgl');
+            router.push('/manager/commentSubjectgl');
         };
         const gocomt = () => {
-            router.push('/commentgl');
+            router.push('/manager/commentgl');
         };
         const goquestion = () => {
-            router.push('/questiongl');
+            router.push('/manager/questiongl');
         };
 
         return {
