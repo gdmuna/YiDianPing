@@ -24,17 +24,24 @@ exports.recoverComment = async (comtSubjectId, commentId) => {
 };
 
 // 更新评论获赞数
-exports.updateThumbsUp = async (commentId, comtSubjectId) => {
-    return await commentDao.updateThumbsUp(commentId, comtSubjectId);
+exports.updateThumbsUp = async (userId, commentId, comtSubjectId) => {
+    const Comment = await commentDao.updateThumbsUp(userId, commentId, comtSubjectId);
+    return Comment;
 };
 
 // 更新评论点赞数（减少）
-exports.cancelThumbUp = async (commentId, comtSubjectId) => {
-    return await commentDao.cancelThumbsUp(commentId, comtSubjectId);
+exports.cancelThumbUp = async (userId, commentId, comtSubjectId) => {
+    const Comment = await commentDao.cancelThumbsUp(userId, commentId, comtSubjectId);
+    return Comment;
 };
 
 //查询历史评论
-exports.getHistoryComment = async (comtSubjectId, userId) => {
-    const Comment = await commentDao.getHistoryComment(comtSubjectId, userId);
+exports.getHistoryComment = async (userId) => {
+    const Comment = await commentDao.getHistoryComment(userId);
+    return Comment;
+};
+//查询点赞评论
+exports.getLoveComment = async (userId) => {
+    const Comment = await commentDao.getLoveComment(userId);
     return Comment;
 };

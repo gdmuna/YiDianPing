@@ -65,8 +65,9 @@ router.post('/recoverComment', async (req, res, next) => {
  * @response {Object} result 更新结果
  */
 router.put('/ThumbsUp', async (req, res, next) => {
-    const thumbsUp = await commentService.updateThumbsUp(req.body.commentId, req.body.comtSubjectId);
-    res.ResultVO(0, '成功', { thumbsUp });
+    const { userId, commentId, comtSubjectId } = req.body;
+    const result = await commentService.updateThumbsUp(userId, commentId, comtSubjectId);
+    res.ResultVO(0, '成功', result);
 });
 
 /**
@@ -78,8 +79,33 @@ router.put('/ThumbsUp', async (req, res, next) => {
  * @response {Object} result 取消点赞结果
  */
 router.put('/cancelThumbsUp', async (req, res) => {
-    const thumbsUp = await commentService.cancelThumbUp(req.body.commentId, req.body.comtSubjectId);
-    res.ResultVO(0, '成功', { thumbsUp });
+    const { userId, commentId, comtSubjectId } = req.body;
+    const result = await commentService.cancelThumbUp(userId, commentId, comtSubjectId);
+    res.ResultVO(0, '成功', result);
+});
+/**
+ * 用户获取历史评论
+ * @name getHistoryComment 获取评论点赞数
+ * @description GET /getHistoryComment
+ * @body {string} commentId 评论ID
+ * @response {Object} result 获取点赞数结果
+ */
+router.get('/getHistoryComment', async (req, res, next) => {
+    const { userId } = req.query;
+    const result = await commentService.getHistoryComment(userId);
+    res.ResultVO(0, '成功', result);
+});
+/**
+ * 获取点赞评论
+ * @name getLoveComment 获取评论点赞数
+ * @description GET /getLoveComment
+ * @body {string} commentId 评论ID
+ * @response {Object} result 获取点赞数结果
+ */
+router.get('/getLoveComment', async (req, res, next) => {
+    const { userId } = req.query;
+    const result = await commentService.getLoveComment(userId);
+    res.ResultVO(0, '成功', result);
 });
 
 module.exports = router;
