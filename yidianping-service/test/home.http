@@ -1,0 +1,7 @@
+# home 首页模块
+@moduleUrl = /home
+
+### 获取评论信息
+GET {{ baseUrl }}{{ moduleUrl }}/commentInfo
+Content-Type: application/json
+Authorization: Bearer {{ token }}
