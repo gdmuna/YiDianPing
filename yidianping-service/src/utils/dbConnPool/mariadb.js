@@ -43,6 +43,14 @@ exports.conditionReplace = (condition, param) => {
     }
 };
 
+exports.keyReplace = (keyName, dbParamName, endFlag = false) => {
+    if (dbParamName != null && dbParamName != undefined && dbParamName != '') {
+        return `${keyName} = ?${endFlag ? '' : ','}`;
+    } else {
+        return '';
+    }
+};
+
 // 过滤 SQL 语句中的空参数
 exports.paramsReplace = (params) => {
     return params.filter((item) => item != null && item != undefined && item != '');

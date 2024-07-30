@@ -2,6 +2,32 @@
 @moduleUrl = /user
 
 ### 获取用户信息
-GET {{ baseUrl }}{{ moduleUrl }}/userInfo
+GET {{ baseUrl }}{{ moduleUrl }}/users
 Content-Type: application/json
 Authorization: Bearer {{ token }}
+
+###修改用户信息接口
+PUT {{ baseUrl }}{{ moduleUrl }}/updateUser
+Content-Type: application/json
+
+{
+    "userId":"",
+    "nickname":""
+   
+}
+
+###封禁用户接口
+POST {{ baseUrl }}{{ moduleUrl }}/banUser
+Content-Type: application/json
+
+{
+    "userId":""
+}
+
+###解禁用户接口
+POST {{ baseUrl }}{{ moduleUrl }}/unbanUser
+Content-Type: application/json
+
+{
+    "userId":""
+}
