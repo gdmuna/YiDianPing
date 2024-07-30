@@ -153,6 +153,17 @@ const routes = [
         }
     },
     {
+        path: '/setMyself',
+        name: 'setMyself',
+        component: () => import('@/pages/user/setMyself.vue'),
+        meta: {
+            title: '编辑个人资料',
+            freeAuth: true,
+            showNavigation: false,
+            isGoBack: true
+        }
+    },
+    {
         path: '/manager',
         name: 'manager',
         component: () => import('@/pages/manager/manager.vue'),
