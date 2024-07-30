@@ -1,12 +1,25 @@
 <template>
-    <div class="w-full max-w-screen-sm h-full mx-auto px-10 py-10">
-        <var-card class="" title="主页">
-            <template #extra>
-                <var-space>
-                    <var-button type="primary">Button 1</var-button>
-                </var-space>
-            </template>
-        </var-card>
+    <var-app-bar fixed safe-area-top title-position="center" class="" style="background-color: #f6f8fb; color: #0f46a0; box-shadow: none; --app-bar-height: 85px">
+        <template #left>
+            <!-- 刷新页面按钮 -->
+            <var-button text text-color="#0F46A0" class="" style="margin-top: 3rem" @click="refresh">
+                <font-awesome-icon :icon="['fas', 'arrow-rotate-right']" size="xl" style="color: #2041a9" />
+            </var-button>
+        </template>
+        <!-- 页面选项卡 -->
+        <var-tabs v-model:active="activeTabs" class="self-end" style="--tab-font-size: 1.05rem; --tab-active-font-size: 1.05rem" color="rgb(246, 248, 251)" active-color="#4E77B9" inactive-color="#4E77B9">
+            <var-tab name="分类" @click="goTypes">分类</var-tab>
+            <var-tab name="发现" @click="goExplore">发现</var-tab>
+        </var-tabs>
+        <!-- 搜索按钮 -->
+        <template #right>
+            <var-button text text-color="#0F46A0" class="" style="margin-top: 3rem" @click="goSearsh">
+                <font-awesome-icon :icon="['fas', 'magnifying-glass']" size="xl" style="color: #2041a9" />
+            </var-button>
+        </template>
+    </var-app-bar>
+    <div class="show-area" style="overflow-y: scroll">
+        <router-view></router-view>
     </div>
 </template>
 
@@ -18,13 +31,32 @@ export default {
         return {};
     },
     data() {
-        return {};
+        return {
+            activeTabs: '发现'
+        };
     },
     created() {},
-    mounted() {},
+    mounted() {
+        // 自动重定向到 home/explore/theThirdCanteen
+        this.$router.push('/home/explore/theThirdCanteen');
+    },
     updated() {},
-    methods: {}
+    methods: {
+        goTypes() {
+            this.$router.push('/home/types');
+        },
+        goExplore() {
+            this.$router.push('/home/explore');
+        }
+    }
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.show-area {
+    width: 100%;
+    height: calc(100% - 149px);
+    position: fixed;
+    top: 85px;
+}
+</style>

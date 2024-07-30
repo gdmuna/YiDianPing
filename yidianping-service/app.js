@@ -29,6 +29,7 @@ app.use(`${baseUrl}/user`, require('./src/controller/userController'));
 app.use(`${baseUrl}/commentSubject`, require('./src/controller/commentSubjectController'));
 app.use(`${baseUrl}/comment`, require('./src/controller/commentController'));
 app.use(`${baseUrl}/question`, require('./src/controller/questionController'));
+app.use(`${baseUrl}/home`, require('./src/controller/homeController'));
 
 // 启动服务器
 const server = app.listen(server_conf.port || 33001, server_conf.host || '127.0.0.1', () => {

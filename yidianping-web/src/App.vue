@@ -3,12 +3,6 @@
     <!-- 顶部导航栏 -->
     <var-app-bar v-if="!$route.meta.hideAppBar" title-position="center" :title="$route.meta.title" fixed safe-area-top style="background-color: #f6f8fb; color: #0f46a0; box-shadow: none; --app-bar-left-gap: 1rem; --app-bar-right-gap: 1rem">
         <!-- 左侧 -->
-        <!-- "发现页+分类页"————刷新页面按钮 -->
-        <template v-if="$route.meta.isRefresh" #left>
-            <var-button round text color="transparent" text-color="#0F46A0" class="self-end" @click="refresh">
-                <font-awesome-icon :icon="['fas', 'arrow-rotate-right']" size="xl" style="color: #2041a9" />
-            </var-button>
-        </template>
         <!-- "创建新评论+创建新评论对象"————返回上一页面按钮 -->
         <template v-if="$route.meta.isGoBack" #left>
             <var-button round text color="transparent" text-color="#0F46A0" class="self-end" @click="goBack">
@@ -16,12 +10,6 @@
             </var-button>
         </template>
         <!-- 右侧 -->
-        <!-- "发现页+分类页"————搜索按钮 -->
-        <template v-if="$route.meta.isSearch" #right>
-            <var-button round text color="transparent" text-color="#0F46A0" class="self-end" @click="goSearsh">
-                <font-awesome-icon :icon="['fas', 'magnifying-glass']" size="xl" style="color: #2041a9" />
-            </var-button>
-        </template>
         <!-- "创建新评论+创建新评论对象"————弹窗提示按钮 -->
         <template v-if="$route.meta.isTip" #right>
             <var-button round text color="transparent" text-color="#0F46A0" class="self-end" @click="showTips">
@@ -46,7 +34,7 @@
     </var-bottom-navigation>
 </template>
 
-<script>
+<script lang="js">
 export default {
     name: 'App',
     components: {},
@@ -55,7 +43,7 @@ export default {
     },
     data() {
         return {
-            activeNavigation: null
+            activeNavigation: '首页'
         };
     },
     created() {
