@@ -5,8 +5,8 @@
                 <div class="card-header">
                     <h1 class="comment-title">{{ item.cb_title }}</h1>
                     <div class="thumbs-up" @click="cancelThumbsUp(index)">
-                        <font-awesome-icon v-if="item.is_thumbs == 1" :icon="['fas', 'heart']" size="lg" style="color: #4e77b9"></font-awesome-icon>
-                        <p :style="{ color: '#4e77b9', fontSize: '10px', margin: '0 0 0 5px' }">{{ item.thumbs_up }}</p>
+                        <font-awesome-icon v-if="item.is_thumbs == 1" :icon="['fas', 'heart']" style="color: #4e77b9"></font-awesome-icon>
+                        <p :style="{ color: '#4e77b9', fontSize: '14px', margin: '2px 15px 0 5px' }">{{ item.thumbs_up }}</p>
                     </div>
                 </div>
             </template>
@@ -79,7 +79,6 @@ export default {
 
 <style scoped>
 .comment {
-    border: 1px solid #e1e4e8;
     margin-bottom: 8%;
     padding: 4%;
 }
@@ -89,6 +88,7 @@ export default {
     padding: 16px;
     background-color: white;
     border-radius: 8px;
+    box-shadow: none;
 }
 .card-header {
     display: flex;
@@ -100,9 +100,11 @@ export default {
     font-size: 20px;
     margin: 0;
     padding: 0;
+    margin-top: 3px;
 }
 .text-content {
     margin-top: 10px;
+    margin-bottom: 10px;
     word-break: break-word;
 }
 .thumbs-up {
@@ -111,10 +113,11 @@ export default {
 }
 .created-time {
     position: absolute;
-    bottom: 10px;
+    bottom: 5px;
     right: 10px;
     color: #2041a9;
     font-size: 12px;
+    margin-right: 10px;
 }
 .popup-content {
     padding: 10px;
