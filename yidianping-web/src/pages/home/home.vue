@@ -1,19 +1,19 @@
 <template>
-    <var-app-bar fixed safe-area-top title-position="center" class="" style="background-color: #f6f8fb; color: #0f46a0; box-shadow: none; --app-bar-height: 85px">
+    <var-app-bar fixed safe-area-top title-position="center" class="" style="background-color: #eef5ff; color: #0f46a0; box-shadow: none; --app-bar-height: 85px">
         <template #left>
             <!-- 刷新页面按钮 -->
-            <var-button text text-color="#0F46A0" class="" style="margin-top: 3rem" @click="refresh">
+            <var-button text text-color="#0F46A0" class="" style="margin-top: 2.7rem" @click="refresh">
                 <font-awesome-icon :icon="['fas', 'arrow-rotate-right']" size="xl" style="color: #2041a9" />
             </var-button>
         </template>
         <!-- 页面选项卡 -->
-        <var-tabs v-model:active="activeTabs" class="self-end" style="--tab-font-size: 1.05rem; --tab-active-font-size: 1.05rem" color="rgb(246, 248, 251)" active-color="#4E77B9" inactive-color="#4E77B9">
+        <var-tabs v-model:active="activeTabs" class="self-end" style="--tab-font-size: 1rem; --tab-active-font-size: 1.05rem" color="rgb(238, 245, 255)" active-color="#0F46A0" inactive-color="#4E77B9">
             <var-tab name="分类" @click="goTypes">分类</var-tab>
             <var-tab name="发现" @click="goExplore">发现</var-tab>
         </var-tabs>
         <!-- 搜索按钮 -->
         <template #right>
-            <var-button text text-color="#0F46A0" class="" style="margin-top: 3rem" @click="goSearsh">
+            <var-button text text-color="#0F46A0" class="" style="margin-top: 2.7rem" @click="goSearsh">
                 <font-awesome-icon :icon="['fas', 'magnifying-glass']" size="xl" style="color: #2041a9" />
             </var-button>
         </template>
