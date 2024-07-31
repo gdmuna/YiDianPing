@@ -28,6 +28,7 @@ library.add(fas, far, fab);
 
 // fonts - LXGWWenKai
 import '@chinese-fonts/lxgwwenkai/dist/LXGWWenKai-Bold/result.css';
+import '@chinese-fonts/dymh/dist/DouyinSansBold/result.css';
 
 // App Entry
 import App from '@/App.vue';

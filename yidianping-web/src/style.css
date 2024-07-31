@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 :root {
-    font-family: LXGW WenKai, Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+    font-family: Douyin Sans, Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
 
     color-scheme: light dark;
     color: rgba(0, 0, 0, 0.87);
@@ -13,6 +13,15 @@
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* "我的"页面————选项卡内卡片正文字体 */
+.text-content {
+    font-family: '微软雅黑', LXGW WenKai, Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
+}
+/* "首页"————选项卡内卡片正文字体 */
+.text-sm {
+    font-family: '微软雅黑', LXGW WenKai, Helvetica, Arial, Menlo, Monaco, monospace, sans-serif;
 }
 
 /* 渐变动画背景 */
