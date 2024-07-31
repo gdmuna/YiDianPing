@@ -6,7 +6,9 @@ exports.getCommentInfo = async () => {
         SELECT
             c.*,
             cs.cb_title,
-            s.score
+            s.score,
+            u.nickname,
+            u.avatar
         FROM
             yi_comment c
         JOIN
@@ -15,6 +17,9 @@ exports.getCommentInfo = async () => {
         JOIN
             yi_score s
             ON c.user_id = s.user_id
+        JOIN
+            yi_user u
+            ON c.user_id = u.user_id
     `;
     const sqlParams = [];
     return await db.query(sql, sqlParams);
