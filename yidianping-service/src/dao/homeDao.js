@@ -14,7 +14,7 @@ exports.getCommentInfo = async () => {
         JOIN
             yi_comment_subject cs
             ON c.comt_subject_id = cs.comt_subject_id
-        JOIN
+        LEFT JOIN
             yi_score s
             ON c.user_id = s.user_id
         JOIN
