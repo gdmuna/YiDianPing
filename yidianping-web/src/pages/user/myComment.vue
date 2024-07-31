@@ -27,6 +27,7 @@
             </div>
         </var-popup>
         <var-image-preview v-model:show="showImagePreviewVisible" :images="imagePreviewUrls" />
+        <p class="flex justify-center mt-4 text-xs" style="color: #999999">没有更多内容咯</p>
     </div>
 </template>
 
