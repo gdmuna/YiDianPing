@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
 import comment from '../../api/comment';
 
 export default {
@@ -93,8 +94,7 @@ export default {
             this.showImagePreviewVisible = true;
         },
         formatTime(time) {
-            const date = new Date(time);
-            return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}`;
+            return dayjs(time).format('YYYY-MM-DD HH:mm');
         }
     }
 };
