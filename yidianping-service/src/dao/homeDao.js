@@ -8,7 +8,8 @@ exports.getCommentInfo = async () => {
             cs.cb_title,
             s.score,
             u.nickname,
-            u.avatar
+            u.avatar,
+            COALESCE(CAST(COUNT(CASE WHEN ct.is_thumbs = 1 THEN 1 END) AS CHAR), '0') AS thumbs_up
         FROM
             yi_comment c
         JOIN
@@ -17,9 +18,17 @@ exports.getCommentInfo = async () => {
         LEFT JOIN
             yi_score s
             ON c.user_id = s.user_id
+            AND c.comt_subject_id = s.comt_subject_id
         JOIN
             yi_user u
             ON c.user_id = u.user_id
+        LEFT JOIN
+            yi_comment_thumbs ct
+            ON c.comt_subject_id = ct.comt_subject_id
+        WHERE
+            c.is_enabled = 0 AND cs.is_enabled = 0
+        GROUP BY
+            c.comment_id, cs.cb_title, s.score, u.nickname, u.avatar;
     `;
     const sqlParams = [];
     return await db.query(sql, sqlParams);
