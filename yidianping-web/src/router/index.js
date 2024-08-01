@@ -55,11 +55,14 @@ const routes = [
                     // title: '分类',
                     freeAuth: true
                 },
+                redirect: {
+                    name: 'theThirdCanteenType' // 使用子路由的名称进行重定向
+                },
                 children: [
                     {
-                        path: 'theThirdCanteen',
-                        name: 'theThirdCanteen',
-                        component: () => import('@/pages/home/theThirdCanteen.vue'),
+                        path: 'theThirdCanteenType',
+                        name: 'theThirdCanteenType',
+                        component: () => import('@/pages/home/theThirdCanteenType.vue'),
                         meta: {
                             // title: '三饭',
                             freeAuth: true
