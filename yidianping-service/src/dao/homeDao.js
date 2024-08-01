@@ -24,3 +24,21 @@ exports.getCommentInfo = async () => {
     const sqlParams = [];
     return await db.query(sql, sqlParams);
 };
+
+// 获取评论对象信息
+exports.getCommentSubjectInfo = async () => {
+    const sql = `
+        SELECT
+            cs.*,
+            AVG(s.score) AS avg_score
+        FROM
+            yi_comment_subject cs
+        LEFT JOIN
+            yi_score s
+            ON cs.comt_subject_id = s.comt_subject_id
+        GROUP BY
+            cs.comt_subject_id
+    `;
+    const sqlParams = [];
+    return await db.query(sql, sqlParams);
+};

@@ -17,3 +17,18 @@ router.get('/commentInfo', async (req, res, next) => {
     const commentInfo = await homeService.getCommentInfo();
     res.ResultVO(0, '成功', commentInfo);
 });
+
+/**
+ * @name commentSubjectInfo 获取评论信息
+ * @description GET /home/commentSubjectInfo
+ * @header {string} authorization 用户凭证
+ * @response {Object} commentSubjectInfo 评论信息
+ * @response {string} commentSubjectInfo.userId 用户ID
+ * @response {string} commentSubjectInfo.avatar 用户头像
+ * @response {string} commentSubjectInfo.nickName 用户昵称
+ * @response {string} commentSubjectInfo.score 用户对评论对象的评分
+ */
+router.get('/commentSubjectInfo', async (req, res, next) => {
+    const commentSubjectInfo = await homeService.getCommentSubjectInfo();
+    res.ResultVO(0, '成功', commentSubjectInfo);
+});
