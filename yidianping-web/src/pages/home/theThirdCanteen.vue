@@ -44,8 +44,8 @@
                         <var-avatar :src="card.avatar" size="23" />
                         <p class="absolute left-12 text-sm" style="margin-top: 3px">{{ card.nickname }}</p>
                         <div class="flex justify-end mr-4 items-center">
-                            <font-awesome-icon v-if="card.is_thumbs == 1" :icon="['fas', 'heart']" size="sm" class="mr-1" style="color: #0f46a0" @click="cancelThumbsUp(card.user_id, card.comt_subject_id, card.comment_id, index)" />
-                            <font-awesome-icon v-else :icon="['far', 'heart']" size="sm" class="mr-1" style="color: #0f46a0" @click="thumbsUp(card.user_id, card.comt_subject_id, card.comment_id, index)" />
+                            <font-awesome-icon v-if="card.is_thumbs == 1" :icon="['fas', 'heart']" size="sm" class="mr-1" style="color: #0f46a0; margin-top: 1px" @click="cancelThumbsUp(card.user_id, card.comt_subject_id, card.comment_id, index)" />
+                            <font-awesome-icon v-else :icon="['far', 'heart']" size="sm" class="mr-1" style="color: #0f46a0; margin-top: 1px" @click="thumbsUp(card.user_id, card.comt_subject_id, card.comment_id, index)" />
                             <p class="text-sm" style="color: #0f46a0; margin-top: 2.5px">{{ card.thumbs_up }}</p>
                             <!-- {{ card.created_at }} -->
                         </div>
