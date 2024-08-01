@@ -22,7 +22,7 @@
                     <font-awesome-icon :icon="['far', 'comment-dots']" size="lg" class="mr-1" style="color: #4e77b9" />
                     我评论的
                 </var-tab>
-                <var-tab name="收藏" @click="goStar">
+                <var-tab name="收藏" @click="goCollect">
                     <font-awesome-icon :icon="['far', 'star']" size="lg" class="mr-1" style="color: #4e77b9" />
                     收藏
                 </var-tab>
@@ -66,8 +66,8 @@ export default {
         goMyComment() {
             this.$router.push('/user/myComment');
         },
-        goStar() {
-            this.$router.push('/user/star');
+        goCollect() {
+            this.$router.push('/user/collect');
         },
         goLike() {
             this.$router.push('/user/like');

@@ -116,9 +116,9 @@ const routes = [
                 }
             },
             {
-                path: 'star',
-                name: 'star',
-                component: () => import('@/pages/user/star.vue'),
+                path: 'collect',
+                name: 'collect',
+                component: () => import('@/pages/user/collect.vue'),
                 meta: {
                     // title: '收藏',
                     freeAuth: true
