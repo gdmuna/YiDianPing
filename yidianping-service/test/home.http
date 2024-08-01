@@ -5,3 +5,8 @@
 GET {{ baseUrl }}{{ moduleUrl }}/commentInfo
 Content-Type: application/json
 Authorization: Bearer {{ token }}
+
+### 获取评论对象信息
+GET {{ baseUrl }}{{ moduleUrl }}/commentSubjectInfo
+Content-Type: application/json
+Authorization: Bearer {{ token }}

@@ -22,7 +22,7 @@
         <router-view></router-view>
     </div>
     <!-- 底部导航栏 -->
-    <var-bottom-navigation v-if="$route.meta.showNavigation" v-model:active="activeNavigation" fixed safe-area class="items-center" style="height: 4rem; border-top: 2px solid rgb(242, 245, 248); --bottom-navigation-item-icon-size: 1.6rem" inactive-color="#424242" active-color="#356fcf" @change="navigateTo()">
+    <var-bottom-navigation v-if="$route.meta.showNavigation" v-model:active="activeNavigation" fixed safe-area class="items-center" style="height: 4rem; --bottom-navigation-item-icon-size: 1.6rem" inactive-color="#424242" active-color="#356fcf" @change="navigateTo()">
         <!-- "首页"按钮 -->
         <var-bottom-navigation-item label="首页" icon="home" />
         <!-- "创建新评论"按钮 -->

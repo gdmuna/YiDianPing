@@ -5,31 +5,34 @@
                 <div class="card-header">
                     <h1 class="comment-title">{{ item.cb_title }}</h1>
                     <div class="thumbs-up">
-                        <font-awesome-icon v-if="item.is_thumbs == 1" :icon="['fas', 'heart']" size="lg" style="color: #4e77b9" @click="cancelThumbsUp(item.user_id, item.comt_subject_id, item.comment_id, index)" />
-                        <font-awesome-icon v-else :icon="['far', 'heart']" size="lg" style="color: #4e77b9" @click="thumbsUp(item.user_id, item.comt_subject_id, item.comment_id, index)" />
-                        <p :style="{ color: '#4e77b9', fontSize: '10px', margin: '0 0 0 5px' }">{{ item.thumbs_up }}</p>
+                        <font-awesome-icon v-if="item.is_thumbs == 1" :icon="['fas', 'heart']" style="color: #4e77b9" @click="cancelThumbsUp(item.user_id, item.comt_subject_id, item.comment_id, index)" />
+                        <font-awesome-icon v-else :icon="['far', 'heart']" style="color: #4e77b9" @click="thumbsUp(item.user_id, item.comt_subject_id, item.comment_id, index)" />
+                        <p :style="{ color: '#4e77b9', fontSize: '14px', margin: '2px 15px 0 5px' }">{{ item.thumbs_up }}</p>
+                        <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" class="fixed-icon" @click="openPopup(item.comt_subject_id, item.comment_id)" />
                     </div>
                 </div>
             </template>
             <template #description>
                 <div class="text-content">{{ item.text }}</div>
                 <var-image v-if="item.img_path" width="150px" height="150px" fit="cover" :radius="10" :src="item.img_path" @click="showImagePreview(item.img_path)" />
-                <font-awesome-icon :icon="['fas', 'ellipsis']" size="xl" class="fixed-icon" @click="openPopup(item.comt_subject_id, item.comment_id)" />
+                <div class="created-time">{{ formatTime(item.created_at) }}</div>
             </template>
         </var-card>
         <var-popup v-model:show="popupVisible" position="bottom">
             <div class="popup-content">
                 <var-button-group mode="text" size="large" style="width: 100vw" vertical>
-                    <var-button block type="primary" @click="editComment(selectedComtSubjectId, selectedCommentId)">修改</var-button>
-                    <var-button block type="danger" @click="deleteComment(selectedComtSubjectId, selectedCommentId)">删除</var-button>
+                    <var-button block type="primary" style="color: #2041a9" @click="editComment(selectedComtSubjectId, selectedCommentId)">修改</var-button>
+                    <var-button block type="danger" style="color: #db4550" @click="deleteComment(selectedComtSubjectId, selectedCommentId)">删除</var-button>
                 </var-button-group>
             </div>
         </var-popup>
         <var-image-preview v-model:show="showImagePreviewVisible" :images="imagePreviewUrls" />
+        <p class="flex justify-center mt-4 text-xs" style="color: #999999">没有更多内容咯</p>
     </div>
 </template>
 
 <script>
+import dayjs from 'dayjs';
 import comment from '../../api/comment';
 
 export default {
@@ -89,6 +92,9 @@ export default {
         showImagePreview(imageUrl) {
             this.imagePreviewUrls = [imageUrl];
             this.showImagePreviewVisible = true;
+        },
+        formatTime(time) {
+            return dayjs(time).format('YYYY-MM-DD HH:mm');
         }
     }
 };
@@ -96,7 +102,6 @@ export default {
 
 <style scoped>
 .comment {
-    border: 1px solid #e1e4e8;
     margin-bottom: 8%;
     padding: 4%;
 }
@@ -106,6 +111,7 @@ export default {
     padding: 16px;
     background-color: white;
     border-radius: 8px;
+    box-shadow: none;
 }
 .card-header {
     display: flex;
@@ -117,9 +123,11 @@ export default {
     font-size: 20px;
     margin: 0;
     padding: 0;
+    margin-top: 3px;
 }
 .text-content {
     margin-top: 10px;
+    margin-bottom: 10px;
     word-break: break-word;
 }
 .thumbs-up {
@@ -127,10 +135,16 @@ export default {
     align-items: center;
 }
 .fixed-icon {
+    margin-right: 7px;
+    color: #324fb1;
+}
+.created-time {
     position: absolute;
-    bottom: 10px;
+    bottom: 5px;
     right: 10px;
     color: #2041a9;
+    font-size: 12px;
+    margin-right: 10px;
 }
 .popup-content {
     padding: 10px;
