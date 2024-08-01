@@ -27,3 +27,18 @@ exports.recoverCommentSubject = async (comtSubjectId) => {
     const commentSubject = await commentSubjectDao.recoverCommentSubject(comtSubjectId);
     return commentSubject;
 };
+//用户个人获取收藏评论体信息
+exports.getCollectCommentSubject = async (userId) => {
+    const commentSubject = await commentSubjectDao.getCollectCommentSubject(userId);
+    return commentSubject;
+};
+//用户收藏评论体接口
+exports.collectCommentSubject = async (comtSubjectId, userId) => {
+    const commentSubject = await commentSubjectDao.collectCommentSubject(comtSubjectId, userId);
+    return commentSubject;
+};
+//用户取消收藏评论体接口
+exports.cancelCollectCommentSubject = async (comtSubjectId, userId) => {
+    const commentSubject = await commentSubjectDao.cancelCollectCommentSubject(comtSubjectId, userId);
+    return commentSubject;
+};
