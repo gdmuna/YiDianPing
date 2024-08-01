@@ -71,3 +71,39 @@ router.post('/recoverCommentSubject', async (req, res, next) => {
     const result = await commentSubjectService.recoverCommentSubject(comtSubjectId);
     res.ResultVO(0, '成功', result);
 });
+/**
+ * 用户个人获取收藏评论体信息
+ * @name getCollectCommentSubject 恢复评论体信息
+ * @description GET /getCollectCommentSubject
+ * @body {string} comtSubjectId 评论体ID
+ * @response {Object} result 删除结果
+ */
+router.get('/getCollectCommentSubject', async (req, res, next) => {
+    const { userId } = req.query;
+    const result = await commentSubjectService.getCollectCommentSubject(userId);
+    res.ResultVO(0, '成功', result);
+});
+/**
+ * 用户收藏评论体接口
+ * @name collectCommentSubject 恢复评论体信息
+ * @description PUT /collectCommentSubject
+ * @body {string} comtSubjectId 评论体ID
+ * @response {Object} result 删除结果
+ */
+router.put('/collectCommentSubject', async (req, res, next) => {
+    const { comtSubjectId, userId } = req.body;
+    const result = await commentSubjectService.collectCommentSubject(comtSubjectId, userId);
+    res.ResultVO(0, '成功', result);
+});
+/**
+ * 用户取消收藏评论体接口
+ * @name cancelCollectCommentSubject 恢复评论体信息
+ * @description PUT /cancelCollectCommentSubject
+ * @body {string} comtSubjectId 评论体ID
+ * @response {Object} result 删除结果
+ */
+router.put('/cancelCollectCommentSubject', async (req, res, next) => {
+    const { comtSubjectId, userId } = req.body;
+    const result = await commentSubjectService.cancelCollectCommentSubject(comtSubjectId, userId);
+    res.ResultVO(0, '成功', result);
+});
