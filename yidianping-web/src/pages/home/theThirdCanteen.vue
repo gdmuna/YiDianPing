@@ -61,7 +61,7 @@
 import home from '@/api/home';
 
 export default {
-    name: 'UserPage',
+    name: 'TheThirdCanteenPage',
     components: {},
     setup() {
         return {};
