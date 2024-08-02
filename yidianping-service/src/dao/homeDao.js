@@ -39,7 +39,7 @@ exports.getCommentSubjectInfo = async () => {
     const sql = `
         SELECT
             cs.*,
-            AVG(s.score) AS avg_score
+            IFNULL(AVG(s.score), 0) AS avg_score
         FROM
             yi_comment_subject cs
         LEFT JOIN
