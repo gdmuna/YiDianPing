@@ -34,7 +34,7 @@ exports.getCommentInfo = async () => {
     return await db.query(sql, sqlParams);
 };
 
-// 获取评论对象信息
+// 获取评论主体信息
 exports.getCommentSubjectInfo = async () => {
     const sql = `
         SELECT

@@ -6,7 +6,7 @@ exports.getCommentInfo = async () => {
     return commentInfo;
 };
 
-// 获取评论对象信息
+// 获取评论主体信息
 exports.getCommentSubjectInfo = async () => {
     const commentSubjectInfo = await homeDao.getCommentSubjectInfo();
     return commentSubjectInfo;
