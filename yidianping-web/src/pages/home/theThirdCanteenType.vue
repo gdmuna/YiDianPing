@@ -1,11 +1,14 @@
 <template>
     <div style="margin-bottom: 12%; padding: 4%">
         <div v-for="(card, index) in filteredComments" :key="index" class="mb-2">
-            <div class="flex w-full h-20 mb-3 p-2 bg-white" style="border-radius: 4px">
-                <var-image :src="card.cb_img ? card.cb_img : 'https://krseoul.imgtbl.com/i/2024/08/02/66abb6e452f16.png'" :radius="5" height="4rem" width="5.5rem" fit="cover" class="mr-3" />
+            <div class="flex w-full h-[82px] mb-3 p-[9px] bg-white" style="border-radius: 4px">
+                <var-image :src="card.cb_img ? card.cb_img : 'https://krseoul.imgtbl.com/i/2024/08/02/66accb57ab412.png'" :radius="5" height="4rem" width="5.5rem" fit="cover" class="mr-3" />
                 <p class="mt-0.5">{{ card.cb_title }}</p>
-                <div>
-                    <font-awesome-icon :icon="['far', 'star']" class="mr-1" style="color: #4e77b9" />
+                <div class="flex items-center absolute right-[7.5vw]">
+                    <p class="text-sm" style="color: #0f46a0; margin-top: 2.5px">{{ card.avg_score && card.avg_score > 0 ? card.avg_score + ' 分' : '暂无评分' }}</p>
+                </div>
+                <div class="flex items-center absolute right-[7.5vw] mt-[2.7rem]">
+                    <p class="text-sm" style="color: #999999; margin-top: 2.5px">{{ card.comment_count }} 人已评论</p>
                 </div>
             </div>
         </div>
@@ -26,7 +29,7 @@ export default {
         return {
             cards: [],
             commentSubjectInfo: {
-                score: '',
+                avg_score: '',
                 cb_img: '',
                 cb_title: ''
             }
