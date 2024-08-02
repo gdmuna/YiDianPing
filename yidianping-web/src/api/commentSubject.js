@@ -17,6 +17,18 @@ const CommentSubject = {
     // 恢复评论体
     recoverCommentSubject(data) {
         return request.post(`${moduleUrl}/recoverCommentSubject`, data); // 注意这里应该是 post 方法
+    },
+    //用户收藏的评论体
+    getCollectCommentSubject(data) {
+        return request.get(`${moduleUrl}/getCollectCommentSubject`, data);
+    },
+    //用户收藏评论体
+    collectCommentSubject(data) {
+        return request.put(`${moduleUrl}/collectCommentSubject`, data);
+    },
+    //用户取消收藏评论体
+    cancelCollectCommentSubject(data) {
+        return request.put(`${moduleUrl}/cancelCollectCommentSubject`, data);
     }
 };
 
