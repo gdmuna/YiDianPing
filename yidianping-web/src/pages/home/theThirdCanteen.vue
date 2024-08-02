@@ -8,7 +8,7 @@
                     <var-menu>
                         <!-- 菜单按钮 -->
                         <var-button color="transparent" text-color="#fff" round text>
-                            <font-awesome-icon :icon="['fas', 'ellipsis']" size="lg" class="mr-1" style="color: #2041a9" />
+                            <font-awesome-icon :icon="['fas', 'ellipsis']" size="lg" class="mr-1.5" style="color: #2041a9" />
                         </var-button>
                         <!-- 菜单选项 -->
                         <template #menu>
