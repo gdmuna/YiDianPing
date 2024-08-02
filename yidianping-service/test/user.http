@@ -6,6 +6,15 @@ GET {{ baseUrl }}{{ moduleUrl }}/users
 Content-Type: application/json
 Authorization: Bearer {{ token }}
 
+###个人信息
+GET {{ baseUrl }}{{ moduleUrl }}/getUser
+Content-Type: application/json  
+Authorization: Bearer {{ token }}
+
+{
+    "userId":""
+}
+
 ###修改用户信息接口
 PUT {{ baseUrl }}{{ moduleUrl }}/updateUser
 Content-Type: application/json

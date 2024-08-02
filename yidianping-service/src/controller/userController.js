@@ -55,3 +55,15 @@ router.post('/unbanUser', async (req, res, next) => {
     const result = await userService.unbanUser(userId);
     res.ResultVO(0, '成功', result);
 });
+/**
+ * 个人用户
+ * @name getUser 用户
+ * @description get/getUser
+ * @path {string} userId 用户ID
+ * @response {Object} result 删除结果
+ */
+router.get('/getUser', async (req, res, next) => {
+    const { userId } = req.query;
+    const result = await userService.getUser(userId);
+    res.ResultVO(0, '成功', result);
+});

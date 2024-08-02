@@ -96,6 +96,7 @@ const routes = [
         ]
     },
     {
+        // path: '/user/:userId',
         path: '/user',
         name: 'user',
         component: () => import('@/pages/user/user.vue'),

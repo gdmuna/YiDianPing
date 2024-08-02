@@ -27,3 +27,8 @@ exports.unbanUser = async (userId) => {
     const unbanuser = await userDao.unbanUser(userId);
     return unbanuser;
 };
+//个人用户
+exports.getUser = async (userId) => {
+    const user = await userDao.getUser(userId);
+    return user;
+};

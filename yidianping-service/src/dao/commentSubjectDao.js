@@ -100,52 +100,57 @@ exports.recoverCommentSubject = async (comtSubjectId) => {
 exports.getCollectCommentSubject = async (userId) => {
     const sql = `
         SELECT 
-            ycs.cb_title,
-            ycs.cb_img,
-            ycs.created_at,
-            ycs.cb_text,
-            ycs.is_enabled,
-            ct.is_collect,
-            CONVERT(
-                (SELECT COUNT(*) 
-                FROM yi_comment_subject_collect 
-                WHERE comt_subject_id = ycs.comt_subject_id AND is_collect = 1), 
-                CHAR
-            ) AS collect
-        FROM 
-            yi_comment_subject_collect ct
-        JOIN 
-            yi_comment_subject ycs
-        ON 
-            ct.comt_subject_id = ycs.comt_subject_id
-        WHERE
-            ct.user_id = ?
-        AND 
-            ycs.is_enabled = 0
-        GROUP BY 
-            ycs.cb_title, ycs.cb_img, ycs.created_at, ycs.cb_text, ycs.is_enabled, ycs.comt_subject_id
+    ycs.cb_title,
+    ycs.cb_img,
+    ycs.cb_text,
+    ycs.is_enabled,
+    ct.*,
+    CONVERT(
+        (SELECT COUNT(*) 
+        FROM yi_comment_subject_collect 
+        WHERE comt_subject_id = ycs.comt_subject_id AND is_collect = 1), 
+        CHAR
+    ) AS collect,
+    (SELECT 
+        IFNULL(AVG(score), 0) 
+    FROM 
+        yi_score 
+    WHERE 
+        comt_subject_id = ycs.comt_subject_id) AS sum_score
+FROM 
+    yi_comment_subject_collect ct
+JOIN 
+    yi_comment_subject ycs
+ON 
+    ct.comt_subject_id = ycs.comt_subject_id
+WHERE
+    ct.user_id = ?
+AND 
+    ycs.is_enabled = 0
+GROUP BY 
+    ycs.cb_title, ycs.cb_img, ycs.cb_text, ycs.is_enabled, ycs.comt_subject_id
     `;
     const sqlParams = [userId];
     return await db.query(sql, sqlParams);
 };
 //用户收藏评论体
-exports.collectCommentSubject = async (comtSubjectId, userId) => {
+exports.collectCommentSubject = async (userId, comtSubjectId) => {
     const sql = `
         REPLACE INTO yi_comment_subject_collect (user_id, comt_subject_id, created_at, is_collect)
-        VALUES (?, ?,NOW(),1);
+        VALUES (?, ?, NOW(), 1);
     `;
-    const sqlParams = [comtSubjectId, userId];
+    const sqlParams = [userId, comtSubjectId];
 
     return await db.query(sql, sqlParams);
 };
 //用户取消收藏评论体接口
-exports.cancelCollectCommentSubject = async (comtSubjectId, userId) => {
+exports.cancelCollectCommentSubject = async (userId, comtSubjectId) => {
     const sql = `
     UPDATE yi_comment_subject_collect
     SET is_collect = 0
     WHERE user_id = ? AND comt_subject_id = ?;
 `;
-    const sqlParams = [comtSubjectId, userId];
+    const sqlParams = [userId, comtSubjectId];
 
     return await db.query(sql, sqlParams);
 };
