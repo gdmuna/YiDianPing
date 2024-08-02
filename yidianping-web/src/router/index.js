@@ -148,6 +148,17 @@ const routes = [
         }
     },
     {
+        path: '/search',
+        name: 'search',
+        component: () => import('@/pages/home/search.vue'),
+        meta: {
+            // title: '搜索',
+            freeAuth: true,
+            showNavigation: false,
+            isGoBack: true
+        }
+    },
+    {
         path: '/settings',
         name: 'settings',
         component: () => import('@/pages/user/settings.vue'),
