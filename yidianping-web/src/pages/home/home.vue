@@ -13,7 +13,7 @@
         </var-tabs>
         <!-- 搜索按钮 -->
         <template #right>
-            <var-button text text-color="#0F46A0" class="" @click="goSearsh">
+            <var-button text text-color="#0F46A0" class="" @click="goSearch">
                 <font-awesome-icon :icon="['fas', 'magnifying-glass']" size="xl" style="color: #2041a9" />
             </var-button>
         </template>
@@ -47,6 +47,9 @@ export default {
         },
         goExplore() {
             this.$router.push('/home/explore');
+        },
+        goSearch() {
+            this.$router.push('/search');
         }
     }
 };
