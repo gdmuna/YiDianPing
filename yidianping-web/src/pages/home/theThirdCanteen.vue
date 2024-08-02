@@ -19,7 +19,7 @@
             </var-app-bar>
             <!-- 图片+评论内容 -->
             <var-card style="box-shadow: none; border-bottom: #9ab1d7; --card-padding: 0px 0 8px 0">
-                <var-image v-if="card.img_path" :src="card.img_path" :radius="5" height="15rem" fit="cover" />
+                <var-image v-if="card.img_path" :src="card.img_path" :radius="5" height="15rem" fit="cover" class="max-w-[30rem]" />
                 <template #subtitle>
                     <div
                         class="cardText text-sm m-3 my-2 py-1 px-1.5"
