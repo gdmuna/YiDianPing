@@ -96,6 +96,7 @@ const routes = [
         ]
     },
     {
+        // path: '/user/:userId',
         path: '/user',
         name: 'user',
         component: () => import('@/pages/user/user.vue'),
@@ -142,6 +143,7 @@ const routes = [
         meta: {
             // title: '创建新评论',
             freeAuth: true,
+            hideAppBar: true,
             showNavigation: false,
             isGoBack: true,
             isTip: true
