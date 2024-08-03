@@ -142,6 +142,7 @@ const routes = [
         meta: {
             // title: '创建新评论',
             freeAuth: true,
+            hideAppBar: true,
             showNavigation: false,
             isGoBack: true,
             isTip: true
