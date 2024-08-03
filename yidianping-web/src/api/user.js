@@ -18,6 +18,10 @@ const user = {
     //解禁用户
     unbanUser(data) {
         return request.post(`${moduleUrl}/unbanUser`, data);
+    },
+    //查询用户信息
+    getUser(data) {
+        return request.get(`${moduleUrl}/getUser`, data);
     }
 };
 

@@ -33,12 +33,12 @@ exports.getCollectCommentSubject = async (userId) => {
     return commentSubject;
 };
 //用户收藏评论体接口
-exports.collectCommentSubject = async (comtSubjectId, userId) => {
-    const commentSubject = await commentSubjectDao.collectCommentSubject(comtSubjectId, userId);
+exports.collectCommentSubject = async (userId, comtSubjectId) => {
+    const commentSubject = await commentSubjectDao.collectCommentSubject(userId, comtSubjectId);
     return commentSubject;
 };
 //用户取消收藏评论体接口
-exports.cancelCollectCommentSubject = async (comtSubjectId, userId) => {
-    const commentSubject = await commentSubjectDao.cancelCollectCommentSubject(comtSubjectId, userId);
+exports.cancelCollectCommentSubject = async (userId, comtSubjectId) => {
+    const commentSubject = await commentSubjectDao.cancelCollectCommentSubject(userId, comtSubjectId);
     return commentSubject;
 };

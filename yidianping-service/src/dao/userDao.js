@@ -16,6 +16,25 @@ exports.getAllUsers = async () => {
     `;
     return await db.query(sql);
 };
+// 获取单个用户信息
+exports.getUser = async (userId) => {
+    const sql = `
+        SELECT 
+            user_id, 
+            account,
+            nickname,
+            avatar,
+            created_at,
+            is_admin,
+            is_forbidden
+        FROM 
+            yi_user
+        WHERE 
+            user_id = ?
+    `;
+    const results = await db.query(sql, [userId]);
+    return results[0];
+};
 
 // 修改用户信息
 exports.updateUser = async (userId, nickname, avatar, password, stuId, email, phone) => {

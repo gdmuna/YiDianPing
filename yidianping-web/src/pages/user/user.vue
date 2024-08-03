@@ -11,9 +11,11 @@
             <div class="flex gap-1 items-center mt-3">
                 <!-- 头像+昵称+修改个人 -->
                 <var-space direction="column" class="ml-8 self-end">
-                    <var-avatar src="https://krseoul.imgtbl.com/i/2024/07/29/66a7b7f6ec0b6.jpg" fit="cover" size="68" />
+                    <var-avatar :src="users.avatar" fit="cover" size="68" />
                 </var-space>
-                <var-cell title="沸羊羊" class="ml-0.5" description="账号：123456" style="color: #0f46a0; --cell-font-size: 1.5rem; --cell-description-font-size: 0.9rem; --cell-description-color: #0f46a0" />
+                <var-cell v-if="users.is_forbidden === 0" :title="users.nickname" class="ml-0.5" :description="'账号：' + users.account" style="color: #0f46a0; --cell-font-size: 1.5rem; --cell-description-font-size: 0.9rem; --cell-description-color: #0f46a0" />
+                <var-cell v-if="users.is_forbidden === 1" :title="users.nickname" class="ml-0.5" :description="'账号：' + users.account" style="color: #0f46a0; --cell-font-size: 1.5rem; --cell-description-font-size: 0.9rem; --cell-description-color: #0f46a0" />
+                <!-- 封禁信息紧跟在账号信息下方显示 -->
                 <var-button type="primary" class="h-10 rounded-2xl mr-5 pt-1" color="#ffffff" style="font-size: 0.95rem; letter-spacing: 0.02rem; box-shadow: inset 0 0 4px rgb(159, 178, 234); color: #4e77b9" @click="goSetMyself">编辑资料</var-button>
             </div>
             <!-- "我的页面"选项卡 -->
@@ -37,26 +39,36 @@
         <router-view></router-view>
     </div>
 </template>
-
 <script>
+import user from '../../api/user';
+
 export default {
     name: 'UserPage',
-    components: {},
-    setup() {
-        return {};
-    },
     data() {
         return {
-            activeTabs: '我评论的'
+            activeTabs: '我评论的',
+            users: {
+                avatar: '',
+                nickname: '',
+                account: ''
+            }
+            //userId: ''
         };
     },
-    created() {},
+    created() {
+        //// this.userId = this.$route.params.userId; // 确保路由参数名称与这里的一致
+        this.fetchUser();
+    },
     mounted() {
         // 自动重定向到 /user/myComment
         this.$router.push('/user/myComment');
     },
-    updated() {},
     methods: {
+        async fetchUser() {
+            const response = await user.getUser({ userId: '0190c9e4-684a-7070-a326-d0b5c07d65b0' });
+            this.users = response;
+            //this.userId = response.user_id;
+        },
         goSettings() {
             this.$router.push('/settings');
         },
@@ -72,10 +84,12 @@ export default {
         goLike() {
             this.$router.push('/user/like');
         }
+        // goCollect() {
+        //     this.$router.push({ path: `/user/${this.userId}/collect` });
+        // },
     }
 };
 </script>
-
 <style scoped>
 .show-area {
     width: 100%;
