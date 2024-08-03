@@ -91,8 +91,8 @@ router.get('/getCollectCommentSubject', async (req, res, next) => {
  * @response {Object} result 删除结果
  */
 router.put('/collectCommentSubject', async (req, res, next) => {
-    const { comtSubjectId, userId } = req.body;
-    const result = await commentSubjectService.collectCommentSubject(comtSubjectId, userId);
+    const { userId, comtSubjectId } = req.body;
+    const result = await commentSubjectService.collectCommentSubject(userId, comtSubjectId);
     res.ResultVO(0, '成功', result);
 });
 /**
@@ -103,7 +103,7 @@ router.put('/collectCommentSubject', async (req, res, next) => {
  * @response {Object} result 删除结果
  */
 router.put('/cancelCollectCommentSubject', async (req, res, next) => {
-    const { comtSubjectId, userId } = req.body;
-    const result = await commentSubjectService.cancelCollectCommentSubject(comtSubjectId, userId);
+    const { userId, comtSubjectId } = req.body;
+    const result = await commentSubjectService.cancelCollectCommentSubject(userId, comtSubjectId);
     res.ResultVO(0, '成功', result);
 });
