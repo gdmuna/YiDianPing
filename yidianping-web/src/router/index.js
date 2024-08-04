@@ -150,6 +150,32 @@ const routes = [
         }
     },
     {
+        path: '/selectType',
+        name: 'selectType',
+        component: () => import('@/pages/user/selectType.vue'),
+        meta: {
+            // title: '选择板块',
+            freeAuth: true,
+            hideAppBar: true,
+            showNavigation: false,
+            isGoBack: true,
+            isTip: true
+        }
+    },
+    {
+        path: '/selectSubject',
+        name: 'selectSubject',
+        component: () => import('@/pages/user/selectSubject.vue'),
+        meta: {
+            // title: '选择评论主体',
+            freeAuth: true,
+            hideAppBar: true,
+            showNavigation: false,
+            isGoBack: true,
+            isTip: true
+        }
+    },
+    {
         path: '/search',
         name: 'search',
         component: () => import('@/pages/home/search.vue'),
