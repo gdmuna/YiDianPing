@@ -6,6 +6,10 @@ const Comment = {
     getComment() {
         return request.get(`${moduleUrl}/getComment`);
     },
+    // 创建新评论
+    createComment(data) {
+        return request.post(`${moduleUrl}/createComment`, data);
+    },
     //删除评论
     deleteComment(data) {
         return request.post(`${moduleUrl}/deleteComment`, data);
