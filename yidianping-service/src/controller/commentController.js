@@ -21,10 +21,11 @@ router.get('/getComment', async (req, res, next) => {
  * @body {string} commentId 评论ID
  * @body {string} text 评论内容
  * @body {string} userId 用户ID
+ * @body {string} imgPath 评论配图路径（非必填）
  * @response {Object} result 创建结果
  */
 router.post('/createComment', async (req, res, next) => {
-    const result = await commentService.createComment(req.body.comtSubjectId, req.body.commentId, req.body.text, req.body.userId);
+    const result = await commentService.createComment(req.body.comtSubjectId, req.body.commentId, req.body.text, req.body.userId, req.body.imgPath);
     res.ResultVO(0, '成功', result);
 });
 
