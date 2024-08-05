@@ -96,6 +96,17 @@ const routes = [
         ]
     },
     {
+        path: '/commentSubject',
+        name: 'commentSubject',
+        component: () => import('@/pages/home/commentSubject.vue'),
+        meta: {
+            // title: '创建新评论',
+            freeAuth: true,
+            hideAppBar: true,
+            showNavigation: false
+        }
+    },
+    {
         // path: '/user/:userId',
         path: '/user',
         name: 'user',
@@ -143,9 +154,41 @@ const routes = [
         meta: {
             // title: '创建新评论',
             freeAuth: true,
+            hideAppBar: true,
+            showNavigation: false
+        }
+    },
+    {
+        path: '/selectType',
+        name: 'selectType',
+        component: () => import('@/pages/user/selectType.vue'),
+        meta: {
+            // title: '选择板块',
+            freeAuth: true,
+            hideAppBar: true,
+            showNavigation: false
+        }
+    },
+    {
+        path: '/selectSubject',
+        name: 'selectSubject',
+        component: () => import('@/pages/user/selectSubject.vue'),
+        meta: {
+            // title: '选择评论主体',
+            freeAuth: true,
+            hideAppBar: true,
+            showNavigation: false
+        }
+    },
+    {
+        path: '/search',
+        name: 'search',
+        component: () => import('@/pages/home/search.vue'),
+        meta: {
+            // title: '搜索',
+            freeAuth: true,
             showNavigation: false,
-            isGoBack: true,
-            isTip: true
+            isGoBack: true
         }
     },
     {

@@ -1,6 +1,6 @@
 <template>
-    <var-tabs v-model:active="activeChildrenTabs" class="sticky top-0" style="--tab-font-size: 1.05rem; --tab-active-font-size: 1.05rem; border-bottom: 1px solid rgb(242, 245, 248)" color="rgb(255, 255, 255)" active-color="#4E77B9" inactive-color="#4E77B9" indicator-color="#ffffff">
-        <var-tab name="三饭" class="mt-0.5" @click="goTheThirdCanteenType">三饭</var-tab>
+    <var-tabs v-model:active="activeChildrenTabs" class="sticky top-0" style="--tab-font-size: 1rem; --tab-active-font-size: 1.05rem; border-bottom: 1px solid rgb(242, 245, 248)" color="rgb(255, 255, 255)" active-color="#0F46A0" inactive-color="#4E77B9" indicator-color="#ffffff">
+        <var-tab name="小吃街" class="mt-0.5" @click="goTheThirdCanteenType">小吃街</var-tab>
     </var-tabs>
     <div class="children-show-area" style="overflow-y: scroll">
         <router-view></router-view>
@@ -15,7 +15,9 @@ export default {
         return {};
     },
     data() {
-        return {};
+        return {
+            activeChildrenTabs: '小吃街'
+        };
     },
     created() {},
     mounted() {
@@ -34,8 +36,8 @@ export default {
 <style scoped>
 .children-show-area {
     width: 100%;
-    height: calc(100% - 193px);
+    height: calc(100% - 173px);
     position: fixed;
-    top: 129px;
+    top: 109px;
 }
 </style>

@@ -22,11 +22,11 @@
         <router-view></router-view>
     </div>
     <!-- 底部导航栏 -->
-    <var-bottom-navigation v-if="$route.meta.showNavigation" v-model:active="activeNavigation" fixed safe-area class="items-center" style="height: 4rem; --bottom-navigation-item-icon-size: 1.6rem" inactive-color="#424242" active-color="#356fcf" @change="navigateTo()">
+    <var-bottom-navigation v-if="$route.meta.showNavigation" v-model:active="activeNavigation" fixed safe-area class="items-center" style="height: 4rem; --bottom-navigation-item-icon-size: 1.6rem" inactive-color="#424242" active-color="#0F46A0" @change="navigateTo()">
         <!-- "首页"按钮 -->
         <var-bottom-navigation-item label="首页" icon="home" />
         <!-- "创建新评论"按钮 -->
-        <var-button type="primary" class="h-11 w-11" color="#356fcf" @click="goCreateComment">
+        <var-button type="primary" class="h-11 w-11" color="#0F46A0" @click="goCreateComment">
             <font-awesome-icon :icon="['fas', 'plus']" size="2xl" style="color: #ffffff" />
         </var-button>
         <!-- "我的"按钮 -->
