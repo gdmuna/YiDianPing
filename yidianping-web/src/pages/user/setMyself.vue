@@ -103,7 +103,7 @@
         </var-popup>
         <!-- 修改昵称弹窗 -->
         <var-popup v-model:show="onNickname" position="center" style="width: 80vw; height: 50vw; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center" round>
-            <input v-model="newNickname" placeholder="请输入至多8个字符的昵称" style="width: 80%; margin-bottom: 15px; padding: 10px; border-radius: 5px; font-size: 10px; border: 1px solid #ccc" />
+            <input v-model="newNickname" placeholder="请输入至多5个字符的昵称" style="width: 80%; margin-bottom: 15px; padding: 10px; border-radius: 5px; font-size: 10px; border: 1px solid #ccc" />
             <p v-if="nicknameError" style="color: red; font-size: 10px; margin-bottom: 5px">{{ nicknameError }}</p>
             <p v-else-if="nicknameSuccess" style="color: green; font-size: 10px; margin-bottom: 5px">{{ nicknameSuccess }}</p>
             <var-button style="width: 80%; background-color: #0f46a0; margin-bottom: 10px; color: white; border: 2px solid #0f46a0" @click="handleUpdateNickname">确定</var-button>
@@ -272,7 +272,7 @@ export default {
             }
             // 如果昵称格式不正确，显示错误信息并返回
             if (!this.validateNickname(this.newNickname)) {
-                this.nicknameError = '格式错误，应为1到8个字符的昵称';
+                this.nicknameError = '格式错误，应为1到5个字符的昵称';
                 return;
             }
             // 清除错误信息，显示成功信息
@@ -297,7 +297,7 @@ export default {
         // 验证昵称格式
         validateNickname(nickname) {
             // 正则表达式验证昵称格式
-            const nicknameRegex = /^.{1,8}$/;
+            const nicknameRegex = /^.{1,5}$/;
             return nicknameRegex.test(nickname);
         },
 
