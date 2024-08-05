@@ -22,7 +22,7 @@ GROUP BY
 };
 
 // 创建新评论
-exports.createComment = async (comtSubjectId, commentId, text, userId) => {
+exports.createComment = async (comtSubjectId, commentId, text, userId, imgPath = null) => {
     const sql = `
         INSERT INTO 
             yi_comment
@@ -30,17 +30,19 @@ exports.createComment = async (comtSubjectId, commentId, text, userId) => {
             comt_subject_id,
             comment_id,
             text,
-            user_id
+            user_id,
+            img_path
         )
         VALUES
         (
             ?,
             ?,
             ?,
+            ?,
             ?
         )
     `;
-    const sqlParams = [comtSubjectId, commentId, text, userId];
+    const sqlParams = [comtSubjectId, commentId, text, userId, imgPath];
     try {
         return await db.query(sql, sqlParams);
     } catch (error) {

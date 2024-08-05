@@ -7,8 +7,8 @@ exports.getComment = async () => {
 };
 
 //创建新评论
-exports.createComment = async (comtSubjectId, commentId, text, userId) => {
-    const Comment = await commentDao.createComment(comtSubjectId, commentId, text, userId);
+exports.createComment = async (comtSubjectId, commentId, text, userId, imgPath = null) => {
+    const Comment = await commentDao.createComment(comtSubjectId, commentId, text, userId, imgPath);
     return Comment;
 };
 

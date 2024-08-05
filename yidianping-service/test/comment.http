@@ -12,10 +12,11 @@ Content-Type: application/json
 Authorization: Bearer {{ token }}
 
 {
-    "comtSubjectId":"",
-    "commentId":5,
-    "text":"666",
-    "userId":""
+    "comtSubjectId":"0190f31f-5649-7007-b741-4516fdd3353a",
+    "commentId":9,
+    "text":"一枝花你在哪？",
+    "userId":"01911724-1f61-7334-a860-490fbf074fda",
+    "imgPath":""
 }
 
 ###删除评论接口
