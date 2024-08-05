@@ -99,19 +99,10 @@ export default {
             const selectedSubject = localStorage.getItem('selectedSubject');
             if (selectedSubject) {
                 const subject = JSON.parse(selectedSubject);
-                this.selectedSubjectName = subject.cb_title;
-                this.selectedSubjectId = subject.comt_subject_id;
+                this.selectedSubjectName = subject.comtSubjectTitle;
+                this.selectedSubjectId = subject.comtSubjectId;
             }
         },
-        // resetSelections() {
-        //     // 清空选择的板块和店铺
-        //     this.selectedTypeName = '';
-        //     this.selectedTypeId = null;
-        //     this.selectedSubjectName = '';
-        //     this.selectedSubjectId = null;
-        //     this.commentContent = ''; // 清空评论内容
-        //     this.imgFiles = []; // 清空上传的图片
-        // },
         submitComment() {
             // 在这里处理发布评论的逻辑，比如发送请求到服务器
         },

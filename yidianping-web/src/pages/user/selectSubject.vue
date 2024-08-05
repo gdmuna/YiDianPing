@@ -12,7 +12,7 @@
             </div>
             <!-- 搜索按钮 -->
             <var-button round text color="transparent" text-color="#0F46A0" class="mt-1" @click="goBack">
-                <p class="t text-base">搜索</p>
+                <p class="text-base">搜索</p>
             </var-button>
         </div>
     </var-app-bar>
@@ -21,8 +21,8 @@
             <div class="flex w-full h-[82px] mb-3 p-[9px] bg-white" style="border-radius: 4px">
                 <div class="w-full flex justify-between">
                     <div class="flex">
-                        <var-image :src="card.cb_img ? card.cb_img : 'https://krseoul.imgtbl.com/i/2024/08/02/66accb57ab412.png'" :radius="5" height="4rem" width="5.5rem" fit="cover" class="mr-3" />
-                        <p class="mt-0.5">{{ card.cb_title }}</p>
+                        <var-image :src="card.comtSubjectImg ? card.comtSubjectImg : 'https://krseoul.imgtbl.com/i/2024/08/02/66accb57ab412.png'" :radius="5" height="4rem" width="5.5rem" fit="cover" class="mr-3" />
+                        <p class="mt-0.5">{{ card.comtSubjectTitle }}</p>
                     </div>
                     <div class="flex flex-col items-end justify-between mr-1.5">
                         <p class="text-sm" style="color: #0f46a0; margin-top: 2.5px">{{ card.avg_score && card.avg_score > 0 ? card.avg_score + ' 分' : '暂无评分' }}</p>
@@ -49,14 +49,14 @@ export default {
             cards: [],
             commentSubjectInfo: {
                 avg_score: '',
-                cb_img: '',
-                cb_title: ''
+                comtSubjectImg: '',
+                comtSubjectTitle: ''
             }
         };
     },
     computed: {
         filteredComments() {
-            return this.cards.filter((card) => card.is_enabled == 0);
+            return this.cards.filter((card) => card.comtSubjectIsEnabled == 0);
         }
     },
     created() {
