@@ -112,7 +112,6 @@
         <!-- 修改绑定邮箱弹窗 -->
         <var-popup v-model:show="onEmail" position="center" style="width: 80vw; height: 70vw; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center" round>
             <input v-model="newEmail" placeholder="请输入要绑定的邮箱" style="width: 80%; margin-bottom: 15px; padding: 10px; border-radius: 5px; font-size: 10px; border: 1px solid #ccc" />
-
             <div style="width: 80%; display: flex; margin-bottom: 15px">
                 <input v-model="verificationCode" placeholder="请输入验证码" style="flex: 1; padding: 10px; border-radius: 5px; font-size: 10px; border: 1px solid #ccc" />
                 <var-button style="margin-left: 10px; font-size: 10px; padding: 10px; background-color: white; color: #0f46a0; border: 2px solid #0f46a0; width: 100px; text-align: center" :disabled="isSending || countdown > 0" @click="sendVerificationCode">
@@ -395,7 +394,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 78vh;
+    height: 65vh;
 }
 .custom-avatar,
 .custom-button {
