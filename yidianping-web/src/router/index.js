@@ -96,6 +96,17 @@ const routes = [
         ]
     },
     {
+        path: '/commentSubject',
+        name: 'commentSubject',
+        component: () => import('@/pages/home/commentSubject.vue'),
+        meta: {
+            // title: '创建新评论',
+            freeAuth: true,
+            hideAppBar: true,
+            showNavigation: false
+        }
+    },
+    {
         // path: '/user/:userId',
         path: '/user',
         name: 'user',
@@ -144,9 +155,7 @@ const routes = [
             // title: '创建新评论',
             freeAuth: true,
             hideAppBar: true,
-            showNavigation: false,
-            isGoBack: true,
-            isTip: true
+            showNavigation: false
         }
     },
     {
@@ -157,9 +166,7 @@ const routes = [
             // title: '选择板块',
             freeAuth: true,
             hideAppBar: true,
-            showNavigation: false,
-            isGoBack: true,
-            isTip: true
+            showNavigation: false
         }
     },
     {
@@ -170,9 +177,7 @@ const routes = [
             // title: '选择评论主体',
             freeAuth: true,
             hideAppBar: true,
-            showNavigation: false,
-            isGoBack: true,
-            isTip: true
+            showNavigation: false
         }
     },
     {
