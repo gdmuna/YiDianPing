@@ -10,15 +10,17 @@
     </var-app-bar>
     <!-- 选项列表 -->
     <var-list class="px-3 mt-0.5">
-        <var-cell v-for="item in list" :key="item" style="padding: 7px" @click="selectType(item)">
+        <var-cell v-for="(card, index) in filteredComments" :key="index" style="padding: 7px" @click="selectType(card)">
             <div class="bg-white p-3.5 rounded-[10px] text-[1.2rem]">
-                {{ item }}
+                {{ card.itemLabel }}
             </div>
         </var-cell>
     </var-list>
 </template>
 
 <script>
+import home from '@/api/home';
+
 export default {
     name: 'SelectTypePage',
     components: {},
@@ -27,24 +29,41 @@ export default {
     },
     data() {
         return {
-            list: ['三饭']
+            cards: [],
+            dictPlateInfo: {
+                dictId: '',
+                dictName: '',
+                dictCode: '',
+                itemSort: '',
+                itemLabel: '',
+                itemCode: '',
+                dictPlateIsEnabled: ''
+            }
         };
     },
+    computed: {
+        filteredComments() {
+            return this.cards.filter((card) => card.dictPlateIsEnabled == 1);
+        }
+    },
     created() {
-        document.addEventListener('backbutton', this.goBack);
+        this.getDictPlateInfo();
     },
     mounted() {},
-    unmounted() {
-        document.removeEventListener('backbutton', this.goBack);
-    },
+    unmounted() {},
     updated() {},
     methods: {
         goBack() {
             this.$router.go(-1);
         },
-        selectType(item) {
+        async getDictPlateInfo() {
+            const dictPlateInfo = await home.getDictPlateInfo();
+            this.cards = dictPlateInfo;
+            console.log(this.cards[0].itemLabel);
+        },
+        selectType(card) {
             // 将选择的店铺信息存储到 localStorage
-            localStorage.setItem('selectedType', item);
+            localStorage.setItem('selectedType', JSON.stringify(card));
             // 返回上一页面
             this.$router.go(-1);
         }

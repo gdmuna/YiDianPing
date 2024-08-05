@@ -61,22 +61,17 @@ export default {
             imgFiles: [], // 用于存储上传的文件
             uploadUrl: '/createComment', // 你的后端接口地址
             selectedTypeName: '', // 存储选中的板块的名字
-            selectedTypeId: null, // 存储选中的板块的 ID
             selectedSubjectName: '', // 存储选中的评论主体的名字
             selectedSubjectId: null, // 存储选中的评论主体的 ID
             commentContent: '' // 评论内容
         };
     },
     created() {
-        document.addEventListener('backbutton', this.goBack);
         this.loadSelectedType(); // 加载存储的板块信息
         this.loadSelectedSubject(); // 加载存储的店铺信息
-        // this.resetSelections(); // 清空选择的板块和评论对象
     },
     mounted() {},
-    unmounted() {
-        document.removeEventListener('backbutton', this.goBack);
-    },
+    unmounted() {},
     updated() {},
     methods: {
         goBack() {
@@ -91,10 +86,10 @@ export default {
         loadSelectedType() {
             const selectedType = localStorage.getItem('selectedType');
             if (selectedType) {
-                this.selectedTypeName = selectedType;
+                const type = JSON.parse(selectedType);
+                this.selectedTypeName = type.itemLabel;
             }
         },
-        // 获取selectSubject页面存储的选中评论对象的的信息，并将其解析后显示在本页面上
         loadSelectedSubject() {
             const selectedSubject = localStorage.getItem('selectedSubject');
             if (selectedSubject) {

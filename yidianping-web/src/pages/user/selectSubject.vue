@@ -1,14 +1,14 @@
 <template>
     <!-- 顶部导航栏 -->
-    <var-app-bar fixed safe-area-top title-position="center" class="relative top-0" style="background-color: #f6f8fb; color: #0f46a0; box-shadow: none; --app-bar-height: 64px">
-        <div class="flex w-[100vw] justify-between items-center px-[1%]">
+    <var-app-bar fixed safe-area-top title-position="center" class="relative top-0" style="background-color: #f6f8fb; color: #0f46a0; box-shadow: none; --app-bar-height: 75px">
+        <div class="flex w-[100vw] justify-between items-center px-[1.1%]">
             <!-- 返回上一页面按钮 -->
             <var-button round text color="transparent" text-color="#0F46A0" class="" @click="goBack">
                 <font-awesome-icon :icon="['fas', 'arrow-left']" size="xl" style="color: #2041a9" />
             </var-button>
             <!-- 搜索框 -->
             <div class="w-[75%]" style="margin: 0 auto">
-                <input type="text" class="w-full h-[2rem] rounded-[20px] p-2.5 focus:outline-none" style="border: 1px solid #9ab1d7" />
+                <input type="text" class="w-full h-[2rem] rounded-[20px] p-2.5 ml-[0.1rem] focus:outline-none" style="border: 1px solid #9ab1d7" />
             </div>
             <!-- 搜索按钮 -->
             <var-button round text color="transparent" text-color="#0F46A0" class="mt-1" @click="goBack">
@@ -61,12 +61,9 @@ export default {
     },
     created() {
         this.getCommentSubjectInfo();
-        document.addEventListener('backbutton', this.goBack);
     },
     mounted() {},
-    unmounted() {
-        document.removeEventListener('backbutton', this.goBack);
-    },
+    unmounted() {},
     updated() {},
     methods: {
         goBack() {
