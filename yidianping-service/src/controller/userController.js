@@ -25,8 +25,8 @@ router.get('/users', async (req, res, next) => {
  * @response {Object} result 修改结果
  */
 router.put('/updateUser', async (req, res, next) => {
-    const { userId, nickname, avatar, password, stuId, email, phone } = req.body;
-    const result = await userService.updateUser(userId, nickname, avatar, password, stuId, email, phone);
+    const { userId, account, nickname, avatar, password, stuId, email, phone } = req.body;
+    const result = await userService.updateUser(userId, account, nickname, avatar, password, stuId, email, phone);
     res.ResultVO(0, '成功', result);
 });
 
