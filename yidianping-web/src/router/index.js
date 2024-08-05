@@ -96,6 +96,16 @@ const routes = [
         ]
     },
     {
+        path: '/subjectInfo',
+        name: 'subjectInfo',
+        component: () => import('@/pages/home/subjectInfo.vue'),
+        meta: {
+            // title: '评论主体信息',
+            freeAuth: true,
+            hideAppBar: true
+        }
+    },
+    {
         // path: '/user/:userId',
         path: '/user',
         name: 'user',
