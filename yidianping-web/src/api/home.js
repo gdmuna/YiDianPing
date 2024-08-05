@@ -14,6 +14,10 @@ const home = {
     // 根据评论主体id获取对应评论主体信息
     getTheCommentSubjectInfo(comtSubjectId) {
         return request.get(`${moduleUrl}/theCommentSubjectInfo`, { comtSubjectId });
+    },
+    // 获取餐饮类版块字典信息
+    getDictPlateInfo() {
+        return request.get(`${moduleUrl}/dictPlateInfo`);
     }
 };
 
