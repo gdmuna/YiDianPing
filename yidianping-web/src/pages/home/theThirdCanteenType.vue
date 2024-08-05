@@ -1,9 +1,9 @@
 <template>
     <div style="margin-bottom: 12%; padding: 4%">
-        <div v-for="(card, index) in filteredComments" :key="index" class="mb-2">
+        <div v-for="(card, index) in filteredComments" :key="index" class="mb-2" @click="goCommentSubject(card.comtSubjectId)">
             <div class="flex w-full h-[82px] mb-3 p-[9px] bg-white" style="border-radius: 4px">
-                <var-image :src="card.cb_img ? card.cb_img : 'https://krseoul.imgtbl.com/i/2024/08/02/66accb57ab412.png'" :radius="5" height="4rem" width="5.5rem" fit="cover" class="mr-3" />
-                <p class="mt-0.5">{{ card.cb_title }}</p>
+                <var-image :src="card.comtSubjectImg ? card.comtSubjectImg : 'https://krseoul.imgtbl.com/i/2024/08/02/66accb57ab412.png'" :radius="5" height="4rem" width="5.5rem" fit="cover" class="mr-3" />
+                <p class="mt-0.5">{{ card.comtSubjectTitle }}</p>
                 <div class="flex items-center absolute right-[7.5vw]">
                     <p class="text-sm" style="color: #0f46a0; margin-top: 2.5px">{{ card.avg_score && card.avg_score > 0 ? card.avg_score + ' 分' : '暂无评分' }}</p>
                 </div>
@@ -30,14 +30,14 @@ export default {
             cards: [],
             commentSubjectInfo: {
                 avg_score: '',
-                cb_img: '',
-                cb_title: ''
+                comtSubjectImg: '',
+                comtSubjectTitle: ''
             }
         };
     },
     computed: {
         filteredComments() {
-            return this.cards.filter((card) => card.is_enabled == 0);
+            return this.cards.filter((card) => card.comtSubjectIsEnabled == 0);
         }
     },
     created() {
@@ -50,6 +50,9 @@ export default {
             const commentSubjectInfo = await home.getCommentSubjectInfo();
             this.cards = commentSubjectInfo;
             console.log(this.commentSubjectInfo);
+        },
+        goCommentSubject(comtSubjectId) {
+            this.$router.push({ path: '/commentSubject', query: { CardId: comtSubjectId } });
         }
     }
 };
