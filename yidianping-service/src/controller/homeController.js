@@ -83,6 +83,7 @@ router.get('/theCommentSubjectInfo', async (req, res, next) => {
  * @response {string} dictPlateInfo.itemSort 字典项排序
  * @response {string} dictPlateInfo.itemLabel 字典项标签
  * @response {string} dictPlateInfo.itemCode 字典项编码
+ * @response {string} dictPlateInfo.dictPlateIsEnabled 字典项是否启用
  */
 router.get('/dictPlateInfo', async (req, res, next) => {
     const dictPlateInfo = await homeService.getDictPlateInfo();

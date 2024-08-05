@@ -115,7 +115,8 @@ exports.getDictPlateInfo = async () => {
             d.dict_code AS dictCode,
             i.item_sort AS itemSort,
             i.item_label AS itemLabel,
-            i.item_code AS itemCode
+            i.item_code AS itemCode,
+            i.is_enabled AS dictPlateIsEnabled
         FROM
             sys_dict_item i
         INNER JOIN
