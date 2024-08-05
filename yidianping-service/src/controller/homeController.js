@@ -70,3 +70,21 @@ router.get('/theCommentSubjectInfo', async (req, res, next) => {
     const theCommentSubjectInfo = await homeService.getTheCommentSubjectInfo(comtSubjectId);
     res.ResultVO(0, '成功', theCommentSubjectInfo);
 });
+
+/**
+ * 获取餐饮类版块字典信息
+ * @name dictPlateInfo 获取对象主体信息
+ * @description GET /home/dictPlateInfo
+ * @header {string} authorization 用户凭证
+ * @response {Object} dictPlateInfo 评论主体信息
+ * @response {string} dictPlateInfo.dictId 字典ID
+ * @response {string} dictPlateInfo.dictName 字典名称
+ * @response {string} dictPlateInfo.dictCode 字典编码
+ * @response {string} dictPlateInfo.itemSort 字典项排序
+ * @response {string} dictPlateInfo.itemLabel 字典项标签
+ * @response {string} dictPlateInfo.itemCode 字典项编码
+ */
+router.get('/dictPlateInfo', async (req, res, next) => {
+    const dictPlateInfo = await homeService.getDictPlateInfo();
+    res.ResultVO(0, '成功', dictPlateInfo);
+});

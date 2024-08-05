@@ -17,3 +17,9 @@ exports.getTheCommentSubjectInfo = async (comtSubjectId) => {
     const theCommentSubjectInfo = await homeDao.getTheCommentSubjectInfo(comtSubjectId);
     return theCommentSubjectInfo;
 };
+
+// 获取餐饮类版块字典信息
+exports.getDictPlateInfo = async () => {
+    const dictPlateInfo = await homeDao.getDictPlateInfo();
+    return dictPlateInfo;
+};

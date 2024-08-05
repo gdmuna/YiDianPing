@@ -105,3 +105,26 @@ exports.getTheCommentSubjectInfo = async (comtSubjectId) => {
     const sqlParams = [comtSubjectId];
     return await db.query(sql, sqlParams);
 };
+
+// 获取餐饮类版块字典信息
+exports.getDictPlateInfo = async () => {
+    const sql = `
+        SELECT
+            d.dict_id AS dictId,
+            d.dict_name AS dictName,
+            d.dict_code AS dictCode,
+            i.item_sort AS itemSort,
+            i.item_label AS itemLabel,
+            i.item_code AS itemCode
+        FROM
+            sys_dict_item i
+        INNER JOIN
+            sys_dict d ON d.dict_code = i.dict_code
+        WHERE
+            i.dict_code = 'PLATE'
+        ORDER BY
+            i.item_sort ASC;
+    `;
+    const sqlParams = [];
+    return await db.query(sql, sqlParams);
+};
