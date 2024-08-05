@@ -13,8 +13,7 @@
                 <var-space direction="column" class="ml-8 self-end">
                     <var-avatar :src="users.avatar" fit="cover" size="68" />
                 </var-space>
-                <var-cell v-if="users.is_forbidden === 0" :title="users.nickname" class="ml-0.5" :description="'账号：' + users.account" style="color: #0f46a0; --cell-font-size: 1.5rem; --cell-description-font-size: 0.9rem; --cell-description-color: #0f46a0" />
-                <var-cell v-if="users.is_forbidden === 1" :title="users.nickname" class="ml-0.5" :description="'账号：' + users.account" style="color: #0f46a0; --cell-font-size: 1.5rem; --cell-description-font-size: 0.9rem; --cell-description-color: #0f46a0" />
+                <var-cell :title="users.nickname" class="ml-0.5" :description="'账号：' + users.account" style="color: #0f46a0; --cell-font-size: 1.5rem; --cell-description-font-size: 0.9rem; --cell-description-color: #0f46a0" />
                 <!-- 封禁信息紧跟在账号信息下方显示 -->
                 <var-button type="primary" class="h-10 rounded-2xl mr-5 pt-1" color="#ffffff" style="font-size: 0.95rem; letter-spacing: 0.02rem; box-shadow: inset 0 0 4px rgb(159, 178, 234); color: #4e77b9" @click="goSetMyself">编辑资料</var-button>
             </div>
