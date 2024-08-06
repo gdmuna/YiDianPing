@@ -67,3 +67,15 @@ router.get('/getUser', async (req, res, next) => {
     const result = await userService.getUser(userId);
     res.ResultVO(0, '成功', result);
 });
+/**
+ * 用户注销账号
+ * @name deleteUser 用户
+ * @description post/deleteUser
+ * @path {string} userId 用户ID
+ * @response {Object} result 删除结果
+ */
+router.post('/deleteUser', async (req, res, next) => {
+    const { userId } = req.body;
+    const result = await userService.deleteUser(userId);
+    res.ResultVO(0, '成功', result);
+});

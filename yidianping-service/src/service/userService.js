@@ -38,3 +38,8 @@ exports.getUser = async (userId) => {
     const user = await userDao.getUser(userId);
     return user;
 };
+//用户注销账号
+exports.deleteUser = async (userId) => {
+    const deleteUser = await userDao.deleteUser(userId);
+    return deleteUser;
+};
