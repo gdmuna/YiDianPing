@@ -213,6 +213,17 @@ const routes = [
         }
     },
     {
+        path: '/accountSecurity',
+        name: 'accountSecurity',
+        component: () => import('@/pages/user/accountSecurity.vue'),
+        meta: {
+            title: '账号安全',
+            freeAuth: true,
+            showNavigation: false,
+            isGoBack: true
+        }
+    },
+    {
         path: '/setMyself',
         name: 'setMyself',
         component: () => import('@/pages/user/setMyself.vue'),

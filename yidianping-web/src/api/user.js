@@ -22,6 +22,10 @@ const user = {
     //查询用户信息
     getUser(data) {
         return request.get(`${moduleUrl}/getUser`, data);
+    },
+    //注销用户
+    deleteUser(data) {
+        return request.post(`${moduleUrl}/deleteUser`, data);
     }
 };
 
