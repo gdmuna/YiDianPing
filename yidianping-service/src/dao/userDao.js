@@ -25,6 +25,8 @@ exports.getUser = async (userId) => {
             nickname,
             avatar,
             created_at,
+            email,
+            stu_id,
             is_admin,
             is_forbidden
         FROM 
@@ -33,45 +35,73 @@ exports.getUser = async (userId) => {
             user_id = ?
     `;
     const results = await db.query(sql, [userId]);
-    return results[0];
+
+    // 检查结果是否存在，如果存在则格式化 stu_id 和 email
+    if (results.length > 0) {
+        const user = results[0];
+
+        // 格式化 stu_id（检查是否为空）
+        if (user.stu_id) {
+            const originalStuId = user.stu_id;
+            const formattedStuId = originalStuId.replace(/(\w{3})\w{4}(\w{3})$/, '$1****$2');
+            user.stu_id = formattedStuId;
+        }
+
+        // 格式化 email（检查是否为空）
+        if (user.email) {
+            const originalEmail = user.email;
+            const emailParts = originalEmail.split('@');
+            if (emailParts.length === 2) {
+                const localPart = emailParts[0];
+                const domainPart = emailParts[1];
+                const formattedEmail = `${localPart.substring(0, 4)}****@${domainPart}`;
+                user.email = formattedEmail;
+            }
+        }
+
+        return user;
+    } else {
+        return null;
+    }
 };
-
 // 修改用户信息
-exports.updateUser = async (userId, nickname, avatar, password, stuId, email, phone) => {
-    // const setClause = [];
-    // const sqlParams = [];
+exports.updateUser = async (userId, updatedFields) => {
+    const setClause = [];
+    const sqlParams = [];
 
-    // for (const [key, value] of Object.entries(updatedFields)) {
-    //     setClause.push(`${key} = ?`);
-    //     sqlParams.push(value);
-    // }
+    for (const [key, value] of Object.entries(updatedFields)) {
+        setClause.push(`${key} = ?`);
+        sqlParams.push(value);
+    }
 
-    // sqlParams.push(userId);
-
-    // const sql = `
-    //     UPDATE yi_user
-    //     SET ${setClause.join(', ')}
-    //     WHERE user_id = ?
-    // `;
-    // return await db.query(sql, sqlParams);
+    sqlParams.push(userId);
 
     const sql = `
-        UPDATE
-            yi_user
-        SET
-            ${db.keyReplace('nickname', nickname)}
-            ${db.keyReplace('avatar', avatar)}
-            ${db.keyReplace('password', password)}
-            ${db.keyReplace('stu_id', stuId)}
-            ${db.keyReplace('email', email)}
-            ${db.keyReplace('phone', phone, true)}
-        WHERE
-            user_id = ?
-    `;
-
-    const sqlParams = db.paramsReplace([nickname, avatar, password, stuId, email, phone, userId]);
+        UPDATE yi_user
+         SET ${setClause.join(', ')}
+        WHERE user_id = ?
+     `;
     return await db.query(sql, sqlParams);
 };
+// 修改用户信息
+// exports.updateUser = async (userId, nickname, avatar, password, stuId, email, phone) => {
+//     const sql = `
+//          UPDATE
+//              yi_user
+//         SET
+//              ${db.keyReplace('nickname', nickname)}
+//             ${db.keyReplace('avatar', avatar)}
+//             ${db.keyReplace('password', password)}
+//              ${db.keyReplace('stu_id', stuId)}
+//              ${db.keyReplace('email', email)}
+//             ${db.keyReplace('phone', phone, true)}
+//          WHERE
+//            user_id = ?
+//      `;
+
+//     const sqlParams = db.paramsReplace([nickname, avatar, password, stuId, email, phone, userId]);
+//     return await db.query(sql, sqlParams);
+// };
 // 封禁用户
 exports.banUser = async (userId) => {
     const sql = `

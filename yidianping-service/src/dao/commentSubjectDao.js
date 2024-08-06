@@ -127,6 +127,8 @@ WHERE
     ct.user_id = ?
 AND 
     ycs.is_enabled = 0
+AND 
+    ct.is_collect = 1
 GROUP BY 
     ycs.cb_title, ycs.cb_img, ycs.cb_text, ycs.is_enabled, ycs.comt_subject_id
     `;
