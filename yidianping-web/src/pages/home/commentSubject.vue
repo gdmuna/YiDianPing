@@ -85,9 +85,7 @@ export default {
         },
         async getTheCommentSubjectInfo(comtSubjectId) {
             const theCommentSubjectInfo = await home.getTheCommentSubjectInfo(comtSubjectId);
-            console.log(theCommentSubjectInfo);
             this.card = theCommentSubjectInfo[0];
-            console.log(this.card);
         }
     }
 };
