@@ -59,11 +59,10 @@ export default {
         async getDictPlateInfo() {
             const dictPlateInfo = await home.getDictPlateInfo();
             this.cards = dictPlateInfo;
-            console.log(this.cards[0].itemLabel);
         },
         selectType(card) {
-            // 将选择的店铺信息存储到 localStorage
-            localStorage.setItem('selectedType', JSON.stringify(card));
+            // 触发事件并传递选中的信息
+            this.$store.comment.selectedTypeName = card.itemLabel;
             // 返回上一页面
             this.$router.go(-1);
         }

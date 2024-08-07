@@ -74,8 +74,9 @@ export default {
             this.cards = commentSubjectInfo;
         },
         selectSubject(card) {
-            // 将选中的店铺信息存储到 localStorage
-            localStorage.setItem('selectedSubject', JSON.stringify(card));
+            // 触发事件并传递选中的信息
+            this.$store.comment.selectedSubjectName = card.comtSubjectTitle;
+            this.$store.comment.selectedSubjectId = card.comtSubjectId;
             // 返回上一页面
             this.$router.go(-1);
         }

@@ -67,8 +67,9 @@ export default {
         };
     },
     created() {
-        this.loadSelectedType(); // 加载存储的板块信息
-        this.loadSelectedSubject(); // 加载存储的店铺信息
+        this.selectedTypeName = this.$store.comment.selectedTypeName;
+        this.selectedSubjectName = this.$store.comment.selectedSubjectName;
+        this.selectedSubjectId = this.$store.comment.selectedSubjectId;
     },
     mounted() {},
     unmounted() {},
@@ -82,21 +83,6 @@ export default {
         },
         goSelectSubject() {
             this.$router.push('/selectSubject'); // 跳转到评论主体选择页面
-        },
-        loadSelectedType() {
-            const selectedType = localStorage.getItem('selectedType');
-            if (selectedType) {
-                const type = JSON.parse(selectedType);
-                this.selectedTypeName = type.itemLabel;
-            }
-        },
-        loadSelectedSubject() {
-            const selectedSubject = localStorage.getItem('selectedSubject');
-            if (selectedSubject) {
-                const subject = JSON.parse(selectedSubject);
-                this.selectedSubjectName = subject.comtSubjectTitle;
-                this.selectedSubjectId = subject.comtSubjectId;
-            }
         },
         submitComment() {
             // 在这里处理发布评论的逻辑，比如发送请求到服务器
