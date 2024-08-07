@@ -72,9 +72,10 @@ export default {
         updateCommentThumbsStatus(index, isThumbsUp) {
             const comment = this.comments[index];
             comment.is_thumbs = isThumbsUp ? '1' : '0';
-            comment.thumbs_up = isThumbsUp ? comment.thumbs_up + 1 : comment.thumbs_up - 1;
+            comment.thumbs_up = isThumbsUp ? Number(comment.thumbs_up) + 1 : Math.max(Number(comment.thumbs_up) - 1, 0);
             this.$set(this.comments, index, comment);
         },
+
         openPopup(comtSubjectId, commentId) {
             this.selectedComtSubjectId = comtSubjectId;
             this.selectedCommentId = commentId;
