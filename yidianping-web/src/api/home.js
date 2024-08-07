@@ -18,6 +18,10 @@ const home = {
     // 获取餐饮类版块字典信息
     getDictPlateInfo() {
         return request.get(`${moduleUrl}/dictPlateInfo`);
+    },
+    // 根据关键词模糊搜索对应评论主体
+    searchSubject(comtSubjectTitle) {
+        return request.get(`${moduleUrl}/searchSubject`, { comtSubjectTitle });
     }
 };
 
