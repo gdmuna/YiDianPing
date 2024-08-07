@@ -29,6 +29,10 @@ const CommentSubject = {
     //用户取消收藏评论体
     cancelCollectCommentSubject(data) {
         return request.put(`${moduleUrl}/cancelCollectCommentSubject`, data);
+    },
+    //用户获取评论体评论
+    getSubjectComment(data) {
+        return request.get(`${moduleUrl}/getSubjectComment`, data);
     }
 };
 
