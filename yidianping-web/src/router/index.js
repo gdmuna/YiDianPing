@@ -114,7 +114,17 @@ const routes = [
             freeAuth: true,
             hideAppBar: true,
             showNavigation: false
-        }
+        },
+        children: [
+            {
+                path: 'subjectComment',
+                name: 'subjectComment',
+                component: () => import('@/pages/home/subjectComment.vue'),
+                meta: {
+                    freeAuth: true
+                }
+            }
+        ]
     },
     {
         // path: '/user/:userId',
