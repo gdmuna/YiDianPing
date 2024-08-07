@@ -89,3 +89,23 @@ router.get('/dictPlateInfo', async (req, res, next) => {
     const dictPlateInfo = await homeService.getDictPlateInfo();
     res.ResultVO(0, '成功', dictPlateInfo);
 });
+
+/**
+ * 根据关键词模糊搜索对应评论主体
+ * @name searchSubject 获取对象主体信息
+ * @description GET /home/searchSubject
+ * @header {string} authorization 用户凭证
+ * @response {Object} searchSubject 评论主体信息
+ * @response {string} searchSubject.comt_subject_id 评论主体ID
+ * @response {string} searchSubject.cb_title 评论主体名称
+ * @response {string} searchSubject.cb_img 评论主体配图路径
+ * @response {string} searchSubject.created_at 评论主体创建时间
+ * @response {string} searchSubject.is_enabled 该评论主体是否有效
+ * @response {string} searchSubject.comment_count 评论主体的评论总数
+ * @response {string} searchSubject.avg_score 评论主体的评分（平均分）
+ */
+router.get('/searchSubject', async (req, res, next) => {
+    const { comtSubjectTitle } = req.query;
+    const searchSubject = await homeService.getSearchSubject(comtSubjectTitle);
+    res.ResultVO(0, '成功', searchSubject);
+});

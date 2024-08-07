@@ -21,3 +21,8 @@ Authorization: Bearer {{ token }}
 GET {{ baseUrl }}{{ moduleUrl }}/dictPlateInfo
 Content-Type: application/json
 Authorization: Bearer {{ token }}
+
+### 根据关键词模糊搜索对应评论主体
+GET {{ baseUrl }}{{ moduleUrl }}/searchSubject?comtSubjectTitle=广东医
+Content-Type: application/json
+Authorization: Bearer {{ token }}

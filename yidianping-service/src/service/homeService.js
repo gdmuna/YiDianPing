@@ -23,3 +23,9 @@ exports.getDictPlateInfo = async () => {
     const dictPlateInfo = await homeDao.getDictPlateInfo();
     return dictPlateInfo;
 };
+
+// 根据关键词模糊搜索对应评论主体
+exports.getSearchSubject = async (comtSubjectTitle) => {
+    const searchSubject = await homeDao.getSearchSubject(comtSubjectTitle);
+    return searchSubject;
+};
