@@ -197,8 +197,8 @@ const routes = [
         meta: {
             // title: '搜索',
             freeAuth: true,
-            showNavigation: false,
-            isGoBack: true
+            hideAppBar: true,
+            showNavigation: false
         }
     },
     {
