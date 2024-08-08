@@ -40,3 +40,12 @@ Content-Type: application/json
 {
     "userId":""
 }
+
+###用户注销接口
+POST {{ baseUrl }}{{ moduleUrl }}/deleteUser
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "userId":"0190c9e4-684a-7070-a326-d0b5c07d65b0"
+}

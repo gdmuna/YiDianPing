@@ -3,7 +3,7 @@
         <var-space direction="column" class="button-container">
             <var-button class="custom-button" block @click="goaccout">
                 <div class="button-content">
-                    <font-awesome-icon :icon="['far', 'circle-user']" size="xl" style="color: #3246a0" />
+                    <font-awesome-icon :icon="['far', 'circle-user']" size="xl" style="color: #0f46a0" />
                     <span>账号安全</span>
                 </div>
                 <div class="arrow-icon">
@@ -115,7 +115,7 @@ export default {
             this.$router.push('/login');
         },
         goaccout() {
-            this.$router.push('/account');
+            this.$router.push('/accountSecurity');
         },
         exitCancel() {
             this.exitDialog = false;

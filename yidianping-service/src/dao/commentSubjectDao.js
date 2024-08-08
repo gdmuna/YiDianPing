@@ -156,3 +156,32 @@ exports.cancelCollectCommentSubject = async (userId, comtSubjectId) => {
 
     return await db.query(sql, sqlParams);
 };
+// 用户获取评论体评论接口
+exports.getSubjectComment = async (comtSubjectId, userId) => {
+    const sql = `
+        SELECT
+            c.*, 
+            b.cb_title,
+            u.nickname,
+            u.avatar,
+            u.is_forbidden,
+            u.is_deleted,
+            SUM(CASE WHEN ct.is_thumbs = 1 THEN 1 ELSE 0 END) AS thumbs_up,
+            MAX(CASE WHEN ct.user_id = ? THEN ct.is_thumbs ELSE 0 END) AS is_thumbs
+        FROM 
+            yi_comment c
+        JOIN
+            yi_comment_subject b ON c.comt_subject_id = b.comt_subject_id AND b.is_enabled = 0
+        JOIN
+            yi_user u ON c.user_id = u.user_id
+        LEFT JOIN
+            yi_comment_thumbs ct ON c.comment_id = ct.comment_id
+        WHERE
+            c.comt_subject_id = ? 
+            AND c.is_enabled = 0
+        GROUP BY
+            c.comment_id, b.cb_title, u.nickname, u.avatar, u.is_forbidden, u.is_deleted
+    `;
+    const sqlParams = [userId, comtSubjectId];
+    return await db.query(sql, sqlParams);
+};

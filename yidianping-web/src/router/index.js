@@ -114,7 +114,17 @@ const routes = [
             freeAuth: true,
             hideAppBar: true,
             showNavigation: false
-        }
+        },
+        children: [
+            {
+                path: 'subjectComment',
+                name: 'subjectComment',
+                component: () => import('@/pages/home/subjectComment.vue'),
+                meta: {
+                    freeAuth: true
+                }
+            }
+        ]
     },
     {
         // path: '/user/:userId',
@@ -207,6 +217,17 @@ const routes = [
         component: () => import('@/pages/user/settings.vue'),
         meta: {
             title: '设置',
+            freeAuth: true,
+            showNavigation: false,
+            isGoBack: true
+        }
+    },
+    {
+        path: '/accountSecurity',
+        name: 'accountSecurity',
+        component: () => import('@/pages/user/accountSecurity.vue'),
+        meta: {
+            title: '账号安全',
             freeAuth: true,
             showNavigation: false,
             isGoBack: true
