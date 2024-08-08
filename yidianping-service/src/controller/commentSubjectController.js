@@ -107,3 +107,15 @@ router.put('/cancelCollectCommentSubject', async (req, res, next) => {
     const result = await commentSubjectService.cancelCollectCommentSubject(userId, comtSubjectId);
     res.ResultVO(0, '成功', result);
 });
+/**
+ * 用户获取评论体评论接口
+ * @name getSubjectComment 恢复评论体信息
+ * @description GET /getSubjectComment
+ * @body {string} comtSubjectId 评论体ID
+ * @response {Object} result 删除结果
+ */
+router.get('/getSubjectComment', async (req, res, next) => {
+    const { comtSubjectId, userId } = req.query;
+    const result = await commentSubjectService.getSubjectComment(comtSubjectId, userId);
+    res.ResultVO(0, '成功', result);
+});

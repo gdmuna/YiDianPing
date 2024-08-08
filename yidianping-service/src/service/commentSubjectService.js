@@ -42,3 +42,8 @@ exports.cancelCollectCommentSubject = async (userId, comtSubjectId) => {
     const commentSubject = await commentSubjectDao.cancelCollectCommentSubject(userId, comtSubjectId);
     return commentSubject;
 };
+//用户获取评论体评论接口
+exports.getSubjectComment = async (comtSubjectId, userId) => {
+    const getSubjectComment = await commentSubjectDao.getSubjectComment(comtSubjectId, userId);
+    return getSubjectComment;
+};

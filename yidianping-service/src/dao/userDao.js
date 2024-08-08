@@ -130,9 +130,19 @@ exports.unbanUser = async (userId) => {
             user_id = ?
     `;
     const sqlParams = [userId];
-    try {
-        return await db.query(sql, sqlParams);
-    } catch (error) {
-        console.error('解禁用户失败:', error);
-    }
+    return await db.query(sql, sqlParams);
+};
+//用户注销
+exports.deleteUser = async (userId) => {
+    const sql = `
+        UPDATE
+            yi_user
+        SET
+            is_deleted = 1 
+            deleted_at = NOW()       
+        WHERE 
+            user_id = ?
+    `;
+    const sqlParams = [userId];
+    return await db.query(sql, sqlParams);
 };
