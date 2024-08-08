@@ -61,22 +61,18 @@ export default {
             imgFiles: [], // 用于存储上传的文件
             uploadUrl: '/createComment', // 你的后端接口地址
             selectedTypeName: '', // 存储选中的板块的名字
-            selectedTypeId: null, // 存储选中的板块的 ID
             selectedSubjectName: '', // 存储选中的评论主体的名字
             selectedSubjectId: null, // 存储选中的评论主体的 ID
             commentContent: '' // 评论内容
         };
     },
     created() {
-        document.addEventListener('backbutton', this.goBack);
-        this.loadSelectedType(); // 加载存储的板块信息
-        this.loadSelectedSubject(); // 加载存储的店铺信息
-        // this.resetSelections(); // 清空选择的板块和评论对象
+        this.selectedTypeName = this.$store.comment.selectedTypeName;
+        this.selectedSubjectName = this.$store.comment.selectedSubjectName;
+        this.selectedSubjectId = this.$store.comment.selectedSubjectId;
     },
     mounted() {},
-    unmounted() {
-        document.removeEventListener('backbutton', this.goBack);
-    },
+    unmounted() {},
     updated() {},
     methods: {
         goBack() {
@@ -87,21 +83,6 @@ export default {
         },
         goSelectSubject() {
             this.$router.push('/selectSubject'); // 跳转到评论主体选择页面
-        },
-        loadSelectedType() {
-            const selectedType = localStorage.getItem('selectedType');
-            if (selectedType) {
-                this.selectedTypeName = selectedType;
-            }
-        },
-        // 获取selectSubject页面存储的选中评论对象的的信息，并将其解析后显示在本页面上
-        loadSelectedSubject() {
-            const selectedSubject = localStorage.getItem('selectedSubject');
-            if (selectedSubject) {
-                const subject = JSON.parse(selectedSubject);
-                this.selectedSubjectName = subject.comtSubjectTitle;
-                this.selectedSubjectId = subject.comtSubjectId;
-            }
         },
         submitComment() {
             // 在这里处理发布评论的逻辑，比如发送请求到服务器

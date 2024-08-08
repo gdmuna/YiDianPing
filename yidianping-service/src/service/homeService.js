@@ -17,3 +17,15 @@ exports.getTheCommentSubjectInfo = async (comtSubjectId) => {
     const theCommentSubjectInfo = await homeDao.getTheCommentSubjectInfo(comtSubjectId);
     return theCommentSubjectInfo;
 };
+
+// 获取餐饮类版块字典信息
+exports.getDictPlateInfo = async () => {
+    const dictPlateInfo = await homeDao.getDictPlateInfo();
+    return dictPlateInfo;
+};
+
+// 根据关键词模糊搜索对应评论主体
+exports.getSearchSubject = async (comtSubjectTitle) => {
+    const searchSubject = await homeDao.getSearchSubject(comtSubjectTitle);
+    return searchSubject;
+};

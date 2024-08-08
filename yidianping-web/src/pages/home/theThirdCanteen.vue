@@ -1,8 +1,13 @@
 <template>
     <div style="margin-bottom: 12%">
-        <div v-for="(card, index) in filteredComments" :key="index" class="mb-2">
+        <div v-for="(card, index) in filteredComments" :key="index" class="mb-2" @click="goCommentInfo(card.commentId)">
             <!-- 标题栏 -->
-            <var-app-bar :title="card.comtSubjectTitle" class="pt-1.5 h-11" style="background-color: #ffffff; box-shadow: none; border-top: 2px solid rgb(242, 245, 248); --app-bar-text-color: #0f46a0; --app-bar-title-font-size: 17.2px">
+            <var-app-bar class="pt-1.5 h-11" style="background-color: #ffffff; box-shadow: none; border-top: 2px solid rgb(242, 245, 248); --app-bar-text-color: #0f46a0; --app-bar-title-font-size: 17.2px">
+                <template #default>
+                    <div @click="goCommentSubject(card.comtSubjectId)">
+                        {{ card.comtSubjectTitle }}
+                    </div>
+                </template>
                 <template #right>
                     <!-- 菜单 -->
                     <var-menu>
@@ -94,6 +99,14 @@ export default {
             const commentInfo = await home.getCommentInfo();
             this.cards = commentInfo;
             console.log(this.commentInfo);
+        },
+        async getCommentSubjectInfo() {
+            const commentSubjectInfo = await home.getCommentSubjectInfo();
+            this.cards = commentSubjectInfo;
+            console.log(this.commentSubjectInfo);
+        },
+        goCommentSubject(comtSubjectId) {
+            this.$router.push({ path: '/commentSubject', query: { CardId: comtSubjectId } });
         },
         async thumbsUp(userId, comtSubjectId, commentId, index) {
             await card.thumbsUp({ userId, comtSubjectId, commentId });
