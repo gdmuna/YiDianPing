@@ -16,8 +16,9 @@
             </var-button>
         </div>
     </var-app-bar>
-    <!-- 所有有效可选评论对象 -->
+    <!-- 可选选项 -->
     <div style="margin-bottom: 12%" class="px-[4%] pb-[4%]">
+        <!-- 搜索结果 -->
         <div v-if="resSubjects">
             <div v-for="(resSubject, index2) in filteredComments2" :key="index2" class="mb-2" @click="selectSubject(resSubject)">
                 <div class="flex w-full h-[82px] mb-3 p-[9px] bg-white" style="border-radius: 4px">
@@ -34,6 +35,7 @@
                 </div>
             </div>
         </div>
+        <!-- 所有有效可选评论对象 -->
         <div v-else>
             <div v-for="(card, index) in filteredComments" :key="index" class="mb-2" @click="selectSubject(card)">
                 <div class="flex w-full h-[82px] mb-3 p-[9px] bg-white" style="border-radius: 4px">
@@ -50,6 +52,7 @@
                 </div>
             </div>
         </div>
+        <!-- 到尽头提示 -->
         <p class="flex justify-center mt-4 text-xs" style="color: #999999">没有更多内容咯</p>
     </div>
 </template>
