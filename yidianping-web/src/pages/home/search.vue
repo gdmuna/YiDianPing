@@ -40,7 +40,7 @@
             <p>历史记录：</p>
         </div>
         <div v-if="searchHistory.length">
-            <div v-for="(item, index) in searchHistory" :key="index" class="flex bg-white rounded-[10px] h-12 justify-between items-center px-4 mb-2" @click="goCommentSubject(resSubject.comtSubjectId)">
+            <div v-for="(item, index) in searchHistory" :key="index" class="flex bg-white rounded-[10px] h-12 justify-between items-center px-4 mb-2" @click="searchSubject(item)">
                 <p>{{ item }}</p>
                 <font-awesome-icon :icon="['fas', 'chevron-right']" size="sm" class="mb-0.5" style="color: #000000" />
             </div>
