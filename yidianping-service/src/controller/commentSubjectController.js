@@ -119,3 +119,15 @@ router.get('/getSubjectComment', async (req, res, next) => {
     const result = await commentSubjectService.getSubjectComment(comtSubjectId, userId);
     res.ResultVO(0, '成功', result);
 });
+/**
+ * 用户获取评论体提问接口
+ * @name getSubjectQuestion 评论体提问信息
+ * @description GET /getSubjectQuestion
+ * @body {string} comtSubjectId 评论体ID
+ * @response {Object} result 删除结果
+ */
+router.get('/getSubjectQuestion', async (req, res, next) => {
+    const { comtSubjectId, userId } = req.query;
+    const result = await commentSubjectService.getSubjectQuestion(comtSubjectId, userId);
+    res.ResultVO(0, '成功', result);
+});
