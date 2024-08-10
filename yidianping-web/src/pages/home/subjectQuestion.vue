@@ -35,6 +35,7 @@
                 </div>
             </var-card>
         </div>
+        <p class="flex justify-center mt-4 text-xs" style="color: #999999">没有更多内容咯</p>
     </div>
 </template>
 
@@ -72,7 +73,13 @@ export default {
                 comtSubjectId: this.selectedComtSubjectId,
                 userId: this.userId
             });
-            this.comments = response;
+            // 过滤掉评论数组中的无效评论
+            this.comments = response.map((item) => {
+                return {
+                    ...item,
+                    comments: item.comments.filter((comment) => comment.comment_id !== null)
+                };
+            });
             this.$nextTick(() => {
                 this.adjustTextAlignment();
             });
