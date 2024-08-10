@@ -33,6 +33,10 @@ const CommentSubject = {
     //用户获取评论体评论
     getSubjectComment(data) {
         return request.get(`${moduleUrl}/getSubjectComment`, data);
+    },
+    //用户获取评论体提问
+    getSubjectQuestion(data) {
+        return request.get(`${moduleUrl}/getSubjectQuestion`, data);
     }
 };
 
