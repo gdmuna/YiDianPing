@@ -156,7 +156,7 @@ exports.cancelCollectCommentSubject = async (userId, comtSubjectId) => {
 
     return await db.query(sql, sqlParams);
 };
-// 用户获取评论体评论接口
+//用户获取评论体评论接口
 exports.getSubjectComment = async (comtSubjectId, userId) => {
     const sql = `
         SELECT
@@ -179,9 +179,54 @@ exports.getSubjectComment = async (comtSubjectId, userId) => {
         WHERE
             c.comt_subject_id = ? 
             AND c.is_enabled = 0
+            AND c.question_id IS NULL
         GROUP BY
             c.comment_id, b.cb_title, u.nickname, u.avatar, u.is_forbidden, u.is_deleted
     `;
     const sqlParams = [userId, comtSubjectId];
+    return await db.query(sql, sqlParams);
+};
+// 用户获取评论体提问接口
+exports.getSubjectQuestion = async (comtSubjectId, userId) => {
+    const sql = `
+        SELECT 
+    q.text AS question_text, 
+    q.created_at AS question_created_at,
+    q.question_id,
+    uq.nickname AS question_nickname,
+    uq.avatar AS question_avatar,
+    uq.is_forbidden AS question_is_forbidden,
+    uq.is_deleted AS question_is_deleted,
+    JSON_ARRAYAGG(
+        JSON_OBJECT(
+    'comment_id', c.comment_id,
+    'comment_text', c.text,
+    'comment_created_at', c.created_at,
+    'comment_user_id', c.user_id,
+    'comment_nickname', u.nickname,
+    'comment_avatar', u.avatar,
+    'comment_is_forbidden', u.is_forbidden,
+    'comment_is_deleted', u.is_deleted,
+    'comment_img_path', c.img_path
+        )
+    ) AS comments
+FROM 
+    yi_questions q
+JOIN 
+    yi_user uq ON q.user_id = uq.user_id -- 获取提问者的信息
+LEFT JOIN 
+    yi_comment c ON q.question_id = c.question_id
+LEFT JOIN 
+    yi_user u ON c.user_id = u.user_id -- 获取评论者的信息
+WHERE 
+    q.comt_subject_id = ?
+    AND q.is_enabled = 0
+    
+    AND (c.is_enabled = 0 OR c.is_enabled IS NULL) -- 允许无评论的情况
+GROUP BY 
+    q.text, q.created_at, q.question_id, uq.nickname, uq.avatar, uq.is_forbidden, uq.is_deleted
+
+    `;
+    const sqlParams = [comtSubjectId];
     return await db.query(sql, sqlParams);
 };

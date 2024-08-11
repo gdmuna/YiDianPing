@@ -106,7 +106,13 @@ export default {
             // 你可以在这里处理信息选项卡点击事件
         },
         goSubjectQuestion() {
-            // 你可以在这里处理提问选项卡点击事件
+            // 传递comtSubjectId作为查询参数
+            this.$router.push({
+                path: '/commentSubject/subjectQuestion',
+                query: {
+                    comtSubjectId: this.card.comtSubjectId
+                }
+            });
         }
     }
 };

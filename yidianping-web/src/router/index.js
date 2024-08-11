@@ -123,6 +123,14 @@ const routes = [
                 meta: {
                     freeAuth: true
                 }
+            },
+            {
+                path: 'subjectQuestion',
+                name: 'subjectQuestion',
+                component: () => import('@/pages/home/subjectQuestion.vue'),
+                meta: {
+                    freeAuth: true
+                }
             }
         ]
     },

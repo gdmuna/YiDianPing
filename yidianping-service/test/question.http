@@ -25,3 +25,26 @@ Authorization: Bearer {{ token }}
     "comtSubjectId":"",
     "questionId":1
 }
+### 发布提问
+POST {{ baseUrl }}{{ moduleUrl }}/putQuestionReply
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "comtSubjectId":"a",
+    "text":"",
+    "questionId":,
+    "userId":""
+}
+###修改提问
+PUT {{ baseUrl }}{{ moduleUrl }}/updateQuestionReply
+Content-Type: application/json
+Authorization: Bearer {{ token }}
+
+{
+    "commentId":,
+    "text":"鸡你实在是太美",
+    "questionId":,
+    "userId":""
+}
+

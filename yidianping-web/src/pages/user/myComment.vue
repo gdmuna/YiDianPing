@@ -1,39 +1,39 @@
 <template>
-    <div class="comment">
-        <var-card v-for="(item, index) in filteredComments" :key="index" class="comment-card">
+    <div class="mb-8 p-4">
+        <var-card v-for="(item, index) in filteredComments" :key="index" class="relative mb-2.5 p-4 bg-white rounded-lg shadow-none">
             <template #title>
-                <div class="card-header">
-                    <h1 class="comment-title">{{ item.cb_title }}</h1>
-                    <div class="thumbs-up">
-                        <font-awesome-icon v-if="item.is_thumbs == 1" :icon="['fas', 'heart']" style="color: #4e77b9" @click="cancelThumbsUp(item.user_id, item.comt_subject_id, item.comment_id, index)" />
-                        <font-awesome-icon v-else :icon="['far', 'heart']" style="color: #4e77b9" @click="thumbsUp(item.user_id, item.comt_subject_id, item.comment_id, index)" />
-                        <p :style="{ color: '#4e77b9', fontSize: '14px', margin: '2px 15px 0 5px' }">{{ item.thumbs_up }}</p>
-                        <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" class="fixed-icon" @click="openPopup(item.comt_subject_id, item.comment_id)" />
+                <div class="flex justify-between items-center">
+                    <h1 class="text-xl mt-1" style="color: #4e77b9">{{ item.cb_title }}</h1>
+                    <div class="flex items-center">
+                        <font-awesome-icon v-if="item.is_thumbs == 1" :icon="['fas', 'heart']" size="lg" style="color: #4e77b9" @click="cancelThumbsUp(item.user_id, item.comt_subject_id, item.comment_id, index)" />
+                        <font-awesome-icon v-else :icon="['far', 'heart']" size="lg" style="color: #4e77b9" @click="thumbsUp(item.user_id, item.comt_subject_id, item.comment_id, index)" />
+                        <p class="text-lg mx-2 my-0" style="color: #4e77b9">{{ item.thumbs_up }}</p>
+                        <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" class="mr-2" style="color: #4e77b9" @click="openPopup(item.comt_subject_id, item.comment_id)" />
                     </div>
                 </div>
             </template>
             <template #description>
-                <div class="text-content">{{ item.text }}</div>
+                <div class="my-2.5 break-words text-content">{{ item.text }}</div>
                 <var-image v-if="item.img_path" width="150px" height="150px" fit="cover" :radius="10" :src="item.img_path" @click="showImagePreview(item.img_path)" />
-                <div class="created-time">{{ formatTime(item.created_at) }}</div>
+                <div class="absolute bottom-1 right-2 text-xs" style="color: #4e77b9">{{ formatTime(item.created_at) }}</div>
             </template>
         </var-card>
         <var-popup v-model:show="popupVisible" position="bottom">
-            <div class="popup-content">
-                <var-button-group mode="text" size="large" style="width: 100vw" vertical>
-                    <var-button block type="primary" style="color: #2041a9" @click="editComment(selectedComtSubjectId, selectedCommentId)">修改</var-button>
-                    <var-button block type="danger" style="color: #db4550" @click="deleteComment(selectedComtSubjectId, selectedCommentId)">删除</var-button>
+            <div class="p-2 flex flex-col items-center w-full">
+                <var-button-group mode="text" size="large" class="w-full" vertical>
+                    <var-button block type="primary" class="text-blue-800" @click="editComment(selectedComtSubjectId, selectedCommentId)">修改</var-button>
+                    <var-button block type="danger" class="text-red-600" @click="deleteComment(selectedComtSubjectId, selectedCommentId)">删除</var-button>
                 </var-button-group>
             </div>
         </var-popup>
         <var-image-preview v-model:show="showImagePreviewVisible" :images="imagePreviewUrls" />
-        <p class="flex justify-center mt-4 text-xs" style="color: #999999">没有更多内容咯</p>
+        <p class="flex justify-center mt-4 text-xs text-gray-400">没有更多内容咯</p>
     </div>
 </template>
 
 <script>
 import dayjs from 'dayjs';
-import comment from '../../api/comment';
+import comment from '@/api/comment';
 
 export default {
     name: 'USER',
@@ -100,58 +100,6 @@ export default {
     }
 };
 </script>
-
 <style scoped>
-.comment {
-    margin-bottom: 8%;
-    padding: 4%;
-}
-.comment-card {
-    position: relative;
-    margin-bottom: 10px;
-    padding: 16px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: none;
-}
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.comment-title {
-    color: #4e77b9;
-    font-size: 20px;
-    margin: 0;
-    padding: 0;
-    margin-top: 3px;
-}
-.text-content {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    word-break: break-word;
-}
-.thumbs-up {
-    display: flex;
-    align-items: center;
-}
-.fixed-icon {
-    margin-right: 7px;
-    color: #324fb1;
-}
-.created-time {
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
-    color: #2041a9;
-    font-size: 12px;
-    margin-right: 10px;
-}
-.popup-content {
-    padding: 10px;
-    width: 100vw;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+/* 空 */
 </style>

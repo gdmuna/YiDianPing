@@ -1,68 +1,71 @@
 <template>
-    <a-table :data="currentTableData" :pagination="false" :bordered="{ cell: true }" style="height: 100%" :scroll="{ x: 2000 }">
-        <template #columns>
-            <a-table-column title="评论体" data-index="cb_title" fixed="left" width="300"></a-table-column>
-            <a-table-column title="评分" data-index="score" width="80"></a-table-column>
-            <a-table-column title="配图" width="100">
-                <template #cell="{ record }">
-                    <a-button size="mini" status="warning" type="text" @click="imgComment(record)">查看</a-button>
-                </template>
-            </a-table-column>
-            <a-table-column title="创建时间" data-index="created_at" width="240"></a-table-column>
-            <a-table-column title="内容" data-index="cb_text" width="10000"></a-table-column>
-            <a-table-column title="操作" width="130" fixed="right">
-                <template #cell="{ record }">
-                    <a-popconfirm content="是否要暂时删除?" ok-text="是" cancel-text="否" @ok="deleteComment(record)">
-                        <a-button v-if="record.is_enabled === 0" size="mini" status="danger" type="text">删除</a-button>
-                    </a-popconfirm>
-                    <a-popconfirm content="是否要恢复此评论体?" ok-text="是" cancel-text="否" @ok="recoverComment(record)">
-                        <a-button v-if="record.is_enabled === 1" size="mini" status="success" type="text">恢复</a-button>
-                    </a-popconfirm>
-                    <a-button size="mini" status="danger" type="text" @click="editComment(record)">修改</a-button>
-                </template>
-            </a-table-column>
-            <a-table-column title="状态" width="120" data-index="is_enabled" fixed="right">
-                <template #cell="{ record }">
-                    <a-button v-if="record.is_enabled === 0" status="success" size="mini" type="outline">正常</a-button>
-                    <a-button v-if="record.is_enabled !== 0" status="danger" size="mini" type="outline">删除</a-button>
-                </template>
-            </a-table-column>
-        </template>
-    </a-table>
-    <!-- 查看配图模态框 -->
-    <a-modal v-model:visible="visibleImg" title="查看配图" @cancel="handleCancelImg">
-        <div v-if="imgUrl">
-            <img :src="imgUrl" alt="评论配图" style="width: 100%; height: auto" />
-        </div>
-        <div v-else>
-            <p>暂无配图</p>
-        </div>
-    </a-modal>
-    <!-- 修改评论体模态框 -->
-    <a-modal v-model:visible="visibleEdit" title="修改评论体" @cancel="handleCancelEdit" @ok="handleOk">
-        <a-form ref="form" :model="form">
-            <a-form-item field="cb_title" label="评论体">
-                <a-input v-model="form.cbTitle" />
-            </a-form-item>
-            <a-form-item label="内容" field="cb_text">
-                <a-textarea v-model="form.cbText" placeholder="请输入内容" allow-clear />
-            </a-form-item>
-            <a-form-item label="配图" field="cb_img">
-                <a-upload v-model:file-list="fileList" :before-upload="beforeUpload" :on-remove="removeFile">
-                    <a-button>上传图片</a-button>
-                </a-upload>
-            </a-form-item>
-        </a-form>
-    </a-modal>
+    <div class="flex flex-col h-full">
+        <a-table :data="currentTableData" :pagination="false" :bordered="{ cell: true }" style="height: 100%" :scroll="{ x: 2000 }">
+            <template #columns>
+                <a-table-column title="评论体" data-index="cb_title" fixed="left" width="300"></a-table-column>
+                <a-table-column title="评分" data-index="score" width="80"></a-table-column>
+                <a-table-column title="配图" width="100">
+                    <template #cell="{ record }">
+                        <a-button size="mini" status="warning" type="text" @click="imgComment(record)">查看</a-button>
+                    </template>
+                </a-table-column>
+                <a-table-column title="创建时间" data-index="created_at" width="240"></a-table-column>
+                <a-table-column title="内容" data-index="cb_text" width="10000"></a-table-column>
+                <a-table-column title="操作" width="130" fixed="right">
+                    <template #cell="{ record }">
+                        <a-popconfirm content="是否要暂时删除?" ok-text="是" cancel-text="否" @ok="deleteComment(record)">
+                            <a-button v-if="record.is_enabled === 0" size="mini" status="danger" type="text">删除</a-button>
+                        </a-popconfirm>
+                        <a-popconfirm content="是否要恢复此评论体?" ok-text="是" cancel-text="否" @ok="recoverComment(record)">
+                            <a-button v-if="record.is_enabled === 1" size="mini" status="success" type="text">恢复</a-button>
+                        </a-popconfirm>
+                        <a-button size="mini" status="danger" type="text" @click="editComment(record)">修改</a-button>
+                    </template>
+                </a-table-column>
+                <a-table-column title="状态" width="120" data-index="is_enabled" fixed="right">
+                    <template #cell="{ record }">
+                        <a-button v-if="record.is_enabled === 0" status="success" size="mini" type="outline">正常</a-button>
+                        <a-button v-if="record.is_enabled !== 0" status="danger" size="mini" type="outline">删除</a-button>
+                    </template>
+                </a-table-column>
+            </template>
+        </a-table>
+        <!-- 查看配图模态框 -->
+        <a-modal v-model:visible="visibleImg" title="查看配图" @cancel="handleCancelImg">
+            <div v-if="imgUrl">
+                <img :src="imgUrl" alt="评论配图" style="width: 100%; height: auto" />
+            </div>
+            <div v-else>
+                <p>暂无配图</p>
+            </div>
+        </a-modal>
+        <!-- 修改评论体模态框 -->
+        <a-modal v-model:visible="visibleEdit" title="修改评论体" @cancel="handleCancelEdit" @ok="handleOk">
+            <a-form ref="form" :model="form">
+                <a-form-item field="cb_title" label="评论体">
+                    <a-input v-model="form.cbTitle" />
+                </a-form-item>
+                <a-form-item label="内容" field="cb_text">
+                    <a-textarea v-model="form.cbText" placeholder="请输入内容" allow-clear />
+                </a-form-item>
+                <a-form-item label="配图" field="cb_img">
+                    <a-upload v-model:file-list="fileList" :before-upload="beforeUpload" :on-remove="removeFile">
+                        <a-button>上传图片</a-button>
+                    </a-upload>
+                </a-form-item>
+            </a-form>
+        </a-modal>
 
-    <div class="search-bar">
-        <a-pagination :total="total" :page-size="pageSize" :current="currentPage" show-total show-jumper show-page-size @change="handlePageChange" @page-size-change="handlePageSizeChange" />
-        <a-input v-model="searchQuery" placeholder="搜索评论体" style="width: 200px" @input="handleSearch" />
+        <!--使用Tailwind CSS  -->
+        <div class="flex justify-between items-center mb-2 p-2">
+            <a-pagination :total="total" :page-size="pageSize" :current="currentPage" show-total show-jumper show-page-size @change="handlePageChange" @page-size-change="handlePageSizeChange" />
+            <a-input v-model="searchQuery" placeholder="搜索评论" class="ml-auto" style="width: 200px" @input="handleSearch" />
+        </div>
     </div>
 </template>
 
 <script>
-import commentSubject from '../../api/commentSubject';
+import commentSubject from '@/api/commentSubject';
 
 export default {
     name: 'CommentSubject',
@@ -197,11 +200,5 @@ export default {
 </script>
 
 <style scoped>
-.search-bar {
-    margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    justify-content: space-between;
-}
+/* 样式 */
 </style>

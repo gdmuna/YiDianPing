@@ -125,6 +125,7 @@ exports.getHistoryComment = async (userId) => {
         WHERE
             c.user_id = ? 
             AND c.is_enabled = 0
+            AND c.question_id IS NULL
         GROUP BY
             c.comment_id, b.cb_title, t.is_thumbs;
     `;
@@ -154,6 +155,7 @@ exports.getLoveComment = async (userId) => {
             AND t.user_id = ? 
             AND c.is_enabled = 0 
             AND b.is_enabled = 0
+            AND c.question_id IS NULL
         GROUP BY
             c.comment_id, b.cb_title, t.is_thumbs;
     `;

@@ -37,4 +37,35 @@ router.post('/recoverQuestion', async (req, res, next) => {
     const result = await questionService.recoverQuestion(comtSubjectId, questionId);
     res.ResultVO(0, '成功', result);
 });
+/**
+ * 发布提问回复
+ * @name putQuestionReply 发布提问回复
+ * @description POST /putQuestionReply
+ * @body {string} comtSubjectId 提问主题ID
+ * @body {string} questionId 提问ID
+ * @body {string} text 回复内容
+ * @body {string} userId 用户ID
+ * @response {Object} result 恢复结果
+ */
+router.post('/putQuestionReply', async (req, res, next) => {
+    const { comtSubjectId, questionId, text, userId, imgPath } = req.body;
+    const result = await questionService.putQuestionReply(comtSubjectId, questionId, text, userId, imgPath);
+    res.ResultVO(0, '成功', result);
+});
+/**
+ * 修改发布提问回复
+ * @name updateQuestionReply 发布提问回复
+ * @description PUT /updateQuestionReply
+ * @body {string} comtSubjectId 提问主题ID
+ * @body {string} questionId 提问ID
+ * @body {string} text 回复内容
+ * @body {string} commentId 回复ID
+ * @body {string} userId 用户ID
+ * @response {Object} result 恢复结果
+ */
+router.put('/updateQuestionReply', async (req, res, next) => {
+    const { questionId, text, commentId, userId, imgPath } = req.body;
+    const result = await questionService.updateQuestionReply(questionId, text, commentId, userId, imgPath);
+    res.ResultVO(0, '成功', result);
+});
 module.exports = router;

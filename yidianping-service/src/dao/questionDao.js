@@ -40,3 +40,28 @@ exports.recoverQuestion = async (comtSubjectId, questionId) => {
 `;
     return await db.query(sql, [comtSubjectId, questionId]);
 };
+//发布提问回复
+exports.putQuestionReply = async (comtSubjectId, questionId, text, userId, imgPath) => {
+    const sql = `
+        INSERT INTO yi_comment
+            (comt_subject_id, question_id, text, user_id,created_at, img_path)
+        VALUES
+            (?, ?, ?, ?, NOW(), ?)
+    `;
+    return await db.query(sql, [comtSubjectId, questionId, text, userId, imgPath]);
+};
+//修改提问回复
+exports.updateQuestionReply = async (questionId, text, commentId, userId, imgPath) => {
+    const sql = `
+        UPDATE yi_comment
+        SET
+            text = ?,
+            img_path = ?,
+            created_at = NOW()
+        WHERE
+            question_id = ?
+            AND comment_id = ?
+            AND user_id = ?
+    `;
+    return await db.query(sql, [questionId, text, commentId, userId, imgPath]);
+};

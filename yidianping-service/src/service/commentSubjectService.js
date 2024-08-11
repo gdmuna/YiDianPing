@@ -47,3 +47,8 @@ exports.getSubjectComment = async (comtSubjectId, userId) => {
     const getSubjectComment = await commentSubjectDao.getSubjectComment(comtSubjectId, userId);
     return getSubjectComment;
 };
+//用户获取评论体提问接口
+exports.getSubjectQuestion = async (comtSubjectId, userId) => {
+    const getSubjectQuestion = await commentSubjectDao.getSubjectQuestion(comtSubjectId, userId);
+    return getSubjectQuestion;
+};
