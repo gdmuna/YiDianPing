@@ -199,15 +199,15 @@ exports.getSubjectQuestion = async (comtSubjectId, userId) => {
     uq.is_deleted AS question_is_deleted,
     JSON_ARRAYAGG(
         JSON_OBJECT(
-            'comment_id', c.comment_id,
-            'comment_text', c.text,
-            'comment_created_at', c.created_at,
-            'comment_user_id', c.user_id,
-            'comment_nickname', u.nickname,
-            'comment_avatar', u.avatar,
-            'comment_is_forbidden', u.is_forbidden,
-            'comment_is_deleted', u.is_deleted,
-            'comment_img_path', c.img_path
+    'comment_id', c.comment_id,
+    'comment_text', c.text,
+    'comment_created_at', c.created_at,
+    'comment_user_id', c.user_id,
+    'comment_nickname', u.nickname,
+    'comment_avatar', u.avatar,
+    'comment_is_forbidden', u.is_forbidden,
+    'comment_is_deleted', u.is_deleted,
+    'comment_img_path', c.img_path
         )
     ) AS comments
 FROM 
