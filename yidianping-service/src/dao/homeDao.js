@@ -14,7 +14,7 @@ exports.getCommentInfo = async () => {
             c.is_enabled AS commentIsEnabled,
             cs.cb_title AS comtSubjectTitle,
             sdi0.item_label AS category,
-            ROUND((s.score_01 + s.score_02 + s.score_03) / 3, 1) AS avg_score,
+            ROUND((s.score_01 + s.score_02 + s.score_03) / 3, 1) AS avgScore,
             s.score_01,
             sdi1.item_label AS dimension01,
             s.score_02,
@@ -23,7 +23,7 @@ exports.getCommentInfo = async () => {
             sdi3.item_label AS dimension03,
             u.nickname,
             u.avatar,
-            COALESCE(CAST(COUNT(CASE WHEN ct.is_thumbs = 1 THEN 1 END) AS CHAR), '0') AS thumbs_up
+            COALESCE(CAST(COUNT(CASE WHEN ct.is_thumbs = 1 THEN 1 END) AS CHAR), '0') AS thumbsUp
         FROM
             yi_comment c
         JOIN
@@ -69,9 +69,9 @@ exports.getCommentSubjectInfo = async () => {
             cs.cb_img AS comtSubjectImg,
             cs.created_at AS comtSubjectCreatedAt,
             cs.is_enabled AS comtSubjectIsEnabled,
-            CAST(COUNT(c.comment_id) AS CHAR) AS comment_count,
+            CAST(COUNT(c.comment_id) AS CHAR) AS commentCount,
             sdi0.item_label AS category,
-            ROUND((s.score_01 + s.score_02 + s.score_03) / 3, 1) AS avg_score,
+            ROUND((s.score_01 + s.score_02 + s.score_03) / 3, 1) AS avgScore,
             s.score_01,
             sdi1.item_label AS dimension01,
             s.score_02,
@@ -116,9 +116,9 @@ exports.getTheCommentSubjectInfo = async (comtSubjectId) => {
             cs.cb_img AS comtSubjectImg,
             cs.created_at AS comtSubjectCreatedAt,
             cs.is_enabled AS comtSubjectIsEnabled,
-            CAST(COUNT(c.comment_id) AS CHAR) AS comment_count,
+            CAST(COUNT(c.comment_id) AS CHAR) AS commentCount,
             sdi0.item_label AS category,
-            ROUND((s.score_01 + s.score_02 + s.score_03) / 3, 1) AS avg_score,
+            ROUND((s.score_01 + s.score_02 + s.score_03) / 3, 1) AS avgScore,
             s.score_01,
             sdi1.item_label AS dimension01,
             s.score_02,
@@ -186,9 +186,9 @@ exports.getSearchSubject = async (comtSubjectTitle) => {
             cs.cb_img AS comtSubjectImg,
             cs.created_at AS comtSubjectCreatedAt,
             cs.is_enabled AS comtSubjectIsEnabled,
-            CAST(COUNT(c.comment_id) AS CHAR) AS comment_count,
+            CAST(COUNT(c.comment_id) AS CHAR) AS commentCount,
             sdi0.item_label AS category,
-            ROUND((s.score_01 + s.score_02 + s.score_03) / 3, 1) AS avg_score,
+            ROUND((s.score_01 + s.score_02 + s.score_03) / 3, 1) AS avgScore,
             s.score_01,
             sdi1.item_label AS dimension01,
             s.score_02,
