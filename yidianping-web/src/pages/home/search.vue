@@ -28,8 +28,8 @@
                             <p class="mt-0.5">{{ resSubject.comtSubjectTitle }}</p>
                         </div>
                         <div class="flex flex-col items-end justify-between mr-1.5">
-                            <p class="text-sm" style="color: #0f46a0; margin-top: 2.5px">{{ resSubject.avg_score && resSubject.avg_score > 0 ? resSubject.avg_score + ' 分' : '暂无评分' }}</p>
-                            <p class="text-sm" style="color: #999999; margin-top: 2.5px">{{ resSubject.comment_count }} 人已评论</p>
+                            <p class="text-sm" style="color: #0f46a0; margin-top: 2.5px">{{ resSubject.avgScore && resSubject.avgScore > 0 ? resSubject.avgScore + ' 分' : '暂无评分' }}</p>
+                            <p class="text-sm" style="color: #999999; margin-top: 2.5px">{{ resSubject.commentCount }} 人已评论</p>
                         </div>
                     </div>
                 </div>

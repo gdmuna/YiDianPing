@@ -5,10 +5,10 @@
                 <var-image :src="card.comtSubjectImg ? card.comtSubjectImg : 'https://krseoul.imgtbl.com/i/2024/08/02/66accb57ab412.png'" :radius="5" height="4rem" width="5.5rem" fit="cover" class="mr-3" />
                 <p class="mt-0.5">{{ card.comtSubjectTitle }}</p>
                 <div class="flex items-center absolute right-[7.5vw]">
-                    <p class="text-sm" style="color: #0f46a0; margin-top: 2.5px">{{ card.avg_score && card.avg_score > 0 ? card.avg_score + ' 分' : '暂无评分' }}</p>
+                    <p class="text-sm" style="color: #0f46a0; margin-top: 2.5px">{{ card.avgScore && card.avgScore > 0 ? card.avgScore + ' 分' : '暂无评分' }}</p>
                 </div>
                 <div class="flex items-center absolute right-[7.5vw] mt-[2.7rem]">
-                    <p class="text-sm" style="color: #999999; margin-top: 2.5px">{{ card.comment_count }} 人已评论</p>
+                    <p class="text-sm" style="color: #999999; margin-top: 2.5px">{{ card.commentCount }} 人已评论</p>
                 </div>
             </div>
         </div>

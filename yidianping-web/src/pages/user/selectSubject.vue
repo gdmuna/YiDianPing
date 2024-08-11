@@ -45,8 +45,8 @@
                             <p class="mt-0.5">{{ card.comtSubjectTitle }}</p>
                         </div>
                         <div class="flex flex-col items-end justify-between mr-1.5">
-                            <p class="text-sm" style="color: #0f46a0; margin-top: 2.5px">{{ card.avg_score && card.avg_score > 0 ? card.avg_score + ' 分' : '暂无评分' }}</p>
-                            <p class="text-sm" style="color: #999999; margin-top: 2.5px">{{ card.comment_count }} 人已评论</p>
+                            <p class="text-sm" style="color: #0f46a0; margin-top: 2.5px">{{ card.avgScore && card.avgScore > 0 ? card.avgScore + ' 分' : '暂无评分' }}</p>
+                            <p class="text-sm" style="color: #999999; margin-top: 2.5px">{{ card.commentCount }} 人已评论</p>
                         </div>
                     </div>
                 </div>
