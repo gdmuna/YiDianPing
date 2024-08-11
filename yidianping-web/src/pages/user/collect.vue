@@ -30,7 +30,7 @@
 </template>
 <script>
 import dayjs from 'dayjs';
-import commentSubject from '../../api/commentSubject';
+import commentSubject from '@/api/commentSubject';
 
 export default {
     name: 'UserCollectComment',
