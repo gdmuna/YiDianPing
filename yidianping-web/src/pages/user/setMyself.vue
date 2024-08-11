@@ -1,92 +1,93 @@
 <template>
-    <div class="center-container">
+    <div class="flex justify-center h-full p-[4%]">
         <var-space direction="column" class="button-container">
             <!-- 修改头像 -->
-            <var-button class="custom-avatar" block @click="center = true">
-                <div class="button-avatar">
+            <var-button class="flex items-center bg-white text-[#0f46a0] h-32 w-full my-[4px] rounded-[10px] px-[10px]" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)" block @click="center = true">
+                <div class="flex items-center w-[53vw] text-[1rem] ml-1">
                     <font-awesome-icon :icon="['far', 'circle-user']" size="xl" style="color: #0f46a0" />
-                    <span>修改头像</span>
-                    <font-awesome-icon :icon="['fas', 'chevron-right']" size="lg" style="color: #0f46a0" />
+                    <span class="ml-2.5 mt-0.5">修改头像</span>
+                    <font-awesome-icon :icon="['fas', 'chevron-right']" class="ml-1" style="color: #0f46a0" />
                 </div>
-                <div class="arrow-icon">
+                <!-- 头像显示 -->
+                <div class="flex items-center justify-end text-[1rem] gap-1 mr-1">
                     <var-space direction="column" class="ml-8 self-end">
-                        <var-avatar :src="users.avatar" fit="cover" size="68" />
+                        <var-avatar :src="users.avatar" fit="cover" size="72" />
                     </var-space>
                 </div>
             </var-button>
 
             <!-- 修改账号 -->
-            <var-button class="custom-button" block @click="showAccountPopup = true">
-                <div class="button-content">
+            <var-button class="flex items-center bg-white text-[#0f46a0] h-12 w-full my-[4px] rounded-[10px] px-[10px]" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)" block @click="showAccountPopup = true">
+                <div class="flex items-center w-[60vw] text-[1rem] ml-1">
                     <font-awesome-icon :icon="['fas', 'address-book']" size="xl" style="color: #0f46a0" />
-                    <span>{{ users.account }}</span>
+                    <span class="ml-2.5">{{ users.account }}</span>
                 </div>
-                <div class="arrow-icon">
+                <div class="flex items-center justify-end text-[1rem] gap-1 mr-1">
                     修改账号
-                    <font-awesome-icon :icon="['fas', 'chevron-right']" size="lg" style="color: #0f46a0" />
+                    <font-awesome-icon :icon="['fas', 'chevron-right']" style="color: #0f46a0" />
                 </div>
             </var-button>
 
             <!-- 修改昵称 -->
-            <var-button class="custom-button" block @click="onNickname = true">
-                <div class="button-content">
+            <var-button class="flex items-center bg-white text-[#0f46a0] h-12 w-full my-[4px] rounded-[10px] px-[10px]" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)" block @click="onNickname = true">
+                <div class="flex items-center w-[60vw] text-[1rem] ml-1">
                     <font-awesome-icon :icon="['fas', 'user-pen']" size="lg" style="color: #0f46a0" />
-                    <span>{{ users.nickname }}</span>
+                    <span class="ml-2.5">{{ users.nickname }}</span>
                 </div>
-                <div class="arrow-icon">
+                <div class="flex items-center justify-end text-[1rem] gap-1 mr-1">
                     修改昵称
-                    <font-awesome-icon :icon="['fas', 'chevron-right']" size="lg" style="color: #0f46a0" />
+                    <font-awesome-icon :icon="['fas', 'chevron-right']" style="color: #0f46a0" />
                 </div>
             </var-button>
 
             <!-- 绑定或修改邮箱 -->
-            <var-button v-if="!users.email" class="custom-button" block @click="onEmail = true">
-                <div class="button-content">
+            <var-button v-if="!users.email" class="flex items-center bg-white text-[#0f46a0] h-12 w-full my-[4px] rounded-[10px] px-[10px]" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)" block @click="onEmail = true">
+                <div class="flex items-center w-[60vw] text-[1rem] ml-1">
                     <font-awesome-icon :icon="['fas', 'envelopes-bulk']" size="lg" style="color: #0f46a0" />
-                    <span>{{ users.email || '暂无' }}</span>
+                    <span class="ml-2.5">{{ users.email || '暂无' }}</span>
                 </div>
-                <div class="arrow-icon">
+                <div class="flex items-center justify-end text-[1rem] gap-1 mr-1">
                     绑定邮箱
-                    <font-awesome-icon :icon="['fas', 'chevron-right']" size="lg" style="color: #0f46a0" />
+                    <font-awesome-icon :icon="['fas', 'chevron-right']" style="color: #0f46a0" />
                 </div>
             </var-button>
-            <var-button v-else class="custom-button" block @click="onEmail = true">
-                <div class="button-content">
+            <var-button v-else class="flex items-center bg-white text-[#0f46a0] h-12 w-full my-[4px] rounded-[10px] px-[10px]" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)" block @click="onEmail = true">
+                <div class="flex items-center w-[60vw] text-[1rem] ml-1">
                     <font-awesome-icon :icon="['fas', 'envelopes-bulk']" size="lg" style="color: #0f46a0" />
-                    <span>{{ users.email }}</span>
+                    <span class="ml-2.5">{{ users.email }}</span>
                 </div>
-                <div class="arrow-icon">
+                <div class="flex items-center justify-end text-[1rem] gap-1 mr-1">
                     修改邮箱
-                    <font-awesome-icon :icon="['fas', 'chevron-right']" size="lg" style="color: #0f46a0" />
+                    <font-awesome-icon :icon="['fas', 'chevron-right']" style="color: #0f46a0" />
                 </div>
             </var-button>
 
             <!-- 绑定或修改学号 -->
-            <var-button v-if="!users.stu_id" class="custom-button" block @click="onStudent = true">
-                <div class="button-content">
+            <var-button v-if="!users.stu_id" class="flex items-center bg-white text-[#0f46a0] h-12 w-full my-[4px] rounded-[10px] px-[10px]" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)" block @click="onStudent = true">
+                <div class="flex items-center w-[60vw] text-[1rem] ml-1">
                     <font-awesome-icon :icon="['fas', 'graduation-cap']" size="lg" style="color: #0f46a0" />
-                    <span>{{ users.stu_id || '暂无' }}</span>
+                    <span class="ml-2.5">{{ users.stu_id || '暂无' }}</span>
                 </div>
-                <div class="arrow-icon">
+                <div class="flex items-center justify-end text-[1rem] gap-1 mr-1">
                     绑定学号
-                    <font-awesome-icon :icon="['fas', 'chevron-right']" size="lg" style="color: #0f46a0" />
+                    <font-awesome-icon :icon="['fas', 'chevron-right']" style="color: #0f46a0" />
                 </div>
             </var-button>
-            <var-button v-else class="custom-button" block @click="onStudent = true">
-                <div class="button-content">
+            <var-button v-else class="flex items-center bg-white text-[#0f46a0] h-12 w-full my-[4px] rounded-[10px] px-[10px]" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)" block @click="onStudent = true">
+                <div class="flex items-center w-[60vw] text-[1rem] ml-1">
                     <font-awesome-icon :icon="['fas', 'graduation-cap']" size="lg" style="color: #0f46a0" />
-                    <span>{{ users.stu_id }}</span>
+                    <span class="ml-2.5">{{ users.stu_id }}</span>
                 </div>
-                <div class="arrow-icon">
+                <div class="flex items-center justify-end text-[1rem] gap-1 mr-1">
                     修改学号
-                    <font-awesome-icon :icon="['fas', 'chevron-right']" size="lg" style="color: #0f46a0" />
+                    <font-awesome-icon :icon="['fas', 'chevron-right']" style="color: #0f46a0" />
                 </div>
             </var-button>
         </var-space>
 
         <!-- 修改头像弹窗 -->
         <var-popup v-model:show="center" position="center" style="width: 80vw; height: 80vw; border-radius: 10px; display: flex; flex-direction: column; justify-content: center; align-items: center" round>
-            <input type="file" @change="handleFileChange" accept="image/*" style="margin-bottom: 20px; display: none" ref="fileInput" />
+            <input ref="fileInput" type="file" accept="image/*" style="margin-bottom: 20px; display: none" @change="handleFileChange" />
             <var-avatar :src="previewAvatar" fit="cover" size="150" style="margin-bottom: 20px" />
             <var-button v-if="!selectedFile" style="width: 80%; margin-bottom: 10px; background-color: white; color: #0f46a0; border: 2px solid #0f46a0" @click="$refs.fileInput.click()">选择图片</var-button>
             <var-button v-if="selectedFile" style="width: 80%; margin-bottom: 10px; background-color: #0f46a0; color: white; border: 2px solid #0f46a0" @click="uploadAvatar">确定</var-button>
@@ -389,54 +390,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.center-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 65vh;
-}
-.custom-avatar,
-.custom-button {
-    display: flex;
-    align-items: center;
-    background-color: #ffffff;
-    color: #0f46a0;
-    width: 90vw;
-    margin: 5px 0;
-    border-radius: 10px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    padding: 0 10px;
-}
-.custom-avatar {
-    height: 120px;
-}
-.custom-button {
-    height: 50px;
-}
-.button-content {
-    display: flex;
-    align-items: center;
-    width: 60vw;
-    font-size: 16px;
-}
-.button-avatar {
-    display: flex;
-    align-items: center;
-    width: 53vw;
-    font-size: 16px;
-}
-.button-avatar span {
-    margin-left: 8px;
-}
-
-.button-content span {
-    margin-left: 8px;
-}
-.arrow-icon {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    font-size: 16px;
-}
-</style>
+<style scoped></style>

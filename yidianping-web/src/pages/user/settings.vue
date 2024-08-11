@@ -1,57 +1,69 @@
 <template>
-    <div class="center-container">
+    <div class="flex justify-center h-full p-[4%]">
         <var-space direction="column" class="button-container">
-            <var-button class="custom-button" block @click="goaccout">
-                <div class="button-content">
+            <!-- 账号安全 -->
+            <var-button class="flex items-center bg-white text-[#0f46a0] h-12 w-full my-[4px] rounded-[10px] px-[10px]" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)" block @click="goaccout">
+                <div class="flex items-center w-[80vw] text-[1rem] ml-1">
                     <font-awesome-icon :icon="['far', 'circle-user']" size="xl" style="color: #0f46a0" />
-                    <span>账号安全</span>
+                    <span class="ml-2.5">账号安全</span>
                 </div>
-                <div class="arrow-icon">
+                <div class="flex items-center justify-end text-[1rem] gap-1 mr-1">
                     <font-awesome-icon :icon="['fas', 'chevron-right']" size="lg" style="color: #0f46a0" />
                 </div>
             </var-button>
-            <var-button class="custom-button" block @click="onnotice = true">
-                <div class="button-content">
+
+            <!-- 通知设置 -->
+            <var-button class="flex items-center bg-white text-[#0f46a0] h-12 w-full my-[4px] rounded-[10px] px-[10px]" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)" block @click="onnotice = true">
+                <div class="flex items-center w-[80vw] text-[1rem] ml-1">
                     <font-awesome-icon :icon="['far', 'envelope']" size="xl" style="color: #0f46a0" />
-                    <span>通知设置</span>
+                    <span class="ml-2.5">通知设置</span>
                 </div>
-                <div class="arrow-icon">
+                <div class="flex items-center justify-end text-[1rem] gap-1 mr-1">
                     <font-awesome-icon :icon="['fas', 'chevron-right']" size="lg" style="color: #0f46a0" />
                 </div>
             </var-button>
-            <var-button class="custom-button" block @click="gomanager">
-                <div class="button-content">
+
+            <!-- 管理员页 -->
+            <var-button class="flex items-center bg-white text-[#0f46a0] h-12 w-full my-[4px] rounded-[10px] px-[10px]" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)" block @click="gomanager">
+                <div class="flex items-center w-[80vw] text-[1rem] ml-1">
                     <font-awesome-icon :icon="['fas', 'user-tie']" size="xl" style="color: #0f46a0" />
-                    <span>管理员页</span>
+                    <span class="ml-2.5">管理员页</span>
                 </div>
-                <div class="arrow-icon">
+                <div class="flex items-center justify-end text-[1rem] gap-1 mr-1">
                     <font-awesome-icon :icon="['fas', 'chevron-right']" size="lg" style="color: #0f46a0" />
                 </div>
             </var-button>
-            <var-button class="custom-button" block @click="onmyself">
-                <div class="button-content">
+
+            <!-- 关于我们 -->
+            <var-button class="flex items-center bg-white text-[#0f46a0] h-12 w-full my-[4px] rounded-[10px] px-[10px]" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)" block @click="onmyself">
+                <div class="flex items-center w-[80vw] text-[1rem] ml-1">
                     <font-awesome-icon :icon="['far', 'face-smile']" size="xl" style="color: #0f46a0" />
-                    <span>关于我们</span>
+                    <span class="ml-2.5">关于我们</span>
                 </div>
-                <div class="arrow-icon">
+                <div class="flex items-center justify-end text-[1rem] gap-1 mr-1">
                     <font-awesome-icon :icon="['fas', 'chevron-right']" size="lg" style="color: #0f46a0" />
                 </div>
             </var-button>
-            <var-button class="custom-button" block @click="exitDialog = true">
-                <div class="button-content">
+
+            <!-- 退出登录 -->
+            <var-button class="flex items-center bg-white text-[#0f46a0] h-12 w-full my-[4px] rounded-[10px] px-[10px]" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1)" block @click="exitDialog = true">
+                <div class="flex items-center w-[80vw] text-[1rem] ml-1">
                     <font-awesome-icon :icon="['fas', 'arrow-right-from-bracket']" size="xl" style="color: #0f46a0" />
-                    <span>退出登录</span>
+                    <span class="ml-2.5">退出登录</span>
                 </div>
-                <div class="arrow-icon">
+                <div class="flex items-center justify-end text-[1rem] gap-1 mr-1">
                     <font-awesome-icon :icon="['fas', 'chevron-right']" size="lg" style="color: #0f46a0" />
                 </div>
             </var-button>
         </var-space>
     </div>
+
     <!-- 通知设置 -->
     <var-dialog v-model:show="onnotice" :title="onnoticeTitle" :message="onnoticeMessage" style="border-radius: 10px" @confirm="toggleNotification" @cancel="closeNoticeDialog" @closed="closeNoticeDialog" />
+
     <!-- 管理员弹窗 -->
     <var-dialog v-model:show="showDialog" title="抱歉" :message="dialogMessage" style="border-radius: 10px" @confirm="onDialogConfirm" @cancel="onDialogCancel" @closed="onDialogClosed" />
+
     <!-- 退出登录 -->
     <var-dialog v-model:show="exitDialog" title="退出" message="确定要退出登录吗？" style="border-radius: 10px" @confirm="exitConfirm" @cancel="exitCancel" @closed="exitClosed" />
 </template>
@@ -136,49 +148,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* 定义一个容器类，用于居中显示子元素 */
-.center-container {
-    display: flex; /* 使用弹性盒子布局 */
-    justify-content: center; /* 水平居中子元素 */
-    align-items: center; /* 垂直居中子元素 */
-    height: 56vh; /* 容器的高度设置为视口高度的55% */
-}
-
-/* 定义一个自定义按钮类，用于设置按钮的样式 */
-.custom-button {
-    display: flex; /* 使用弹性盒子布局 */
-    /* 子元素之间留有间隔 */
-    align-items: center; /* 子元素在容器中垂直居中 */
-    background-color: #ffffff; /* 设置按钮背景颜色为白色 */
-    color: #0f46a0; /* 设置按钮文本颜色 */
-    height: 50px; /* 设置按钮高度 */
-    width: 90vw; /* 设置按钮宽度为视口宽度的90% */
-    margin: 5px 0; /* 设置按钮顶部和底部的外边距 */
-    border-radius: 10px; /* 设置按钮边框圆角 */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 设置按钮阴影效果 */
-    padding: 0 10px; /* 设置按钮内边距，左右各10px */
-}
-
-/* 定义按钮内容的类，用于设置按钮内文本和图标的布局 */
-.button-content {
-    display: flex; /* 使用弹性盒子布局 */
-    align-items: center; /* 子元素在容器中垂直居中 */
-    /* 使该元素占据剩余空间，拉伸以填满按钮宽度 */
-    width: 80vw;
-    font-size: 16px;
-}
-
-/* 定义按钮内容中的span标签，设置图标和文本之间的间距 */
-.button-content span {
-    margin-left: 8px;
-}
-
-/* 定义箭头图标的类，用于设置箭头的布局 */
-.arrow-icon {
-    display: flex; /* 使用弹性盒子布局 */
-    align-items: center; /* 子元素在容器中垂直居中 */
-    justify-content: flex-end; /* 子元素靠容器的末端排列 */
-    font-size: 16px;
-}
-</style>
+<style scoped></style>

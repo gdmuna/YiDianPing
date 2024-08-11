@@ -13,10 +13,17 @@ exports.getCommentInfo = async () => {
             c.created_at AS commentCreatedAt,
             c.is_enabled AS commentIsEnabled,
             cs.cb_title AS comtSubjectTitle,
-            s.score,
+            sdi0.item_label AS category,
+            ROUND((s.score_01 + s.score_02 + s.score_03) / 3, 1) AS avgScore,
+            s.score_01,
+            sdi1.item_label AS dimension01,
+            s.score_02,
+            sdi2.item_label AS dimension02,
+            s.score_03,
+            sdi3.item_label AS dimension03,
             u.nickname,
             u.avatar,
-            COALESCE(CAST(COUNT(CASE WHEN ct.is_thumbs = 1 THEN 1 END) AS CHAR), '0') AS thumbs_up
+            COALESCE(CAST(COUNT(CASE WHEN ct.is_thumbs = 1 THEN 1 END) AS CHAR), '0') AS thumbsUp
         FROM
             yi_comment c
         JOIN
@@ -25,7 +32,16 @@ exports.getCommentInfo = async () => {
         LEFT JOIN
             yi_score s
             ON c.user_id = s.user_id
-            AND c.comt_subject_id = s.comt_subject_id AND s.is_enabled = 0
+            AND c.comt_subject_id = s.comt_subject_id
+            AND (s.is_enabled = 0 OR s.is_enabled IS NULL)
+        LEFT JOIN 
+            sys_dict_item sdi0 ON s.category = sdi0.dict_code = 'PLATE' AND sdi0.item_code = 'XCJ' AND sdi0.is_enabled = 1
+        LEFT JOIN 
+            sys_dict_item sdi1 ON s.category = sdi1.dict_code = 'PLATE' AND sdi1.item_code = 'JG' AND sdi1.is_enabled = 1
+        LEFT JOIN 
+            sys_dict_item sdi2 ON s.category = sdi2.dict_code = 'PLATE' AND sdi2.item_code = 'WD' AND sdi2.is_enabled = 1
+        LEFT JOIN 
+            sys_dict_item sdi3 ON s.category = sdi3.dict_code = 'PLATE' AND sdi3.item_code = 'WS' AND sdi3.is_enabled = 1
         JOIN
             yi_user u
             ON c.user_id = u.user_id
@@ -33,9 +49,10 @@ exports.getCommentInfo = async () => {
             yi_comment_thumbs ct
             ON c.comt_subject_id = ct.comt_subject_id
         WHERE
-            c.is_enabled = 0 AND cs.is_enabled = 0
+            c.is_enabled = 0 
+            AND cs.is_enabled = 0
         GROUP BY
-            c.comment_id, cs.cb_title, s.score, u.nickname, u.avatar;
+            c.comment_id, cs.cb_title, u.nickname, u.avatar;
     `;
     const sqlParams = [];
     return await db.query(sql, sqlParams);
@@ -52,20 +69,35 @@ exports.getCommentSubjectInfo = async () => {
             cs.cb_img AS comtSubjectImg,
             cs.created_at AS comtSubjectCreatedAt,
             cs.is_enabled AS comtSubjectIsEnabled,
-            CAST(COUNT(c.comment_id) AS CHAR) AS comment_count,
-            IFNULL(ROUND(AVG(s.score), 1), 0) AS avg_score
+            CAST(COUNT(c.comment_id) AS CHAR) AS commentCount,
+            sdi0.item_label AS category,
+            ROUND((s.score_01 + s.score_02 + s.score_03) / 3, 1) AS avgScore,
+            s.score_01,
+            sdi1.item_label AS dimension01,
+            s.score_02,
+            sdi2.item_label AS dimension02,
+            s.score_03,
+            sdi3.item_label AS dimension03
         FROM
             yi_comment_subject cs
         LEFT JOIN
             yi_score s
             ON cs.comt_subject_id = s.comt_subject_id
+            AND (s.is_enabled = 0 OR s.is_enabled IS NULL)
+        LEFT JOIN 
+            sys_dict_item sdi0 ON s.category = sdi0.dict_code = 'PLATE' AND sdi0.item_code = 'XCJ' AND sdi0.is_enabled = 1
+        LEFT JOIN 
+            sys_dict_item sdi1 ON s.category = sdi1.dict_code = 'PLATE' AND sdi1.item_code = 'JG' AND sdi1.is_enabled = 1
+        LEFT JOIN 
+            sys_dict_item sdi2 ON s.category = sdi2.dict_code = 'PLATE' AND sdi2.item_code = 'WD' AND sdi2.is_enabled = 1
+        LEFT JOIN 
+            sys_dict_item sdi3 ON s.category = sdi3.dict_code = 'PLATE' AND sdi3.item_code = 'WS' AND sdi3.is_enabled = 1
         LEFT JOIN
             yi_comment c
             ON cs.comt_subject_id = c.comt_subject_id
+            AND (c.is_enabled = 0 OR c.is_enabled IS NULL)
         WHERE
             cs.is_enabled = 0
-            AND (c.is_enabled = 0 OR c.is_enabled IS NULL)
-            AND (s.is_enabled = 0 OR s.is_enabled IS NULL)
         GROUP BY
             cs.comt_subject_id
     `;
@@ -84,20 +116,35 @@ exports.getTheCommentSubjectInfo = async (comtSubjectId) => {
             cs.cb_img AS comtSubjectImg,
             cs.created_at AS comtSubjectCreatedAt,
             cs.is_enabled AS comtSubjectIsEnabled,
-            CAST(COUNT(c.comment_id) AS CHAR) AS comment_count,
-            IFNULL(ROUND(AVG(s.score), 1), 0) AS avg_score
+            CAST(COUNT(c.comment_id) AS CHAR) AS commentCount,
+            sdi0.item_label AS category,
+            ROUND((s.score_01 + s.score_02 + s.score_03) / 3, 1) AS avgScore,
+            s.score_01,
+            sdi1.item_label AS dimension01,
+            s.score_02,
+            sdi2.item_label AS dimension02,
+            s.score_03,
+            sdi3.item_label AS dimension03
         FROM
             yi_comment_subject cs
         LEFT JOIN
             yi_score s
             ON cs.comt_subject_id = s.comt_subject_id
+            AND (s.is_enabled = 0 OR s.is_enabled IS NULL)
         LEFT JOIN
             yi_comment c
             ON cs.comt_subject_id = c.comt_subject_id
+            AND (c.is_enabled = 0 OR c.is_enabled IS NULL)
+        LEFT JOIN 
+            sys_dict_item sdi0 ON s.category = sdi0.dict_code = 'PLATE' AND sdi0.item_code = 'XCJ' AND sdi0.is_enabled = 1
+        LEFT JOIN 
+            sys_dict_item sdi1 ON s.category = sdi1.dict_code = 'PLATE' AND sdi1.item_code = 'JG' AND sdi1.is_enabled = 1
+        LEFT JOIN 
+            sys_dict_item sdi2 ON s.category = sdi2.dict_code = 'PLATE' AND sdi2.item_code = 'WD' AND sdi2.is_enabled = 1
+        LEFT JOIN 
+            sys_dict_item sdi3 ON s.category = sdi3.dict_code = 'PLATE' AND sdi3.item_code = 'WS' AND sdi3.is_enabled = 1
         WHERE
             cs.is_enabled = 0
-            AND (c.is_enabled = 0 OR c.is_enabled IS NULL)
-            AND (s.is_enabled = 0 OR s.is_enabled IS NULL)
             AND cs.comt_subject_id = ?
         GROUP BY
             cs.comt_subject_id;
@@ -139,20 +186,35 @@ exports.getSearchSubject = async (comtSubjectTitle) => {
             cs.cb_img AS comtSubjectImg,
             cs.created_at AS comtSubjectCreatedAt,
             cs.is_enabled AS comtSubjectIsEnabled,
-            CAST(COUNT(c.comment_id) AS CHAR) AS comment_count,
-            IFNULL(ROUND(AVG(s.score), 1), 0) AS avg_score
+            CAST(COUNT(c.comment_id) AS CHAR) AS commentCount,
+            sdi0.item_label AS category,
+            ROUND((s.score_01 + s.score_02 + s.score_03) / 3, 1) AS avgScore,
+            s.score_01,
+            sdi1.item_label AS dimension01,
+            s.score_02,
+            sdi2.item_label AS dimension02,
+            s.score_03,
+            sdi3.item_label AS dimension03
         FROM
             yi_comment_subject cs
         LEFT JOIN
             yi_score s
             ON cs.comt_subject_id = s.comt_subject_id
+            AND (s.is_enabled = 0 OR s.is_enabled IS NULL)
+        LEFT JOIN 
+            sys_dict_item sdi0 ON s.category = sdi0.dict_code = 'PLATE' AND sdi0.item_code = 'XCJ' AND sdi0.is_enabled = 1
+        LEFT JOIN 
+            sys_dict_item sdi1 ON s.category = sdi1.dict_code = 'PLATE' AND sdi1.item_code = 'JG' AND sdi1.is_enabled = 1
+        LEFT JOIN 
+            sys_dict_item sdi2 ON s.category = sdi2.dict_code = 'PLATE' AND sdi2.item_code = 'WD' AND sdi2.is_enabled = 1
+        LEFT JOIN 
+            sys_dict_item sdi3 ON s.category = sdi3.dict_code = 'PLATE' AND sdi3.item_code = 'WS' AND sdi3.is_enabled = 1
         LEFT JOIN
             yi_comment c
             ON cs.comt_subject_id = c.comt_subject_id
+            AND (c.is_enabled = 0 OR c.is_enabled IS NULL)
         WHERE
             cs.is_enabled = 0
-            AND (c.is_enabled = 0 OR c.is_enabled IS NULL)
-            AND (s.is_enabled = 0 OR s.is_enabled IS NULL)
             AND cs.cb_title LIKE ?
         GROUP BY
             cs.comt_subject_id;
