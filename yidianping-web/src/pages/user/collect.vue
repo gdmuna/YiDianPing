@@ -1,18 +1,16 @@
 <template>
-    <div class="comment">
-        <var-card v-for="item in commentSubjects" :key="item.comt_subject_id" class="comment-card">
+    <div class="comment mb-8 p-4">
+        <var-card v-for="item in commentSubjects" :key="item.comt_subject_id" class="comment-card mb-4 p-4 bg-white rounded-lg shadow-none relative">
             <template #title>
-                <div class="card-header">
-                    <h1 class="comment-title">{{ item.cb_title }}</h1>
-                    <div class="thumbs-up">
-                        <p v-if="item.sum_score !== 0" style="color: #4e77b9; font-size: 14px; margin: 2px 15px 0 5px">{{ item.sum_score.toFixed(1) }} 分</p>
-                        <p v-if="item.sum_score === 0" style="color: #4e77b9; font-size: 14px; margin: 2px 15px 0 5px">暂无评分</p>
+                <div class="card-header flex justify-between items-center">
+                    <h1 class="comment-title text-lg mt-1" style="color: #4e77b9">{{ item.cb_title }}</h1>
+                    <div class="thumbs-up flex items-center">
+                        <p v-if="item.sum_score !== 0" class="text-sm mr-4" style="color: #4e77b9">{{ item.sum_score.toFixed(1) }} 分</p>
+                        <p v-if="item.sum_score === 0" class="text-sm mr-4" style="color: #4e77b9">暂无评分</p>
                         <var-menu>
-                            <!-- 菜单按钮 -->
                             <var-button round text>
-                                <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" class="fixed-icon" />
+                                <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" style="color: #4e77b9" />
                             </var-button>
-                            <!-- 菜单选项 -->
                             <template #menu>
                                 <var-cell ripple @click="cancelCollectCommentSubject(item.user_id, item.comt_subject_id)">取消收藏</var-cell>
                             </template>
@@ -21,16 +19,15 @@
                 </div>
             </template>
             <template #description>
-                <div class="text-content">{{ item.cb_text }}</div>
-                <var-image v-if="item.cb_img" width="150px" height="150px" fit="cover" :radius="10" :src="item.cb_img" @click="showImagePreview(item.cb_img)" />
-                <div class="created-time">{{ formatTime(item.created_at) }}</div>
+                <div class="text-content mt-2 mb-2 break-words">{{ item.cb_text }}</div>
+                <var-image v-if="item.cb_img" width="150" height="150" fit="cover" :radius="10" :src="item.cb_img" @click="showImagePreview(item.cb_img)" />
+                <div class="created-time absolute bottom-1 right-2 text-xs" style="color: #4e77b9">{{ formatTime(item.created_at) }}</div>
             </template>
         </var-card>
         <var-image-preview v-model:show="showImagePreviewVisible" :images="imagePreviewUrls" />
-        <p class="flex justify-center mt-4 text-xs" style="color: #999999">没有更多内容咯</p>
+        <p class="flex justify-center mt-4 text-xs text-gray-400">没有更多内容咯</p>
     </div>
 </template>
-
 <script>
 import dayjs from 'dayjs';
 import commentSubject from '../../api/commentSubject';
@@ -42,19 +39,15 @@ export default {
             commentSubjects: [],
             showImagePreviewVisible: false,
             imagePreviewUrls: []
-            //userId: '' // 存储 userId
         };
     },
 
     created() {
-        //this.userId = this.$route.params.userId; // 从查询参数获取 userId
         this.fetchCommentSubject();
     },
 
     methods: {
         async fetchCommentSubject() {
-            console.log('userId:', this.userId);
-            //const response = await commentSubject.getCollectCommentSubject({ userId: this.userId });
             const response = await commentSubject.getCollectCommentSubject({ userId: '0190c9e4-684a-7070-a326-d0b5c07d65b0' });
             this.commentSubjects = response;
         },
@@ -75,51 +68,6 @@ export default {
     }
 };
 </script>
-
 <style scoped>
-.comment {
-    margin-bottom: 8%;
-    padding: 4%;
-}
-.comment-card {
-    position: relative;
-    margin-bottom: 10px;
-    padding: 16px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: none;
-}
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-.comment-title {
-    color: #4e77b9;
-    font-size: 20px;
-    margin: 0;
-    padding: 0;
-    margin-top: 3px;
-}
-.text-content {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    word-break: break-word;
-}
-.thumbs-up {
-    display: flex;
-    align-items: center;
-}
-.fixed-icon {
-    margin-right: 0px;
-    color: #324fb1;
-}
-.created-time {
-    position: absolute;
-    bottom: 5px;
-    right: 10px;
-    color: #2041a9;
-    font-size: 12px;
-    margin-right: 10px;
-}
+/*有个蛋*/
 </style>
