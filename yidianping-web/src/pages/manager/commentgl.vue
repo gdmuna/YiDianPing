@@ -6,7 +6,11 @@
                 <a-table-column title="评论体" data-index="cb_title" fixed="left" width="250"></a-table-column>
                 <a-table-column title="用户昵称" data-index="nickname" width="150"></a-table-column>
                 <a-table-column title="点赞" data-index="thumbs_up" width="80"></a-table-column>
-                <a-table-column title="创建时间" data-index="created_at" width="240"></a-table-column>
+                <a-table-column title="创建时间" width="240">
+                    <template #cell="{ record }">
+                        {{ formatTime(record.created_at) }}
+                    </template>
+                </a-table-column>
                 <a-table-column title="内容" data-index="text" width="10000"></a-table-column>
                 <!-- 操作弹窗 -->
                 <a-table-column title="操作" width="100" fixed="right">
@@ -41,6 +45,7 @@
 <script>
 //api
 import comment from '@/api/comment';
+import dayjs from 'dayjs';
 
 export default {
     name: 'CommentGl',
@@ -100,6 +105,9 @@ export default {
         async recoverComment(record) {
             await comment.recoverComment({ comtSubjectId: record.comt_subject_id, commentId: record.comment_id });
             this.fetchData();
+        },
+        formatTime(time) {
+            return dayjs(time).format('YYYY-MM-DD HH:mm');
         }
     }
 };

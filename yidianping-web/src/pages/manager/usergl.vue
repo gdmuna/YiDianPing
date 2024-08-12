@@ -2,14 +2,18 @@
     <div class="flex flex-col h-full">
         <a-table :data="currentTableData" :pagination="false" :bordered="{ cell: true }" style="height: 100%" :scroll="{ x: 2000 }" size="large">
             <template #columns>
-                <a-table-column title="账号" data-index="account" fixed="left" width="150"></a-table-column>
-                <a-table-column title="昵称" data-index="nickname" width="150"></a-table-column>
+                <a-table-column title="账号" data-index="account" fixed="left" width="100"></a-table-column>
+                <a-table-column title="昵称" data-index="nickname" width="100"></a-table-column>
                 <a-table-column title="头像" width="50">
                     <template #cell="{ record }">
                         <a-button size="mini" status="warning" type="text" @click="imgUser(record)">查看</a-button>
                     </template>
                 </a-table-column>
-                <a-table-column title="创建时间" data-index="created_at" width="400"></a-table-column>
+                <a-table-column title="创建时间" width="300">
+                    <template #cell="{ record }">
+                        {{ formatTime(record.created_at) }}
+                    </template>
+                </a-table-column>
                 <a-table-column title="操作" width="100" fixed="right">
                     <template #cell="{ record }">
                         <a-popconfirm content="是否要暂时删除?" ok-text="是" cancel-text="否" @ok="banUser(record)">
@@ -83,6 +87,7 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
 import user from '@/api/user';
 
 export default {
@@ -240,6 +245,9 @@ export default {
                 this.$message.error('恢复失败');
                 console.error('恢复失败:', error);
             }
+        },
+        formatTime(time) {
+            return dayjs(time).format('YYYY-MM-DD HH:mm');
         }
     }
 };
