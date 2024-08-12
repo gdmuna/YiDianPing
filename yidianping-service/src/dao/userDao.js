@@ -14,7 +14,8 @@ exports.getAllUsers = async () => {
         FROM 
             yi_user
     `;
-    return await db.query(sql);
+    const sqlParams = [];
+    return await db.query(sql, sqlParams);
 };
 // 获取单个用户信息
 exports.getUser = async (userId) => {
@@ -78,9 +79,9 @@ exports.updateUser = async (userId, updatedFields) => {
 
     const sql = `
         UPDATE yi_user
-         SET ${setClause.join(', ')}
+        SET ${setClause.join(', ')}
         WHERE user_id = ?
-     `;
+    `;
     return await db.query(sql, sqlParams);
 };
 // 修改用户信息
@@ -113,11 +114,7 @@ exports.banUser = async (userId) => {
             user_id = ?
     `;
     const sqlParams = [userId];
-    try {
-        return await db.query(sql, sqlParams);
-    } catch (error) {
-        console.error('封禁用户失败:', error);
-    }
+    return await db.query(sql, sqlParams);
 };
 // 解禁用户
 exports.unbanUser = async (userId) => {

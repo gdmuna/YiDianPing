@@ -1,5 +1,5 @@
 const db = require('../utils/dbConnPool/mariadb');
-
+//管理员获取评论信息
 exports.getComment = async () => {
     const sql = `
 SELECT 
@@ -15,10 +15,13 @@ LEFT JOIN
     yi_comment_subject s ON c.comt_subject_id = s.comt_subject_id
 LEFT JOIN 
     yi_comment_thumbs ct ON c.comt_subject_id = ct.comt_subject_id AND c.comment_id = ct.comment_id
+    WHERE 
+        c.question_id IS NULL
 GROUP BY
     c.comment_id, u.nickname, s.cb_title;
 `;
-    return await db.query(sql);
+    const sqlParams = [];
+    return await db.query(sql, sqlParams);
 };
 
 // 创建新评论
@@ -26,29 +29,12 @@ exports.createComment = async (comtSubjectId, commentId, text, userId, imgPath =
     const sql = `
         INSERT INTO 
             yi_comment
-        (
-            comt_subject_id,
-            comment_id,
-            text,
-            user_id,
-            img_path
-        )
+        (comt_subject_id,comment_id,text,user_id,img_path)
         VALUES
-        (
-            ?,
-            ?,
-            ?,
-            ?,
-            ?
-        )
+        (?,?,?,?,?)
     `;
     const sqlParams = [comtSubjectId, commentId, text, userId, imgPath];
-    try {
-        return await db.query(sql, sqlParams);
-    } catch (error) {
-        console.error('创建评论失败:', error);
-        throw error;
-    }
+    return await db.query(sql, sqlParams);
 };
 
 // 删除评论
@@ -62,11 +48,7 @@ exports.deleteComment = async (comtSubjectId, commentId) => {
             AND comment_id = ?
     `;
     const sqlParams = [comtSubjectId, commentId];
-    try {
-        return await db.query(sql, sqlParams);
-    } catch (error) {
-        console.error('删除评论失败:', error);
-    }
+    return await db.query(sql, sqlParams);
 };
 //恢复评论
 exports.recoverComment = async (comtSubjectId, commentId) => {
@@ -79,11 +61,7 @@ exports.recoverComment = async (comtSubjectId, commentId) => {
             AND comment_id = ?
     `;
     const sqlParams = [comtSubjectId, commentId];
-    try {
-        return await db.query(sql, sqlParams);
-    } catch (error) {
-        console.error('删除评论失败:', error);
-    }
+    return await db.query(sql, sqlParams);
 };
 //点赞评论逻辑
 exports.updateThumbsUp = async (userId, commentId, comtSubjectId) => {
@@ -92,7 +70,6 @@ exports.updateThumbsUp = async (userId, commentId, comtSubjectId) => {
         VALUES (?, ?,?,NOW(),1);
     `;
     const sqlParams = [userId, commentId, comtSubjectId];
-
     return await db.query(sql, sqlParams);
 };
 //取消点赞
@@ -103,7 +80,6 @@ exports.cancelThumbsUp = async (userId, commentId, comtSubjectId) => {
     WHERE user_id = ? AND comment_id = ? AND comt_subject_id = ?;
 `;
     const sqlParams = [userId, commentId, comtSubjectId];
-
     return await db.query(sql, sqlParams);
 };
 //查询个人历史评论
@@ -130,7 +106,6 @@ exports.getHistoryComment = async (userId) => {
             c.comment_id, b.cb_title, t.is_thumbs;
     `;
     const sqlParams = [userId, userId];
-
     return await db.query(sql, sqlParams);
 };
 
@@ -160,6 +135,5 @@ exports.getLoveComment = async (userId) => {
             c.comment_id, b.cb_title, t.is_thumbs;
     `;
     const sqlParams = [userId];
-
     return await db.query(sql, sqlParams);
 };
