@@ -3,12 +3,12 @@
         <var-card v-for="(item, index) in filteredComments" :key="index" class="relative mb-2.5 p-4 bg-white rounded-lg shadow-none">
             <template #title>
                 <div class="flex justify-between items-center">
-                    <h1 class="text-xl mt-1" style="color: #4e77b9">{{ item.cb_title }}</h1>
+                    <h1 class="text-lg mt-1" style="color: #4e77b9">{{ item.cb_title }}</h1>
                     <div class="flex items-center">
-                        <font-awesome-icon v-if="item.is_thumbs == 1" :icon="['fas', 'heart']" size="lg" style="color: #4e77b9" @click="cancelThumbsUp(item.user_id, item.comt_subject_id, item.comment_id, index)" />
-                        <font-awesome-icon v-else :icon="['far', 'heart']" size="lg" style="color: #4e77b9" @click="thumbsUp(item.user_id, item.comt_subject_id, item.comment_id, index)" />
-                        <p class="text-lg mx-2 my-0" style="color: #4e77b9">{{ item.thumbs_up }}</p>
-                        <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" class="mr-2" style="color: #4e77b9" @click="openPopup(item.comt_subject_id, item.comment_id)" />
+                        <font-awesome-icon v-if="item.is_thumbs == 1" class="mr-2" :icon="['fas', 'heart']" size="lg" style="color: #4e77b9" @click="cancelThumbsUp(item.user_id, item.comt_subject_id, item.comment_id, index)" />
+                        <font-awesome-icon v-else class="mr-2" :icon="['far', 'heart']" size="lg" style="color: #4e77b9" @click="thumbsUp(item.user_id, item.comt_subject_id, item.comment_id, index)" />
+                        <p class="text-lg my-0 mr-2" style="color: #4e77b9">{{ item.thumbs_up }}</p>
+                        <var-button round text><font-awesome-icon :icon="['fas', 'ellipsis-vertical']" size="xl" style="color: #4e77b9" @click="openPopup(item.comt_subject_id, item.comment_id)" /></var-button>
                     </div>
                 </div>
             </template>
@@ -81,6 +81,7 @@ export default {
             this.selectedCommentId = commentId;
             this.popupVisible = true;
         },
+        //修改
         async editComment(comtSubjectId, commentId) {
             console.log('Editing comment with ID:', commentId);
             this.popupVisible = false;
