@@ -2,14 +2,26 @@
     <div class="flex flex-col h-full">
         <a-table :data="currentTableData" :pagination="false" :bordered="{ cell: true }" style="height: 100%" :scroll="{ x: 2000 }">
             <template #columns>
-                <a-table-column title="评论体" data-index="cb_title" fixed="left" width="300"></a-table-column>
-                <a-table-column title="评分" data-index="score" width="80"></a-table-column>
+                <a-table-column title="评论体" data-index="cb_title" fixed="left" width="240"></a-table-column>
+                <a-table-column title="分类" data-index="category" width="80"></a-table-column>
+                <a-table-column title="评分" width="65">
+                    <template #cell="{ record }">
+                        <div v-if="record.avgScore !== null && record.avgScore !== undefined" style="color: #4e77b9">
+                            {{ record.avgScore }}
+                        </div>
+                        <div v-else style="color: #4e77b9">暂无</div>
+                    </template>
+                </a-table-column>
                 <a-table-column title="配图" width="100">
                     <template #cell="{ record }">
                         <a-button size="mini" status="warning" type="text" @click="imgComment(record)">查看</a-button>
                     </template>
                 </a-table-column>
-                <a-table-column title="创建时间" data-index="created_at" width="240"></a-table-column>
+                <a-table-column title="创建时间" width="240">
+                    <template #cell="{ record }">
+                        {{ formatTime(record.created_at) }}
+                    </template>
+                </a-table-column>
                 <a-table-column title="内容" data-index="cb_text" width="10000"></a-table-column>
                 <a-table-column title="操作" width="130" fixed="right">
                     <template #cell="{ record }">
@@ -65,6 +77,7 @@
 </template>
 
 <script>
+import dayjs from 'dayjs';
 import commentSubject from '@/api/commentSubject';
 
 export default {
@@ -194,6 +207,9 @@ export default {
                 this.$message.error('恢复失败');
                 console.error('恢复失败:', error);
             }
+        },
+        formatTime(time) {
+            return dayjs(time).format('YYYY-MM-DD HH:mm');
         }
     }
 };

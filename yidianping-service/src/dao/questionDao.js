@@ -14,7 +14,8 @@ exports.getQuestion = async () => {
     LEFT JOIN
         yi_comment_subject s ON c.comt_subject_id = s.comt_subject_id
 `;
-    return await db.query(sql);
+    const sqlParams = [];
+    return await db.query(sql, sqlParams);
 };
 //删除提问信息
 exports.deleteQuestion = async (comtSubjectId, questionId) => {
@@ -26,7 +27,8 @@ exports.deleteQuestion = async (comtSubjectId, questionId) => {
             comt_subject_id = ?
             AND question_id = ?
 `;
-    return await db.query(sql, [comtSubjectId, questionId]);
+    const sqlParams = [comtSubjectId, questionId];
+    return await db.query(sql, sqlParams);
 };
 //恢复提问信息
 exports.recoverQuestion = async (comtSubjectId, questionId) => {
@@ -38,7 +40,8 @@ exports.recoverQuestion = async (comtSubjectId, questionId) => {
             comt_subject_id = ?
             AND question_id = ?
 `;
-    return await db.query(sql, [comtSubjectId, questionId]);
+    const sqlParams = [comtSubjectId, questionId];
+    return await db.query(sql, sqlParams);
 };
 //发布提问回复
 exports.putQuestionReply = async (comtSubjectId, questionId, text, userId, imgPath) => {
@@ -48,7 +51,8 @@ exports.putQuestionReply = async (comtSubjectId, questionId, text, userId, imgPa
         VALUES
             (?, ?, ?, ?, NOW(), ?)
     `;
-    return await db.query(sql, [comtSubjectId, questionId, text, userId, imgPath]);
+    const sqlParams = [comtSubjectId, questionId, text, userId, imgPath];
+    return await db.query(sql, sqlParams);
 };
 //修改提问回复
 exports.updateQuestionReply = async (questionId, text, commentId, userId, imgPath) => {
@@ -63,5 +67,6 @@ exports.updateQuestionReply = async (questionId, text, commentId, userId, imgPat
             AND comment_id = ?
             AND user_id = ?
     `;
-    return await db.query(sql, [questionId, text, commentId, userId, imgPath]);
+    const sqlParams = [text, imgPath, questionId, commentId, userId];
+    return await db.query(sql, sqlParams);
 };

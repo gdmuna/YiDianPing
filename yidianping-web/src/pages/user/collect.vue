@@ -5,11 +5,11 @@
                 <div class="card-header flex justify-between items-center">
                     <h1 class="comment-title text-lg mt-1" style="color: #4e77b9">{{ item.cb_title }}</h1>
                     <div class="thumbs-up flex items-center">
-                        <p v-if="item.sum_score !== 0" class="text-sm mr-4" style="color: #4e77b9">{{ item.sum_score.toFixed(1) }} 分</p>
-                        <p v-if="item.sum_score === 0" class="text-sm mr-4" style="color: #4e77b9">暂无评分</p>
+                        <p v-if="item.avgScore !== null" class="text-lg mr-2" style="color: #4e77b9">{{ item.avgScore.toFixed(1) }} 分</p>
+                        <p v-if="item.avgScore === null" class="text-lg mr-2" style="color: #4e77b9">暂无评分</p>
                         <var-menu>
                             <var-button round text>
-                                <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" style="color: #4e77b9" />
+                                <font-awesome-icon :icon="['fas', 'ellipsis-vertical']" size="xl" style="color: #4e77b9" />
                             </var-button>
                             <template #menu>
                                 <var-cell ripple @click="cancelCollectCommentSubject(item.user_id, item.comt_subject_id)">取消收藏</var-cell>
@@ -38,7 +38,8 @@ export default {
         return {
             commentSubjects: [],
             showImagePreviewVisible: false,
-            imagePreviewUrls: []
+            imagePreviewUrls: [],
+            userId: '0190c9e4-684a-7070-a326-d0b5c07d65b0'
         };
     },
 
@@ -48,12 +49,12 @@ export default {
 
     methods: {
         async fetchCommentSubject() {
-            const response = await commentSubject.getCollectCommentSubject({ userId: '0190c9e4-684a-7070-a326-d0b5c07d65b0' });
+            const response = await commentSubject.getCollectCommentSubject({ userId: this.userId });
             this.commentSubjects = response;
         },
 
         async cancelCollectCommentSubject(userId, comtSubjectId) {
-            await commentSubject.cancelCollectCommentSubject({ userId, comtSubjectId });
+            await commentSubject.cancelCollectCommentSubject({ userId: this.userId, comtSubjectId });
             this.commentSubjects = this.commentSubjects.filter((item) => item.user_id !== userId || item.comt_subject_id !== comtSubjectId);
         },
 
